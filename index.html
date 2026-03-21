@@ -65,7 +65,7 @@
         .stat-value { font-size: 28px; font-weight: bold; color: var(--primary); margin-top: 5px; }
         .stat-label { font-size: 12px; color: #aaa; text-transform: uppercase; }
 
-        input[type="text"] { width: 100%; padding: 12px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 18px; border-radius: 8px; margin-bottom: 20px; font-family: inherit; text-align: center;}
+        input[type="text"], input[type="number"] { width: 100%; padding: 12px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 18px; border-radius: 8px; margin-bottom: 20px; font-family: inherit; text-align: center;}
         
         /* Bracket UI */
         #bracket-container { display: flex; justify-content: space-between; align-items: stretch; width: 95%; max-width: 1100px; background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; margin-bottom: 20px; overflow-x: auto;}
@@ -93,6 +93,9 @@
         #replay-text { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); color: #ff4757; font-size: 28px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 10px rgba(0,0,0,0.8); animation: blink 1.5s infinite; }
         #close-replay-btn { position: absolute; top: 25px; right: 25px; background: #ff4757; color: white; border: 2px solid white; width: 50px; height: 50px; font-size: 24px; font-weight: bold; cursor: pointer; pointer-events: auto; border-radius: 10px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        /* Secret Tap Zone */
+        #secret-tap-zone { position: absolute; bottom: 0; left: 0; width: 120px; height: 120px; z-index: 99; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
@@ -114,6 +117,20 @@
                     <button class="mode-btn ex-diff" onclick="setExhibitionDiff('hard')">HARD</button>
                 </div>
                 <button class="btn-primary" style="width: 100%; margin: 15px 0 0 0; font-size: 16px;" onclick="startExhibition()">Play Exhibition</button>
+            </div>
+        </div>
+        
+        <div id="secret-tap-zone" onpointerdown="handleSecretTap(event)"></div>
+    </div>
+
+    <div id="cheat-screen" class="overlay-screen" style="display: none; z-index: 100; background: rgba(0,0,0,0.9);">
+        <div class="glass-panel" style="padding: 30px; text-align: center; width: 280px;">
+            <h2 style="margin-top:0; color: var(--danger); text-transform: uppercase;">Dev Console</h2>
+            <p style="color: #aaa; font-size: 12px; margin-bottom: 15px;">Enter Access Code</p>
+            <input type="number" id="cheat-input" placeholder="0000" style="text-align: center; font-size: 32px; letter-spacing: 5px;">
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-primary" style="background: #555; flex: 1;" onclick="closeCheatMenu()">Close</button>
+                <button class="btn-primary btn-danger" style="flex: 1;" onclick="submitCheatCode()">Submit</button>
             </div>
         </div>
     </div>
@@ -139,7 +156,7 @@
                 <h3 style="margin: 0 0 10px 0; text-align: center;">League Standings</h3>
                 <div class="table-container">
                     <table class="standings-table" id="standings-table-body">
-                        </table>
+                    </table>
                 </div>
             </div>
 
@@ -185,15 +202,15 @@
             </div>
 
             <div class="stat-grid" id="stats-grid-container">
-                </div>
+            </div>
 
             <button class="btn-primary" style="width: 100%; background: #555; margin-top: 20px;" onclick="closeStatsScreen()">Back to Hub</button>
         </div>
     </div>
 
     <div id="career-bracket-screen" class="overlay-screen" style="display: none;">
-        <h1 class="title" style="font-size: 36px;">Season <span id="bracket-season-num">1</span> Playoffs</h1>
-        <p class="subtitle" style="margin-bottom: 10px;">Top 8 Championship Tournament</p>
+        <h1 class="title" style="font-size: 36px; margin-bottom: 5px;">Season <span id="bracket-season-num">1</span> Playoffs</h1>
+        <p class="subtitle" id="bracket-status-text" style="margin-bottom: 10px; font-weight: bold;">Top 8 Championship Tournament</p>
         <div id="career-bracket-container"></div>
         <div style="display: flex; gap: 15px; margin-top: 20px;">
             <button class="btn-primary btn-danger" id="career-bracket-play-btn" onclick="startPlayoffMatch()">PLAY MATCH</button>
@@ -258,7 +275,7 @@
 
         let sfxEnabled = true;
         let gameState = 'demo'; 
-        let gameMode = 'exhibition'; // exhibition, careerRegular, careerPlayoffs
+        let gameMode = 'exhibition'; 
         
         let scorePlayer = 0; let scoreAI = 0;
         
@@ -331,8 +348,6 @@
         dirLight.position.set(3, 5, 2); 
         dirLight.castShadow = true; dirLight.shadow.mapSize.width = 1024; dirLight.shadow.mapSize.height = 1024;
         dirLight.shadow.camera.near = 0.5; dirLight.shadow.camera.far = 15;
-        dirLight.shadow.camera.left = -3; dirLight.shadow.camera.right = 3;
-        dirLight.shadow.camera.top = 3; dirLight.shadow.camera.bottom = -3; dirLight.shadow.bias = -0.001;
         scene.add(dirLight);
 
         const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshLambertMaterial({ color: 0x228B22 }));
@@ -346,10 +361,7 @@
 
         const legGeo = new THREE.BoxGeometry(0.05, 0.76, 0.05); const legMat = new THREE.MeshLambertMaterial({ color: 0x444444 });
         const legPositions = [[tableW/2 - 0.1, -0.38, tableL/2 - 0.2], [-tableW/2 + 0.1, -0.38, tableL/2 - 0.2], [tableW/2 - 0.1, -0.38, -tableL/2 + 0.2], [-tableW/2 + 0.1, -0.38, -tableL/2 + 0.2]];
-        legPositions.forEach(pos => { 
-            const leg = new THREE.Mesh(legGeo, legMat); leg.position.set(pos[0], pos[1], pos[2]); 
-            leg.castShadow = true; leg.receiveShadow = true; scene.add(leg); 
-        });
+        legPositions.forEach(pos => { const leg = new THREE.Mesh(legGeo, legMat); leg.position.set(pos[0], pos[1], pos[2]); leg.castShadow = true; leg.receiveShadow = true; scene.add(leg); });
 
         function createPaddle(color) {
             const g = new THREE.Group();
@@ -368,7 +380,6 @@
         let lastPaddleX = 0, lastPaddleY = 0, prevFramePaddleX = 0, prevFramePaddleY = 0; 
         let paddleVelocity = { x: 0, y: 0 }; let stuckFrames = 0; let lastBounceSide = null; 
 
-        // Replay System
         const REPLAY_FRAMES = 300; let replayBuffer = []; let isReplaying = false; let replayPlaybackIndex = 0;
 
         function getSegmentDist(px, py, x1, y1, x2, y2) {
@@ -591,7 +602,10 @@
             generateSchedule(); saveGameData(); showCareerHub();
         }
 
-        function resumeCareer() { showCareerHub(); }
+        function resumeCareer() { 
+            if (career.phase === 'playoffs') showPlayoffBracket();
+            else showCareerHub(); 
+        }
 
         function generateSchedule() {
             let opps = career.league.filter(p => !p.isPlayer).map(p => p.id);
@@ -608,7 +622,7 @@
             let me = career.league.find(p => p.isPlayer);
             document.getElementById('hub-player-record').innerText = `Record: ${me.w} - ${me.l}`;
 
-            career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l)); // Sort by wins, then losses
+            career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l));
             
             let tbody = document.getElementById('standings-table-body');
             tbody.innerHTML = `<tr><th>Rk</th><th>Player</th><th>W</th><th>L</th></tr>`;
@@ -632,16 +646,15 @@
 
         function getOpponent() {
             if (gameMode === 'careerPlayoffs' || career.phase === 'playoffs') {
-                // Find player in bracket
                 let activeMatch = null;
                 for(let r=0; r<career.playoffBracket.length; r++) {
                     for(let m=0; m<career.playoffBracket[r].length; m++) {
                         let match = career.playoffBracket[r][m];
-                        if (!match.winner && (match.p1.isPlayer || match.p2.isPlayer)) activeMatch = match;
+                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) activeMatch = match;
                     }
                 }
                 if (activeMatch) return activeMatch.p1.isPlayer ? activeMatch.p2 : activeMatch.p1;
-                return {name: "Unknown", country: "❓"}; // fallback
+                return {name: "Unknown", country: "❓"}; 
             }
             let oppId = career.schedule[career.matchIndex];
             return career.league.find(p => p.id === oppId);
@@ -689,12 +702,13 @@
             career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l));
             let t8 = career.league.slice(0, 8);
             
-            // QF: 1v8, 4v5, 3v6, 2v7
             career.playoffBracket = [
-                [ {p1: t8[0], p2: t8[7], s1: null, s2: null, winner: null}, {p1: t8[3], p2: t8[4], s1: null, s2: null, winner: null}, {p1: t8[2], p2: t8[5], s1: null, s2: null, winner: null}, {p1: t8[1], p2: t8[6], s1: null, s2: null, winner: null} ], // QF
-                [ {p1: null, p2: null, s1: null, s2: null, winner: null}, {p1: null, p2: null, s1: null, s2: null, winner: null} ], // SF
-                [ {p1: null, p2: null, s1: null, s2: null, winner: null} ] // Finals
+                [ {p1: t8[0], p2: t8[7], s1: null, s2: null, winner: null}, {p1: t8[3], p2: t8[4], s1: null, s2: null, winner: null}, {p1: t8[2], p2: t8[5], s1: null, s2: null, winner: null}, {p1: t8[1], p2: t8[6], s1: null, s2: null, winner: null} ],
+                [ {p1: null, p2: null, s1: null, s2: null, winner: null}, {p1: null, p2: null, s1: null, s2: null, winner: null} ],
+                [ {p1: null, p2: null, s1: null, s2: null, winner: null} ] 
             ];
+            
+            saveGameData(); 
             showPlayoffBracket();
         }
 
@@ -711,9 +725,15 @@
                 career.playoffBracket[r].forEach(m => {
                     if (!m.p1 || !m.p2) { html += `<div class="match-box"><div style="text-align:center; color:#555;">TBD vs TBD</div></div>`; }
                     else {
-                        let isP1Me = m.p1.isPlayer; let isP2Me = m.p2.isPlayer;
-                        let p1Class = "match-player" + (isP1Me ? " is-me" : "") + (m.winner === m.p1 ? " winner" : (m.winner ? " loser" : ""));
-                        let p2Class = "match-player" + (isP2Me ? " is-me" : "") + (m.winner === m.p2 ? " winner" : (m.winner ? " loser" : ""));
+                        // Ensure safe property reading for memory cloned objects
+                        let isP1Me = m.p1 && m.p1.isPlayer; let isP2Me = m.p2 && m.p2.isPlayer;
+                        // Use exact object checking for classes
+                        let p1Winner = m.winner && (m.winner.id === m.p1.id);
+                        let p2Winner = m.winner && (m.winner.id === m.p2.id);
+
+                        let p1Class = "match-player" + (isP1Me ? " is-me" : "") + (p1Winner ? " winner" : (m.winner ? " loser" : ""));
+                        let p2Class = "match-player" + (isP2Me ? " is-me" : "") + (p2Winner ? " winner" : (m.winner ? " loser" : ""));
+                        
                         html += `<div class="match-box">
                                     <div class="${p1Class}"><span>${m.p1.country} ${m.p1.name}</span> ${m.s1 !== null ? `<span class="match-score">${m.s1}</span>` : ''}</div>
                                     <div class="${p2Class}"><span>${m.p2.country} ${m.p2.name}</span> ${m.s2 !== null ? `<span class="match-score">${m.s2}</span>` : ''}</div>
@@ -728,14 +748,35 @@
             html += `<div class="bracket-col"><div class="bracket-col-title">Champion</div><div class="champion-box"><span class="champion-icon">${champ}</span></div></div>`;
             container.innerHTML = html;
 
-            // Check if player is still in
-            let playerActive = false; let tournamentOver = career.playoffBracket[2][0].winner !== null;
-            if (!tournamentOver) {
-                for(let r=0; r<3; r++) {
-                    career.playoffBracket[r].forEach(m => {
-                        if (!m.winner && m.p1 && m.p2 && (m.p1.isPlayer || m.p2.isPlayer)) playerActive = true;
-                    });
-                }
+            // STATUS CHECKS
+            let playerActive = false; 
+            let tournamentOver = career.playoffBracket[2][0].winner !== null;
+            let playerEliminated = false;
+            let playerWasInTournament = false;
+            
+            for(let r=0; r<3; r++) {
+                career.playoffBracket[r].forEach(m => {
+                    if (m.p1 && m.p1.isPlayer) playerWasInTournament = true;
+                    if (m.p2 && m.p2.isPlayer) playerWasInTournament = true;
+                    if (!m.winner && m.p1 && m.p2 && (m.p1.isPlayer || m.p2.isPlayer)) playerActive = true;
+                });
+            }
+            if (playerWasInTournament && !playerActive && !tournamentOver) playerEliminated = true;
+
+            // UPDATE UI SUBTITLE TEXT
+            let statusText = document.getElementById('bracket-status-text');
+            if (!playerWasInTournament) {
+                statusText.innerText = "You missed the Top 8 cut.";
+                statusText.style.color = "var(--danger)";
+            } else if (playerEliminated) {
+                statusText.innerText = "You have been eliminated.";
+                statusText.style.color = "var(--danger)";
+            } else if (tournamentOver) {
+                statusText.innerText = "Tournament Complete!";
+                statusText.style.color = "var(--gold)";
+            } else {
+                statusText.innerText = "Top 8 Championship Tournament";
+                statusText.style.color = "#ddd";
             }
 
             document.getElementById('career-bracket-play-btn').style.display = (playerActive && !tournamentOver) ? 'block' : 'none';
@@ -753,7 +794,6 @@
         }
 
         function simulateLeagueWeek() {
-            // Give everyone else a random win or loss this round
             career.league.forEach(p => { if (!p.isPlayer) { Math.random() > 0.5 ? p.w++ : p.l++; } });
         }
 
@@ -784,14 +824,16 @@
             if (gameMode === 'careerRegular') {
                 let opp = getOpponent(); isWin ? opp.l++ : opp.w++;
                 simulateLeagueWeek();
+                
                 career.matchIndex++;
-                saveGameData();
-
-                if (career.matchIndex >= 23) { generatePlayoffs(); } 
-                else { showCareerHub(); }
+                if (career.matchIndex >= 23) { 
+                    generatePlayoffs(); 
+                } else { 
+                    saveGameData();
+                    showCareerHub(); 
+                }
             } 
             else if (gameMode === 'careerPlayoffs') {
-                // Find current match in bracket
                 let rIdx = -1, mIdx = -1;
                 for(let r=0; r<3; r++) {
                     for(let m=0; m<career.playoffBracket[r].length; m++) {
@@ -801,12 +843,18 @@
                     if(rIdx !== -1) break;
                 }
 
+                // Safety failover if match was lost
+                if (rIdx === -1) { showPlayoffBracket(); return; }
+
                 let currentMatch = career.playoffBracket[rIdx][mIdx];
                 currentMatch.s1 = currentMatch.p1.isPlayer ? pScore : oScore;
                 currentMatch.s2 = currentMatch.p2.isPlayer ? pScore : oScore;
-                currentMatch.winner = isWin ? me : (currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1);
+                
+                // BUG FIX: Strictly use the object reference exactly as it exists in the bracket array
+                let playerObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p1 : currentMatch.p2;
+                let oppObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1;
+                currentMatch.winner = isWin ? playerObjInBracket : oppObjInBracket;
 
-                // Simulate remaining bracket matches for this round
                 for(let i=0; i < career.playoffBracket[rIdx].length; i++) {
                     let m = career.playoffBracket[rIdx][i];
                     if (!m.winner && m.p1 && m.p2) {
@@ -814,7 +862,6 @@
                     }
                 }
 
-                // Advance winners
                 if (rIdx < 2) {
                     let nR = rIdx + 1;
                     for(let i=0; i < career.playoffBracket[nR].length; i++) {
@@ -825,7 +872,6 @@
                     career.careerStats.championships++; fireConfetti();
                 }
 
-                // If player loses, sim the rest of the tournament
                 if (!isWin) {
                     for(let r = rIdx + 1; r < 3; r++) {
                         for(let m = 0; m < career.playoffBracket[r].length; m++) {
@@ -842,6 +888,50 @@
                 }
 
                 saveGameData(); showPlayoffBracket();
+            }
+        }
+
+        // --- DEV CONSOLE (SECRET MENU) ---
+        let lastSecretTapTime = 0;
+        function handleSecretTap(e) {
+            let currentTime = new Date().getTime();
+            let tapLength = currentTime - lastSecretTapTime;
+            if (tapLength < 400 && tapLength > 0) {
+                openCheatMenu();
+                e.preventDefault();
+            }
+            lastSecretTapTime = currentTime;
+        }
+
+        function openCheatMenu() {
+            if (!career) { alert("Start or resume a career first!"); return; }
+            document.getElementById('cheat-screen').style.display = 'flex';
+            document.getElementById('cheat-input').value = '';
+        }
+
+        function closeCheatMenu() {
+            document.getElementById('cheat-screen').style.display = 'none';
+        }
+
+        function submitCheatCode() {
+            let code = document.getElementById('cheat-input').value;
+            if (code === '5580') {
+                if (career.phase === 'regular') {
+                    // BUG FIX: Guarantee player finishes rank 1 before skipping to playoffs
+                    let me = career.league.find(p => p.isPlayer);
+                    me.w = 23; me.l = 0;
+                    
+                    while(career.matchIndex < 23) {
+                        simulateLeagueWeek();
+                        career.matchIndex++;
+                    }
+                    closeCheatMenu();
+                    generatePlayoffs(); 
+                } else {
+                    alert("You are already in the playoffs!");
+                }
+            } else {
+                alert("Invalid Access Code");
             }
         }
 
