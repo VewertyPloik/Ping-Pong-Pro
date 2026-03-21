@@ -8,19 +8,20 @@
         :root {
             --primary: #4dabf7;
             --danger: #ff6b6b;
-            --glass-bg: rgba(20, 25, 40, 0.75);
+            --glass-bg: rgba(20, 25, 40, 0.85);
             --glass-border: rgba(255, 255, 255, 0.15);
+            --gold: #f1c40f;
         }
         body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; touch-action: none; user-select: none; }
         canvas { display: block; }
         
-        .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; color: white; }
+        .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; color: white; backdrop-filter: blur(5px); }
 
         #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; display: none; }
         
         #score-board { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 30px; padding: 10px 30px; pointer-events: auto; align-items: center;}
-        .score-box { display: flex; flex-direction: column; align-items: center; min-width: 80px;}
-        .score-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px;}
+        .score-box { display: flex; flex-direction: column; align-items: center; min-width: 100px;}
+        .score-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-align: center;}
         .score-text { font-size: 42px; font-weight: bold; line-height: 1; }
         #player-score { color: var(--danger); text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
         #ai-score { color: var(--primary); text-shadow: 0 0 10px rgba(77, 171, 247, 0.5); }
@@ -34,11 +35,13 @@
         .title { font-size: 50px; margin-bottom: 5px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
         .subtitle { font-size: 18px; color: #ddd; margin-bottom: 40px; text-align: center;}
         
-        .btn-primary { padding: 15px 40px; font-size: 18px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 10px;}
+        .btn-primary { padding: 15px 40px; font-size: 18px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 5px; transition: transform 0.1s;}
+        .btn-primary:active { transform: scale(0.95); }
         .btn-danger { background: #ff6b6b; }
+        .btn-gold { background: var(--gold); color: #000; }
 
         .menu-container { display: flex; flex-direction: column; gap: 15px; width: 340px; text-align: center;}
-        .country-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px;}
+        .country-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; max-height: 150px; overflow-y: auto; padding-right: 5px;}
         .country-btn { font-size: 28px; background: rgba(255,255,255,0.1); border: 2px solid transparent; border-radius: 10px; cursor: pointer; padding: 5px;}
         .country-btn.selected { border-color: var(--primary); background: rgba(77, 171, 247, 0.3); }
 
@@ -46,18 +49,37 @@
         .mode-btn { flex: 1; padding: 10px 0; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold;}
         .mode-btn.active { background: var(--primary); border-color: var(--primary); }
 
-        #bracket-container { display: flex; justify-content: space-between; align-items: stretch; width: 95%; max-width: 900px; background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; margin-bottom: 20px; overflow-x: auto;}
-        .bracket-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 140px; gap: 15px; position: relative; flex: 1; padding: 0 10px;}
+        /* Career Specific UI */
+        .career-layout { display: flex; gap: 20px; width: 95%; max-width: 1000px; height: 80%; }
+        .career-panel { flex: 1; display: flex; flex-direction: column; padding: 20px; overflow: hidden; }
+        .standings-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; text-align: left; }
+        .standings-table th { border-bottom: 2px solid var(--glass-border); padding: 8px; color: #aaa; position: sticky; top: 0; background: rgba(20, 25, 40, 0.95); z-index: 2;}
+        .standings-table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .standings-table tr.is-player td { font-weight: bold; color: var(--primary); background: rgba(77, 171, 247, 0.1); }
+        .table-container { overflow-y: auto; flex: 1; padding-right: 10px; }
+        .table-container::-webkit-scrollbar { width: 6px; }
+        .table-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .stat-box { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-value { font-size: 28px; font-weight: bold; color: var(--primary); margin-top: 5px; }
+        .stat-label { font-size: 12px; color: #aaa; text-transform: uppercase; }
+
+        input[type="text"] { width: 100%; padding: 12px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 18px; border-radius: 8px; margin-bottom: 20px; font-family: inherit; text-align: center;}
+        
+        /* Bracket UI */
+        #bracket-container { display: flex; justify-content: space-between; align-items: stretch; width: 95%; max-width: 1100px; background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; margin-bottom: 20px; overflow-x: auto;}
+        .bracket-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 160px; gap: 15px; position: relative; flex: 1; padding: 0 10px;}
         .bracket-col-title { text-align: center; color: #ccc; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;}
-        .match-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 8px; font-size: 16px; display: flex; flex-direction: column; gap: 4px; position: relative;}
+        .match-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 6px; font-size: 14px; display: flex; flex-direction: column; gap: 4px;}
         .match-player { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px; border-radius: 4px;}
         .match-player.is-me { background: rgba(77, 171, 247, 0.25); border: 1px solid var(--primary); }
         .match-player.winner { font-weight: bold; color: #fff;}
         .match-player.loser { color: #888;}
-        .match-score { font-size: 14px; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px;}
+        .match-score { font-size: 12px; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px;}
         
         .champion-box { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;}
-        .champion-icon { font-size: 60px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite;}
+        .champion-icon { font-size: 50px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite; margin-bottom: 10px;}
 
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
@@ -67,7 +89,6 @@
         .confetti { position: absolute; width: 10px; height: 10px; z-index: 100; animation: fall linear forwards; top: -20px;}
         @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
 
-        /* Replay UI */
         #replay-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
         #replay-text { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); color: #ff4757; font-size: 28px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 10px rgba(0,0,0,0.8); animation: blink 1.5s infinite; }
         #close-replay-btn { position: absolute; top: 25px; right: 25px; background: #ff4757; color: white; border: 2px solid white; width: 50px; height: 50px; font-size: 24px; font-weight: bold; cursor: pointer; pointer-events: auto; border-radius: 10px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
@@ -82,47 +103,103 @@
         <p class="subtitle" id="loading-subtitle">LOADING ENGINE...</p>
         <div class="menu-container" id="main-buttons" style="display: none;">
             
-            <div class="glass-panel" style="padding: 15px; margin-bottom: 10px;">
+            <button class="btn-primary" style="background: var(--gold); color: black;" onclick="openCareerSetup()" id="btn-new-career">Start Career Mode</button>
+            <button class="btn-primary" style="background: var(--gold); color: black; display: none;" onclick="resumeCareer()" id="btn-resume-career">Resume Career</button>
+            
+            <div class="glass-panel" style="padding: 15px; margin-top: 15px;">
                 <p style="margin: 0 0 10px 0; color: #ccc; font-size: 14px;">EXHIBITION DIFFICULTY</p>
                 <div class="diff-row" style="margin-bottom: 0;">
                     <button class="mode-btn ex-diff" onclick="setExhibitionDiff('easy')">EASY</button>
                     <button class="mode-btn ex-diff active" onclick="setExhibitionDiff('normal')">NORM</button>
                     <button class="mode-btn ex-diff" onclick="setExhibitionDiff('hard')">HARD</button>
                 </div>
-                <button class="btn-primary" style="width: 100%; margin: 15px 0 0 0;" onclick="startExhibition()">Play Exhibition</button>
+                <button class="btn-primary" style="width: 100%; margin: 15px 0 0 0; font-size: 16px;" onclick="startExhibition()">Play Exhibition</button>
             </div>
-
-            <button class="btn-primary btn-danger" onclick="openTournamentSetup()">New Tournament</button>
-            <button class="btn-primary" style="background: #333;" onclick="resumeTournament()" id="resume-tourney-btn" style="display:none;">Resume Tournament</button>
         </div>
     </div>
 
-    <div id="tourney-setup-screen" class="overlay-screen" style="display: none;">
-        <div class="glass-panel" style="padding: 20px;">
-            <h2 style="text-align: center; margin-top: 0;">Tournament Setup</h2>
-            <div class="country-grid" id="country-grid"></div>
-            <p style="margin: 0 0 10px 0; color: #ccc; font-size: 14px; text-align: center;">TOURNAMENT DIFFICULTY</p>
+    <div id="career-setup-screen" class="overlay-screen" style="display: none;">
+        <div class="glass-panel" style="padding: 30px; width: 320px; text-align: center;">
+            <h2 style="margin-top: 0;">Create Pro</h2>
+            <input type="text" id="career-name-input" placeholder="Enter Your Name" maxlength="12" autocomplete="off">
+            <p style="margin: 0 0 10px 0; color: #ccc; font-size: 14px;">SELECT COUNTRY</p>
+            <div class="country-grid" id="career-country-grid"></div>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="btn-primary" style="background: #555; flex: 1;" onclick="backToMain()">Back</button>
+                <button class="btn-primary btn-danger" style="flex: 2;" onclick="startNewCareer()">START</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="career-hub-screen" class="overlay-screen" style="display: none;">
+        <h1 class="title" style="font-size: 36px; margin-bottom: 20px;">Career Hub - Season <span id="hub-season-num">1</span></h1>
+        
+        <div class="career-layout">
+            <div class="glass-panel career-panel">
+                <h3 style="margin: 0 0 10px 0; text-align: center;">League Standings</h3>
+                <div class="table-container">
+                    <table class="standings-table" id="standings-table-body">
+                        </table>
+                </div>
+            </div>
+
+            <div class="glass-panel career-panel" style="justify-content: space-between;">
+                <div style="text-align: center;">
+                    <h2 style="margin: 0; color: var(--gold);" id="hub-player-name">Name</h2>
+                    <p style="margin: 5px 0 20px 0; color: #aaa;" id="hub-player-record">Record: 0 - 0</p>
+                    
+                    <div id="next-match-container">
+                        <p style="font-size: 14px; color: #ccc; margin-bottom: 5px; text-transform: uppercase; font-weight: bold;">Next Match (Game <span id="hub-game-num">1</span>/23)</p>
+                        <div class="match-box" style="margin: 0 auto 20px auto; width: 80%; text-align: center; padding: 15px; font-size: 20px; font-weight: bold;">
+                            vs <span id="hub-next-opp">Opponent</span>
+                        </div>
+                        
+                        <p style="margin: 0 0 10px 0; color: #ccc; font-size: 12px;">MATCH DIFFICULTY</p>
+                        <div class="diff-row">
+                            <button class="mode-btn car-diff" onclick="setCareerMatchDiff('easy')">EASY</button>
+                            <button class="mode-btn car-diff active" onclick="setCareerMatchDiff('normal')">NORM</button>
+                            <button class="mode-btn car-diff" onclick="setCareerMatchDiff('hard')">HARD</button>
+                        </div>
+
+                        <button class="btn-primary btn-danger" style="width: 100%; margin: 0 0 10px 0; padding: 20px; font-size: 22px;" onclick="startCareerMatch()">PLAY MATCH</button>
+                    </div>
+                    
+                    <button id="view-playoffs-btn" class="btn-primary btn-gold" style="width: 100%; margin: 0 0 10px 0; padding: 20px; font-size: 22px; display: none;" onclick="showPlayoffBracket()">VIEW PLAYOFFS</button>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="btn-primary" style="background: #34495e;" onclick="showStatsScreen()">View Stats</button>
+                    <button class="btn-primary" style="background: #555;" onclick="backToMain()">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stats-screen" class="overlay-screen" style="display: none;">
+        <div class="glass-panel" style="padding: 30px; width: 90%; max-width: 600px;">
+            <h1 class="title" style="font-size: 32px; margin-bottom: 20px;">Statistics</h1>
+            
             <div class="diff-row">
-                <button class="mode-btn tourney-diff" onclick="setSetupDiff('easy')">EASY</button>
-                <button class="mode-btn tourney-diff active" onclick="setSetupDiff('normal')">NORM</button>
-                <button class="mode-btn tourney-diff" onclick="setSetupDiff('hard')">HARD</button>
+                <button class="mode-btn stat-tab active" onclick="toggleStatView('season')">Current Season</button>
+                <button class="mode-btn stat-tab" onclick="toggleStatView('career')">Career Totals</button>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn-primary" style="background: #555; flex: 1;" onclick="backToMain()">Cancel</button>
-                <button class="btn-primary btn-danger" style="flex: 2;" onclick="generateTournament()">START</button>
-            </div>
+
+            <div class="stat-grid" id="stats-grid-container">
+                </div>
+
+            <button class="btn-primary" style="width: 100%; background: #555; margin-top: 20px;" onclick="closeStatsScreen()">Back to Hub</button>
         </div>
     </div>
 
-    <div id="bracket-screen" class="overlay-screen" style="display: none;">
-        <h1 class="title" style="font-size: 36px;">Tournament</h1>
-        <div id="bracket-container"></div>
-        <button class="btn-primary btn-danger" id="next-match-btn" onclick="startTournamentMatch()">PLAY NEXT MATCH</button>
-        <button class="btn-primary" style="background: #555; margin-top: 10px;" onclick="backToMain()">Save & Main Menu</button>
-    </div>
-
-    <div id="countdown-screen" class="overlay-screen">
-        <div id="countdown-text">3</div>
+    <div id="career-bracket-screen" class="overlay-screen" style="display: none;">
+        <h1 class="title" style="font-size: 36px;">Season <span id="bracket-season-num">1</span> Playoffs</h1>
+        <p class="subtitle" style="margin-bottom: 10px;">Top 8 Championship Tournament</p>
+        <div id="career-bracket-container"></div>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="btn-primary btn-danger" id="career-bracket-play-btn" onclick="startPlayoffMatch()">PLAY MATCH</button>
+            <button class="btn-primary btn-gold" id="career-bracket-next-season-btn" style="display:none;" onclick="startNextSeason()">START NEXT SEASON</button>
+            <button class="btn-primary" style="background: #555;" onclick="backToCareerHub()">Back to Hub</button>
+        </div>
     </div>
 
     <div id="game-over-screen" class="overlay-screen" style="display: none;">
@@ -147,15 +224,19 @@
         </div>
     </div>
 
+    <div id="countdown-screen" class="overlay-screen">
+        <div id="countdown-text">3</div>
+    </div>
+
     <div id="ui">
         <div id="score-board" class="glass-panel">
             <div class="score-box">
-                <div class="score-label"><span id="player-flag" style="display: none;"></span> Player</div>
+                <div class="score-label"><span id="player-flag" style="display: none;"></span> <span id="player-label">Player</span></div>
                 <div id="player-score" class="score-text">0</div>
             </div>
-            <div class="score-box" style="justify-content: center; font-size: 24px; color: #666; min-width: 20px;">-</div>
+            <div class="score-box" style="justify-content: center; font-size: 24px; color: #666; min-width: 20px; padding: 0 10px;">-</div>
             <div class="score-box">
-                <div class="score-label">AI <span id="ai-flag" style="display: none;"></span></div>
+                <div class="score-label"><span id="ai-label">AI</span> <span id="ai-flag" style="display: none;"></span></div>
                 <div id="ai-score" class="score-text">0</div>
             </div>
         </div>
@@ -165,10 +246,19 @@
 
     <script>
         // --- DATA & SETTINGS ---
-        const countries = ['🇺🇸', '🇬🇧', '🇯🇵', '🇩🇪', '🇫🇷', '🇧🇷', '🇨🇦', '🇦🇺', '🇮🇹', '🇪🇸', '🇲🇽', '🇰🇷'];
+        const countries = ['🇺🇸', '🇬🇧', '🇯🇵', '🇩🇪', '🇫🇷', '🇧🇷', '🇨🇦', '🇦🇺', '🇮🇹', '🇪🇸', '🇲🇽', '🇰🇷', '🇨🇳', '🇷🇺', '🇸🇪', '🇳🇴', '🇪🇬', '🇸🇦', '🇹🇷', '🇦🇷'];
+        const aiNamesRoster = [
+            {n: 'Liam', c: '🇺🇸'}, {n: 'Noah', c: '🇬🇧'}, {n: 'Kenji', c: '🇯🇵'}, {n: 'Lukas', c: '🇩🇪'}, 
+            {n: 'Mateo', c: '🇫🇷'}, {n: 'Joao', c: '🇧🇷'}, {n: 'Felix', c: '🇨🇦'}, {n: 'Jack', c: '🇦🇺'}, 
+            {n: 'Marco', c: '🇮🇹'}, {n: 'Carlos', c: '🇪🇸'}, {n: 'Diego', c: '🇲🇽'}, {n: 'Min-jun', c: '🇰🇷'}, 
+            {n: 'Wei', c: '🇨🇳'}, {n: 'Ivan', c: '🇷🇺'}, {n: 'Lars', c: '🇸🇪'}, {n: 'Finn', c: '🇳🇴'}, 
+            {n: 'Ahmed', c: '🇪🇬'}, {n: 'Omar', c: '🇸🇦'}, {n: 'Ali', c: '🇹🇷'}, {n: 'Hiro', c: '🇯🇵'}, 
+            {n: 'Tom', c: '🇺🇸'}, {n: 'Alex', c: '🇬🇧'}, {n: 'Hans', c: '🇩🇪'}
+        ];
+
         let sfxEnabled = true;
         let gameState = 'demo'; 
-        let gameMode = 'exhibition'; 
+        let gameMode = 'exhibition'; // exhibition, careerRegular, careerPlayoffs
         
         let scorePlayer = 0; let scoreAI = 0;
         
@@ -180,30 +270,26 @@
         
         let activeDifficulty = 'normal';
         let exhibitionDifficulty = 'normal';
-        
-        let tourney = { active: false, playerCountry: '🇺🇸', difficulty: 'normal', round: 0, matches: [[], [], []] };
+        let careerMatchDifficulty = 'normal';
 
-        // Physics State
-        let lastPaddleX = 0, lastPaddleY = 0;
-        let prevFramePaddleX = 0, prevFramePaddleY = 0; 
-        let paddleVelocity = { x: 0, y: 0 };
-        let stuckFrames = 0; let lastBounceSide = null; 
+        // --- CAREER DATA STRUCTURE ---
+        let career = null;
 
-        // Replay System
-        const REPLAY_FRAMES = 300; // ~5 seconds
-        let replayBuffer = [];
-        let isReplaying = false;
-        let replayPlaybackIndex = 0;
+        function getEmptyStats() {
+            return { wins: 0, losses: 0, winsBy5: 0, lossesBy5: 0, otWins: 0, otLosses: 0, championships: 0 };
+        }
 
-        // Load Save Data
+        // --- SAVE/LOAD ---
         function loadSave() {
-            const data = localStorage.getItem('pingPongTourneyPro2');
+            const data = localStorage.getItem('pingPongProCareerSave');
             if (data) {
-                tourney = JSON.parse(data);
-                if (tourney.active) document.getElementById('resume-tourney-btn').style.display = 'block';
+                career = JSON.parse(data);
+                document.getElementById('btn-resume-career').style.display = 'block';
             }
         }
-        function saveGameData() { localStorage.setItem('pingPongTourneyPro2', JSON.stringify(tourney)); }
+        function saveGameData() { 
+            if (career) localStorage.setItem('pingPongProCareerSave', JSON.stringify(career)); 
+        }
 
         // --- AUDIO ENGINE ---
         let audioCtx;
@@ -219,7 +305,7 @@
             else if (sfxEnabled) initAudio();
         }
         function playSound(type, intensity = 1, isAi = false) {
-            if (!sfxEnabled || !audioCtx || isReplaying) return; // Mute sfx during replay
+            if (!sfxEnabled || !audioCtx || isReplaying) return; 
             const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
             osc.type = type === 'hit' ? 'triangle' : 'sine';
             osc.frequency.setValueAtTime(type === 'hit' ? (isAi ? 500 : 700) : 350, audioCtx.currentTime);
@@ -229,96 +315,73 @@
             osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.1);
         }
 
-        // --- PERFORMANCE THREE.JS SETUP WITH SHADOWS ---
+        // --- THREE.JS GRAPHICS ---
         const scene = new THREE.Scene(); scene.background = new THREE.Color(0x87CEEB); 
         const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.set(0, 1.2, 2.8); camera.lookAt(0, -0.2, 0);
         
         const renderer = new THREE.WebGLRenderer({ antialias: false });
         renderer.setPixelRatio(1); renderer.setSize(window.innerWidth, window.innerHeight);
-        
-        // Enable Shadows
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         document.body.appendChild(renderer.domElement);
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); scene.add(ambientLight);
         
         const dirLight = new THREE.DirectionalLight(0xffffff, 0.7); 
         dirLight.position.set(3, 5, 2); 
-        // Light Shadow Config
-        dirLight.castShadow = true;
-        dirLight.shadow.mapSize.width = 1024;
-        dirLight.shadow.mapSize.height = 1024;
-        dirLight.shadow.camera.near = 0.5;
-        dirLight.shadow.camera.far = 15;
-        dirLight.shadow.camera.left = -3;
-        dirLight.shadow.camera.right = 3;
-        dirLight.shadow.camera.top = 3;
-        dirLight.shadow.camera.bottom = -3;
-        dirLight.shadow.bias = -0.001;
+        dirLight.castShadow = true; dirLight.shadow.mapSize.width = 1024; dirLight.shadow.mapSize.height = 1024;
+        dirLight.shadow.camera.near = 0.5; dirLight.shadow.camera.far = 15;
+        dirLight.shadow.camera.left = -3; dirLight.shadow.camera.right = 3;
+        dirLight.shadow.camera.top = 3; dirLight.shadow.camera.bottom = -3; dirLight.shadow.bias = -0.001;
         scene.add(dirLight);
 
         const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshLambertMaterial({ color: 0x228B22 }));
-        ground.rotation.x = -Math.PI / 2; ground.position.y = -0.76; 
-        ground.receiveShadow = true; // Ground receives shadows
-        scene.add(ground);
+        ground.rotation.x = -Math.PI / 2; ground.position.y = -0.76; ground.receiveShadow = true; scene.add(ground);
         
         const tableW = 1.525, tableL = 2.74, tableH = 0.05;
         const table = new THREE.Mesh(new THREE.BoxGeometry(tableW, tableH, tableL), new THREE.MeshLambertMaterial({ color: 0x00008B }));
-        table.receiveShadow = true; table.castShadow = true;
-        scene.add(table);
+        table.receiveShadow = true; table.castShadow = true; scene.add(table);
         const net = new THREE.Mesh(new THREE.PlaneGeometry(tableW + 0.1, 0.1525), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6, side: THREE.DoubleSide }));
         net.position.y = tableH/2 + 0.1525/2; scene.add(net);
 
-        const legGeo = new THREE.BoxGeometry(0.05, 0.76, 0.05);
-        const legMat = new THREE.MeshLambertMaterial({ color: 0x444444 });
+        const legGeo = new THREE.BoxGeometry(0.05, 0.76, 0.05); const legMat = new THREE.MeshLambertMaterial({ color: 0x444444 });
         const legPositions = [[tableW/2 - 0.1, -0.38, tableL/2 - 0.2], [-tableW/2 + 0.1, -0.38, tableL/2 - 0.2], [tableW/2 - 0.1, -0.38, -tableL/2 + 0.2], [-tableW/2 + 0.1, -0.38, -tableL/2 + 0.2]];
         legPositions.forEach(pos => { 
-            const leg = new THREE.Mesh(legGeo, legMat); 
-            leg.position.set(pos[0], pos[1], pos[2]); 
-            leg.castShadow = true; leg.receiveShadow = true;
-            scene.add(leg); 
+            const leg = new THREE.Mesh(legGeo, legMat); leg.position.set(pos[0], pos[1], pos[2]); 
+            leg.castShadow = true; leg.receiveShadow = true; scene.add(leg); 
         });
 
         function createPaddle(color) {
             const g = new THREE.Group();
             const f = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.02, 16), new THREE.MeshLambertMaterial({ color: color }));
-            f.rotation.x = Math.PI/2; 
-            f.castShadow = true; f.receiveShadow = true;
-            g.add(f);
+            f.rotation.x = Math.PI/2; f.castShadow = true; f.receiveShadow = true; g.add(f);
             const h = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.14, 8), new THREE.MeshLambertMaterial({ color: 0x8B4513 }));
-            h.position.y = -0.15; 
-            h.castShadow = true; h.receiveShadow = true;
-            g.add(h); return g;
+            h.position.y = -0.15; h.castShadow = true; h.receiveShadow = true; g.add(h); return g;
         }
         const playerPaddle = createPaddle(0xff0000); playerPaddle.position.set(0, 0.2, tableL / 2 + 0.2); scene.add(playerPaddle);
         const aiPaddle = createPaddle(0x0000ff); aiPaddle.position.set(0, 0.2, -tableL / 2 - 0.1); scene.add(aiPaddle);
 
         const ball = new THREE.Mesh(new THREE.SphereGeometry(0.02, 8, 8), new THREE.MeshLambertMaterial({ color: 0xffa500 })); 
-        ball.castShadow = true;
-        scene.add(ball);
+        ball.castShadow = true; scene.add(ball);
 
-        let ballVel = new THREE.Vector3(0, 0, 0);
-        const gravity = -0.00315; const airResistance = 0.996; 
-        const paddleHitRadius = 0.15; 
+        let ballVel = new THREE.Vector3(0, 0, 0); const gravity = -0.00315; const airResistance = 0.996; const paddleHitRadius = 0.15; 
+        let lastPaddleX = 0, lastPaddleY = 0, prevFramePaddleX = 0, prevFramePaddleY = 0; 
+        let paddleVelocity = { x: 0, y: 0 }; let stuckFrames = 0; let lastBounceSide = null; 
+
+        // Replay System
+        const REPLAY_FRAMES = 300; let replayBuffer = []; let isReplaying = false; let replayPlaybackIndex = 0;
 
         function getSegmentDist(px, py, x1, y1, x2, y2) {
-            const l2 = (x2 - x1)**2 + (y2 - y1)**2;
-            if (l2 === 0) return Math.sqrt((px - x1)**2 + (py - y1)**2);
-            let t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / l2;
-            t = Math.max(0, Math.min(1, t));
+            const l2 = (x2 - x1)**2 + (y2 - y1)**2; if (l2 === 0) return Math.sqrt((px - x1)**2 + (py - y1)**2);
+            let t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / l2; t = Math.max(0, Math.min(1, t));
             return Math.sqrt((px - (x1 + t * (x2 - x1)))**2 + (py - (y1 + t * (y2 - y1)))**2);
         }
 
         function runCountdown(callback) {
-            const screen = document.getElementById('countdown-screen');
-            const text = document.getElementById('countdown-text');
+            const screen = document.getElementById('countdown-screen'); const text = document.getElementById('countdown-text');
             screen.style.display = 'flex'; let count = 3; text.innerText = count;
             let iv = setInterval(() => {
-                count--;
-                if(count > 0) text.innerText = count;
-                else if(count === 0) text.innerText = "GO!";
+                count--; if(count > 0) text.innerText = count; else if(count === 0) text.innerText = "GO!";
                 else { clearInterval(iv); screen.style.display = 'none'; callback(); }
             }, 1000);
         }
@@ -339,17 +402,18 @@
             who === 'player' ? scorePlayer++ : scoreAI++;
             if(reason) {
                 const ann = document.getElementById('announcement');
-                ann.innerText = `Point ${who === 'player' ? 'Player' : 'AI'}!`;
+                let pointWinner = who === 'player' ? (gameMode.includes('career') ? career.playerName : 'Player') : 
+                    (gameMode.includes('career') ? getOpponent().name : 'AI');
+                ann.innerText = `Point ${pointWinner}!`;
                 ann.style.display = 'block'; setTimeout(() => ann.style.display = 'none', 1500);
             }
-            document.getElementById('player-score').innerText = scorePlayer;
-            document.getElementById('ai-score').innerText = scoreAI;
+            document.getElementById('player-score').innerText = scorePlayer; document.getElementById('ai-score').innerText = scoreAI;
             
             if (scorePlayer >= 11 || scoreAI >= 11) {
                 if (Math.abs(scorePlayer - scoreAI) >= 2) {
                     gameState = 'gameover';
                     const text = document.getElementById('winner-text');
-                    text.innerText = scorePlayer > scoreAI ? "YOU WIN!" : "AI WINS!";
+                    text.innerText = scorePlayer > scoreAI ? "YOU WIN!" : "YOU LOSE!";
                     text.style.color = scorePlayer > scoreAI ? "var(--danger)" : "var(--primary)";
                     document.getElementById('final-score-text').innerText = `${scorePlayer} - ${scoreAI}`;
                     document.getElementById('ui').style.display = 'none';
@@ -362,16 +426,10 @@
 
         function onPointerMove(e) {
             if (gameState !== 'playing') return;
-            const cx = e.touches ? e.touches[0].clientX : e.clientX;
-            const cy = e.touches ? e.touches[0].clientY : e.clientY;
-            const x = (cx / window.innerWidth) * 2 - 1;
-            const y = -(cy / window.innerHeight) * 2 + 1;
-
-            playerPaddle.position.x = x * 1.8;
-            playerPaddle.position.y = Math.max(0.0, Math.min(0.8, (y + 1) * 0.4));
-            
-            paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 0.5;
-            paddleVelocity.y = (playerPaddle.position.y - lastPaddleY) * 0.5;
+            const cx = e.touches ? e.touches[0].clientX : e.clientX; const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            const x = (cx / window.innerWidth) * 2 - 1; const y = -(cy / window.innerHeight) * 2 + 1;
+            playerPaddle.position.x = x * 1.8; playerPaddle.position.y = Math.max(0.0, Math.min(0.8, (y + 1) * 0.4));
+            paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 0.5; paddleVelocity.y = (playerPaddle.position.y - lastPaddleY) * 0.5;
             lastPaddleX = playerPaddle.position.x; lastPaddleY = playerPaddle.position.y;
         }
         window.addEventListener('mousemove', onPointerMove); window.addEventListener('touchmove', onPointerMove, { passive: false });
@@ -379,18 +437,11 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // Replay Playback Logic
             if (isReplaying && replayBuffer.length > 0) {
                 let frame = replayBuffer[Math.floor(replayPlaybackIndex)];
-                if (frame) {
-                    ball.position.set(frame.bx, frame.by, frame.bz);
-                    playerPaddle.position.set(frame.px, frame.py, frame.pz);
-                    aiPaddle.position.set(frame.ax, frame.ay, frame.az);
-                }
-                replayPlaybackIndex += 0.75; // Play at 0.75x speed
-                if (replayPlaybackIndex >= replayBuffer.length) replayPlaybackIndex = 0; // Loop seamlessly
-                renderer.render(scene, camera);
-                return; // Skip standard game logic
+                if (frame) { ball.position.set(frame.bx, frame.by, frame.bz); playerPaddle.position.set(frame.px, frame.py, frame.pz); aiPaddle.position.set(frame.ax, frame.ay, frame.az); }
+                replayPlaybackIndex += 0.75; if (replayPlaybackIndex >= replayBuffer.length) replayPlaybackIndex = 0; 
+                renderer.render(scene, camera); return;
             }
 
             if (gameState === 'playing' || gameState === 'demo') {
@@ -435,8 +486,7 @@
                             const T = (Math.abs(targetZ - ball.position.z) / speedZ) * 1.08;
                             ballVel.y = Math.max(0.05, (0.045 - ball.position.y - 0.5 * gravity * T * T) / T);
                         } else {
-                            ballVel.z = -0.055 - (sSpeed * 0.33); 
-                            ballVel.x = ((ball.position.x - playerPaddle.position.x) * 0.15) + (paddleVelocity.x * 0.15); 
+                            ballVel.z = -0.055 - (sSpeed * 0.33); ballVel.x = ((ball.position.x - playerPaddle.position.x) * 0.15) + (paddleVelocity.x * 0.15); 
                             ballVel.y = 0.05 + Math.max(0, paddleVelocity.y * 0.22); 
                         }
                     }
@@ -445,7 +495,6 @@
                 if (ballVel.z < 0) { 
                     const t = Math.abs((aiPaddle.position.z - ball.position.z) / ballVel.z);
                     const targetX = ball.position.x + (ballVel.x * t);
-                    
                     const cDiff = gameState === 'demo' ? 0.2 : diffSettings[activeDifficulty].diff;
                     const cMarg = gameState === 'demo' ? 0 : diffSettings[activeDifficulty].margin;
 
@@ -459,7 +508,6 @@
                         if (Math.sqrt(dx*dx + dy*dy) < paddleHitRadius) { 
                             if(gameState !== 'demo') playSound('hit', 1, true);
                             lastBounceSide = null; ball.position.z = aiPaddle.position.z + 0.1;
-                            
                             const speedZ = 0.055 + Math.random() * 0.015;
                             ballVel.z = speedZ; ballVel.x = ((Math.random() - 0.5) * 0.02) + (dx * 0.05);
                             const T = (Math.abs((0.8 + Math.random() * 0.4) - ball.position.z) / speedZ) * 1.08;
@@ -469,22 +517,15 @@
                 }
 
                 if (Math.abs(ball.position.z) < 0.03 && ball.position.y < tableH/2 + 0.1525) {
-                    ball.position.z = ballVel.z > 0 ? -0.04 : 0.04; 
-                    ballVel.z *= -0.3; ballVel.x *= 0.5; ballVel.y *= 0.8;
+                    ball.position.z = ballVel.z > 0 ? -0.04 : 0.04; ballVel.z *= -0.3; ballVel.x *= 0.5; ballVel.y *= 0.8;
                     if(gameState !== 'demo') playSound('bounce', 0.5);
                 }
             }
 
-            // Recorder Logic: continuously record the last ~5 seconds during active play
             if (!isReplaying && (gameState === 'playing' || gameState === 'serving')) {
-                replayBuffer.push({
-                    bx: ball.position.x, by: ball.position.y, bz: ball.position.z,
-                    px: playerPaddle.position.x, py: playerPaddle.position.y, pz: playerPaddle.position.z,
-                    ax: aiPaddle.position.x, ay: aiPaddle.position.y, az: aiPaddle.position.z
-                });
+                replayBuffer.push({ bx: ball.position.x, by: ball.position.y, bz: ball.position.z, px: playerPaddle.position.x, py: playerPaddle.position.y, pz: playerPaddle.position.z, ax: aiPaddle.position.x, ay: aiPaddle.position.y, az: aiPaddle.position.z });
                 if (replayBuffer.length > REPLAY_FRAMES) replayBuffer.shift();
             }
-            
             prevFramePaddleX = playerPaddle.position.x; prevFramePaddleY = playerPaddle.position.y; 
             renderer.render(scene, camera);
         }
@@ -497,17 +538,18 @@
 
         function resetMatchUI() {
             scorePlayer = 0; scoreAI = 0; replayBuffer = [];
-            document.getElementById('player-score').innerText = '0';
-            document.getElementById('ai-score').innerText = '0';
+            document.getElementById('player-score').innerText = '0'; document.getElementById('ai-score').innerText = '0';
             
-            if (gameMode === 'tournament') {
-                document.getElementById('player-flag').innerText = tourney.playerCountry;
-                document.getElementById('player-flag').style.display = 'inline';
-                document.getElementById('ai-flag').innerText = tourney.matches[tourney.round][0].p2; 
-                document.getElementById('ai-flag').style.display = 'inline';
+            let pLabel = document.getElementById('player-label'); let pFlag = document.getElementById('player-flag');
+            let aLabel = document.getElementById('ai-label'); let aFlag = document.getElementById('ai-flag');
+
+            if (gameMode.includes('career')) {
+                let opp = getOpponent();
+                pLabel.innerText = career.playerName; pFlag.innerText = career.playerCountry; pFlag.style.display = 'inline';
+                aLabel.innerText = opp.name; aFlag.innerText = opp.country; aFlag.style.display = 'inline';
             } else {
-                document.getElementById('player-flag').style.display = 'none';
-                document.getElementById('ai-flag').style.display = 'none';
+                pLabel.innerText = "Player"; pFlag.style.display = 'none';
+                aLabel.innerText = "AI"; aFlag.style.display = 'none';
             }
         }
 
@@ -517,94 +559,293 @@
             runCountdown(() => { document.getElementById('ui').style.display = 'block'; serveBall(); });
         }
 
-        // --- PRE-GAME SETUP LOGIC ---
-        function setExhibitionDiff(d) {
-            document.querySelectorAll('.ex-diff').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active'); exhibitionDifficulty = d;
-        }
+        // --- EXHIBITION ---
+        function setExhibitionDiff(d) { document.querySelectorAll('.ex-diff').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); exhibitionDifficulty = d; }
+        function startExhibition() { gameMode = 'exhibition'; activeDifficulty = exhibitionDifficulty; triggerGameStart(); }
 
-        function startExhibition() { 
-            gameMode = 'exhibition'; activeDifficulty = exhibitionDifficulty; triggerGameStart(); 
-        }
-
-        function populateCountries() {
-            const grid = document.getElementById('country-grid'); grid.innerHTML = '';
+        // --- CAREER LOGIC ---
+        let selectedCareerCountry = '🇺🇸';
+        function openCareerSetup() {
+            document.getElementById('main-menu-screen').style.display = 'none';
+            document.getElementById('career-setup-screen').style.display = 'flex';
+            const grid = document.getElementById('career-country-grid'); grid.innerHTML = '';
             countries.forEach(c => {
-                let btn = document.createElement('button');
-                btn.className = 'country-btn' + (c === tourney.playerCountry ? ' selected' : ''); btn.innerText = c;
-                btn.onclick = () => {
-                    document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected'); tourney.playerCountry = c;
-                }; grid.appendChild(btn);
+                let btn = document.createElement('button'); btn.className = 'country-btn' + (c === selectedCareerCountry ? ' selected' : ''); btn.innerText = c;
+                btn.onclick = () => { document.querySelectorAll('.career-country-grid .country-btn, #career-country-grid .country-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); selectedCareerCountry = c; };
+                grid.appendChild(btn);
             });
         }
 
-        function openTournamentSetup() {
-            document.getElementById('main-menu-screen').style.display = 'none';
-            document.getElementById('tourney-setup-screen').style.display = 'flex';
-            populateCountries();
-        }
-
-        function setSetupDiff(d) {
-            document.querySelectorAll('.tourney-diff').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active'); tourney.difficulty = d;
-        }
-
-        function generateTournament() {
-            tourney.active = true; tourney.round = 0; activeDifficulty = tourney.difficulty; 
-            let opponents = countries.filter(c => c !== tourney.playerCountry).sort(() => Math.random() - 0.5); 
-            tourney.matches = [[], [], []]; 
+        function startNewCareer() {
+            let name = document.getElementById('career-name-input').value.trim() || "Player";
+            career = {
+                playerName: name, playerCountry: selectedCareerCountry, season: 1,
+                careerStats: getEmptyStats(), seasonStats: getEmptyStats(),
+                league: [], schedule: [], matchIndex: 0, phase: 'regular', playoffBracket: []
+            };
             
-            tourney.matches[0].push({ p1: tourney.playerCountry, p2: opponents.pop(), s1: null, s2: null, winner: null });
-            for(let i=0; i<3; i++) tourney.matches[0].push({ p1: opponents.pop(), p2: opponents.pop(), s1: null, s2: null, winner: null });
-            for(let i=0; i<2; i++) tourney.matches[1].push({ p1: null, p2: null, s1: null, s2: null, winner: null });
-            tourney.matches[2].push({ p1: null, p2: null, s1: null, s2: null, winner: null });
-
-            saveGameData(); showBracket();
+            career.league.push({ id: 0, name: name, country: selectedCareerCountry, w: 0, l: 0, isPlayer: true });
+            for (let i = 0; i < 23; i++) {
+                career.league.push({ id: i+1, name: aiNamesRoster[i].n, country: aiNamesRoster[i].c, w: 0, l: 0, isPlayer: false });
+            }
+            generateSchedule(); saveGameData(); showCareerHub();
         }
 
-        function resumeTournament() { gameMode = 'tournament'; activeDifficulty = tourney.difficulty; showBracket(); }
+        function resumeCareer() { showCareerHub(); }
 
-        function renderMatch(match) {
-            if (!match.p1) return `<div class="match-box"><div style="text-align:center; color:#555;">TBD vs TBD</div></div>`;
-            let isP1Me = match.p1 === tourney.playerCountry; let isP2Me = match.p2 === tourney.playerCountry;
-            let p1Class = "match-player" + (isP1Me ? " is-me" : "") + (match.winner === match.p1 ? " winner" : (match.winner ? " loser" : ""));
-            let p2Class = "match-player" + (isP2Me ? " is-me" : "") + (match.winner === match.p2 ? " winner" : (match.winner ? " loser" : ""));
-            
-            return `<div class="match-box">
-                        <div class="${p1Class}"><span>${match.p1}</span> ${match.s1 !== null ? `<span class="match-score">${match.s1}</span>` : ''}</div>
-                        <div class="${p2Class}"><span>${match.p2}</span> ${match.s2 !== null ? `<span class="match-score">${match.s2}</span>` : ''}</div>
-                    </div>`;
+        function generateSchedule() {
+            let opps = career.league.filter(p => !p.isPlayer).map(p => p.id);
+            opps.sort(() => Math.random() - 0.5); career.schedule = opps; career.matchIndex = 0;
         }
 
-        function showBracket() {
+        function showCareerHub() {
             document.querySelectorAll('.overlay-screen').forEach(el => el.style.display = 'none');
-            const screen = document.getElementById('bracket-screen');
-            const container = document.getElementById('bracket-container');
+            document.getElementById('career-hub-screen').style.display = 'flex';
+            
+            document.getElementById('hub-season-num').innerText = career.season;
+            document.getElementById('hub-player-name').innerText = `${career.playerName} ${career.playerCountry}`;
+            
+            let me = career.league.find(p => p.isPlayer);
+            document.getElementById('hub-player-record').innerText = `Record: ${me.w} - ${me.l}`;
+
+            career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l)); // Sort by wins, then losses
+            
+            let tbody = document.getElementById('standings-table-body');
+            tbody.innerHTML = `<tr><th>Rk</th><th>Player</th><th>W</th><th>L</th></tr>`;
+            career.league.forEach((p, index) => {
+                let tr = document.createElement('tr'); if(p.isPlayer) tr.className = 'is-player';
+                tr.innerHTML = `<td>${index + 1}</td><td>${p.country} ${p.name}</td><td>${p.w}</td><td>${p.l}</td>`;
+                tbody.appendChild(tr);
+            });
+
+            if (career.phase === 'regular') {
+                document.getElementById('next-match-container').style.display = 'block';
+                document.getElementById('view-playoffs-btn').style.display = 'none';
+                document.getElementById('hub-game-num').innerText = career.matchIndex + 1;
+                let opp = getOpponent();
+                document.getElementById('hub-next-opp').innerText = `${opp.country} ${opp.name}`;
+            } else {
+                document.getElementById('next-match-container').style.display = 'none';
+                document.getElementById('view-playoffs-btn').style.display = 'block';
+            }
+        }
+
+        function getOpponent() {
+            if (gameMode === 'careerPlayoffs' || career.phase === 'playoffs') {
+                // Find player in bracket
+                let activeMatch = null;
+                for(let r=0; r<career.playoffBracket.length; r++) {
+                    for(let m=0; m<career.playoffBracket[r].length; m++) {
+                        let match = career.playoffBracket[r][m];
+                        if (!match.winner && (match.p1.isPlayer || match.p2.isPlayer)) activeMatch = match;
+                    }
+                }
+                if (activeMatch) return activeMatch.p1.isPlayer ? activeMatch.p2 : activeMatch.p1;
+                return {name: "Unknown", country: "❓"}; // fallback
+            }
+            let oppId = career.schedule[career.matchIndex];
+            return career.league.find(p => p.id === oppId);
+        }
+
+        function setCareerMatchDiff(d) { document.querySelectorAll('.car-diff').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); careerMatchDifficulty = d; }
+        function startCareerMatch() { gameMode = 'careerRegular'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
+
+        // --- STATS LOGIC ---
+        let currentStatTab = 'season';
+        function showStatsScreen() {
+            document.getElementById('career-hub-screen').style.display = 'none';
+            document.getElementById('stats-screen').style.display = 'flex';
+            renderStats();
+        }
+        function closeStatsScreen() { document.getElementById('stats-screen').style.display = 'none'; document.getElementById('career-hub-screen').style.display = 'flex'; }
+        
+        function toggleStatView(tab) {
+            currentStatTab = tab;
+            document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active'); renderStats();
+        }
+
+        function renderStats() {
+            const grid = document.getElementById('stats-grid-container');
+            const data = currentStatTab === 'season' ? career.seasonStats : career.careerStats;
+            let winPct = data.wins + data.losses > 0 ? ((data.wins / (data.wins + data.losses)) * 100).toFixed(1) + '%' : '0%';
+            
+            let html = `
+                <div class="stat-box"><div class="stat-label">Total Wins</div><div class="stat-value">${data.wins}</div></div>
+                <div class="stat-box"><div class="stat-label">Total Losses</div><div class="stat-value" style="color:var(--danger)">${data.losses}</div></div>
+                <div class="stat-box"><div class="stat-label">Win Percentage</div><div class="stat-value" style="color:#fff">${winPct}</div></div>
+                <div class="stat-box"><div class="stat-label">Championships</div><div class="stat-value" style="color:var(--gold); text-shadow:0 0 10px var(--gold)">${currentStatTab === 'season' ? '-' : data.championships}</div></div>
+                <div class="stat-box"><div class="stat-label">Blowout Wins (5+)</div><div class="stat-value">${data.winsBy5}</div></div>
+                <div class="stat-box"><div class="stat-label">Blowout Losses (5+)</div><div class="stat-value" style="color:var(--danger)">${data.lossesBy5}</div></div>
+                <div class="stat-box"><div class="stat-label">Overtime Wins</div><div class="stat-value">${data.otWins}</div></div>
+                <div class="stat-box"><div class="stat-label">Overtime Losses</div><div class="stat-value" style="color:var(--danger)">${data.otLosses}</div></div>
+            `;
+            grid.innerHTML = html;
+        }
+
+        // --- PLAYOFF LOGIC ---
+        function generatePlayoffs() {
+            career.phase = 'playoffs';
+            career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l));
+            let t8 = career.league.slice(0, 8);
+            
+            // QF: 1v8, 4v5, 3v6, 2v7
+            career.playoffBracket = [
+                [ {p1: t8[0], p2: t8[7], s1: null, s2: null, winner: null}, {p1: t8[3], p2: t8[4], s1: null, s2: null, winner: null}, {p1: t8[2], p2: t8[5], s1: null, s2: null, winner: null}, {p1: t8[1], p2: t8[6], s1: null, s2: null, winner: null} ], // QF
+                [ {p1: null, p2: null, s1: null, s2: null, winner: null}, {p1: null, p2: null, s1: null, s2: null, winner: null} ], // SF
+                [ {p1: null, p2: null, s1: null, s2: null, winner: null} ] // Finals
+            ];
+            showPlayoffBracket();
+        }
+
+        function showPlayoffBracket() {
+            document.querySelectorAll('.overlay-screen').forEach(el => el.style.display = 'none');
+            const screen = document.getElementById('career-bracket-screen');
+            const container = document.getElementById('career-bracket-container');
+            document.getElementById('bracket-season-num').innerText = career.season;
             
             let html = ''; const roundTitles = ["Quarterfinals", "Semifinals", "Finals"];
             
             for(let r=0; r<3; r++) {
                 html += `<div class="bracket-col"><div class="bracket-col-title">${roundTitles[r]}</div>`;
-                tourney.matches[r].forEach(m => html += renderMatch(m));
+                career.playoffBracket[r].forEach(m => {
+                    if (!m.p1 || !m.p2) { html += `<div class="match-box"><div style="text-align:center; color:#555;">TBD vs TBD</div></div>`; }
+                    else {
+                        let isP1Me = m.p1.isPlayer; let isP2Me = m.p2.isPlayer;
+                        let p1Class = "match-player" + (isP1Me ? " is-me" : "") + (m.winner === m.p1 ? " winner" : (m.winner ? " loser" : ""));
+                        let p2Class = "match-player" + (isP2Me ? " is-me" : "") + (m.winner === m.p2 ? " winner" : (m.winner ? " loser" : ""));
+                        html += `<div class="match-box">
+                                    <div class="${p1Class}"><span>${m.p1.country} ${m.p1.name}</span> ${m.s1 !== null ? `<span class="match-score">${m.s1}</span>` : ''}</div>
+                                    <div class="${p2Class}"><span>${m.p2.country} ${m.p2.name}</span> ${m.s2 !== null ? `<span class="match-score">${m.s2}</span>` : ''}</div>
+                                </div>`;
+                    }
+                });
                 html += `</div>`;
             }
 
-            let champ = tourney.round === 3 ? tourney.matches[2][0].winner : "?";
+            let champ = "?";
+            if (career.playoffBracket[2][0].winner) champ = `${career.playoffBracket[2][0].winner.country}<br><span style="font-size:16px">${career.playoffBracket[2][0].winner.name}</span>`;
             html += `<div class="bracket-col"><div class="bracket-col-title">Champion</div><div class="champion-box"><span class="champion-icon">${champ}</span></div></div>`;
-
             container.innerHTML = html;
-            document.getElementById('next-match-btn').style.display = tourney.round >= 3 ? 'none' : 'block';
+
+            // Check if player is still in
+            let playerActive = false; let tournamentOver = career.playoffBracket[2][0].winner !== null;
+            if (!tournamentOver) {
+                for(let r=0; r<3; r++) {
+                    career.playoffBracket[r].forEach(m => {
+                        if (!m.winner && m.p1 && m.p2 && (m.p1.isPlayer || m.p2.isPlayer)) playerActive = true;
+                    });
+                }
+            }
+
+            document.getElementById('career-bracket-play-btn').style.display = (playerActive && !tournamentOver) ? 'block' : 'none';
+            document.getElementById('career-bracket-next-season-btn').style.display = (!playerActive || tournamentOver) ? 'block' : 'none';
             screen.style.display = 'flex';
         }
 
-        function startTournamentMatch() { gameMode = 'tournament'; triggerGameStart(); }
+        function startPlayoffMatch() { gameMode = 'careerPlayoffs'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
+        function backToCareerHub() { showCareerHub(); }
 
-        function generateAIScore() {
-            let win = 11, lose = Math.floor(Math.random() * 10);
-            return Math.random() > 0.5 ? [win, lose] : [lose, win];
+        function startNextSeason() {
+            career.season++; career.phase = 'regular'; career.seasonStats = getEmptyStats();
+            career.league.forEach(p => { p.w = 0; p.l = 0; });
+            generateSchedule(); saveGameData(); showCareerHub();
         }
 
+        function simulateLeagueWeek() {
+            // Give everyone else a random win or loss this round
+            career.league.forEach(p => { if (!p.isPlayer) { Math.random() > 0.5 ? p.w++ : p.l++; } });
+        }
+
+        function genAiScore() { let w = 11, l = Math.floor(Math.random() * 10); return [w, l]; }
+
+        function handlePostMatch() {
+            document.getElementById('game-over-screen').style.display = 'none';
+            
+            if (gameMode === 'exhibition') { backToMain(); return; }
+
+            let pScore = scorePlayer; let oScore = scoreAI;
+            let isWin = pScore > oScore; let margin = Math.abs(pScore - oScore); let isOT = (pScore > 11 || oScore > 11);
+
+            // Update Stats
+            if (isWin) {
+                career.seasonStats.wins++; career.careerStats.wins++;
+                if (margin >= 5) { career.seasonStats.winsBy5++; career.careerStats.winsBy5++; }
+                if (isOT) { career.seasonStats.otWins++; career.careerStats.otWins++; }
+            } else {
+                career.seasonStats.losses++; career.careerStats.losses++;
+                if (margin >= 5) { career.seasonStats.lossesBy5++; career.careerStats.lossesBy5++; }
+                if (isOT) { career.seasonStats.otLosses++; career.careerStats.otLosses++; }
+            }
+
+            let me = career.league.find(p => p.isPlayer);
+            isWin ? me.w++ : me.l++;
+
+            if (gameMode === 'careerRegular') {
+                let opp = getOpponent(); isWin ? opp.l++ : opp.w++;
+                simulateLeagueWeek();
+                career.matchIndex++;
+                saveGameData();
+
+                if (career.matchIndex >= 23) { generatePlayoffs(); } 
+                else { showCareerHub(); }
+            } 
+            else if (gameMode === 'careerPlayoffs') {
+                // Find current match in bracket
+                let rIdx = -1, mIdx = -1;
+                for(let r=0; r<3; r++) {
+                    for(let m=0; m<career.playoffBracket[r].length; m++) {
+                        let match = career.playoffBracket[r][m];
+                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) { rIdx = r; mIdx = m; break; }
+                    }
+                    if(rIdx !== -1) break;
+                }
+
+                let currentMatch = career.playoffBracket[rIdx][mIdx];
+                currentMatch.s1 = currentMatch.p1.isPlayer ? pScore : oScore;
+                currentMatch.s2 = currentMatch.p2.isPlayer ? pScore : oScore;
+                currentMatch.winner = isWin ? me : (currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1);
+
+                // Simulate remaining bracket matches for this round
+                for(let i=0; i < career.playoffBracket[rIdx].length; i++) {
+                    let m = career.playoffBracket[rIdx][i];
+                    if (!m.winner && m.p1 && m.p2) {
+                        let s = genAiScore(); m.s1 = s[0]; m.s2 = s[1]; m.winner = Math.random() > 0.5 ? m.p1 : m.p2;
+                    }
+                }
+
+                // Advance winners
+                if (rIdx < 2) {
+                    let nR = rIdx + 1;
+                    for(let i=0; i < career.playoffBracket[nR].length; i++) {
+                        career.playoffBracket[nR][i].p1 = career.playoffBracket[rIdx][i*2].winner;
+                        career.playoffBracket[nR][i].p2 = career.playoffBracket[rIdx][i*2 + 1].winner;
+                    }
+                } else if (rIdx === 2 && isWin) {
+                    career.careerStats.championships++; fireConfetti();
+                }
+
+                // If player loses, sim the rest of the tournament
+                if (!isWin) {
+                    for(let r = rIdx + 1; r < 3; r++) {
+                        for(let m = 0; m < career.playoffBracket[r].length; m++) {
+                            let match = career.playoffBracket[r][m];
+                            let s = genAiScore(); match.s1 = s[0]; match.s2 = s[1]; match.winner = Math.random() > 0.5 ? match.p1 : match.p2;
+                        }
+                        if (r < 2) {
+                            for(let i=0; i < career.playoffBracket[r+1].length; i++) {
+                                career.playoffBracket[r+1][i].p1 = career.playoffBracket[r][i*2].winner;
+                                career.playoffBracket[r+1][i].p2 = career.playoffBracket[r][i*2 + 1].winner;
+                            }
+                        }
+                    }
+                }
+
+                saveGameData(); showPlayoffBracket();
+            }
+        }
+
+        // --- EFFECTS & REPLAY ---
         function fireConfetti() {
             const colors = ['#ff6b6b', '#4dabf7', '#f1c40f', '#2ecc71', '#9b59b6'];
             for(let i=0; i<150; i++) {
@@ -615,69 +856,20 @@
             }
         }
 
-        // Replay Functions
-        function startReplay() {
-            document.getElementById('game-over-screen').style.display = 'none';
-            document.getElementById('replay-overlay').style.display = 'block';
-            isReplaying = true; replayPlaybackIndex = 0;
-        }
-
-        function stopReplay() {
-            isReplaying = false;
-            document.getElementById('replay-overlay').style.display = 'none';
-            document.getElementById('game-over-screen').style.display = 'flex';
-        }
-
-        function handlePostMatch() {
-            document.getElementById('game-over-screen').style.display = 'none';
-            if (gameMode === 'exhibition') { backToMain(); } 
-            else {
-                let currentMatch = tourney.matches[tourney.round][0];
-                currentMatch.s1 = scorePlayer; currentMatch.s2 = scoreAI;
-
-                if (scorePlayer > scoreAI) {
-                    currentMatch.winner = tourney.playerCountry;
-                    for(let i=1; i < tourney.matches[tourney.round].length; i++) {
-                        let m = tourney.matches[tourney.round][i]; let scores = generateAIScore();
-                        m.s1 = scores[0]; m.s2 = scores[1]; m.winner = m.s1 > m.s2 ? m.p1 : m.p2;
-                    }
-                    
-                    let nextRound = tourney.round + 1;
-                    if (nextRound <= 2) {
-                        for(let i=0; i < tourney.matches[nextRound].length; i++) {
-                            tourney.matches[nextRound][i].p1 = tourney.matches[tourney.round][i*2].winner;
-                            tourney.matches[nextRound][i].p2 = tourney.matches[tourney.round][i*2 + 1].winner;
-                        }
-                    }
-                    
-                    tourney.round++; saveGameData(); showBracket();
-                    if(tourney.round === 3) fireConfetti(); 
-                } else {
-                    currentMatch.winner = currentMatch.p2; alert("You were eliminated from the tournament!"); 
-                    tourney.active = false; saveGameData(); backToMain();
-                }
-            }
-        }
+        function startReplay() { document.getElementById('game-over-screen').style.display = 'none'; document.getElementById('replay-overlay').style.display = 'block'; isReplaying = true; replayPlaybackIndex = 0; }
+        function stopReplay() { isReplaying = false; document.getElementById('replay-overlay').style.display = 'none'; document.getElementById('game-over-screen').style.display = 'flex'; }
 
         function backToMain() {
             document.querySelectorAll('.overlay-screen').forEach(el => el.style.display = 'none');
-            document.getElementById('ui').style.display = 'none';
-            document.getElementById('main-menu-screen').style.display = 'flex';
-            document.getElementById('resume-tourney-btn').style.display = tourney.active ? 'block' : 'none';
+            document.getElementById('ui').style.display = 'none'; document.getElementById('main-menu-screen').style.display = 'flex';
             gameState = 'demo'; isReplaying = false;
         }
 
-        function pauseGame() {
-            if (gameState === 'gameover' || gameState === 'demo') return;
-            gameState = 'paused'; document.getElementById('pause-overlay').style.display = 'flex';
-        }
+        function pauseGame() { if (gameState === 'gameover' || gameState === 'demo') return; gameState = 'paused'; document.getElementById('pause-overlay').style.display = 'flex'; }
         function resumeGame() { document.getElementById('pause-overlay').style.display = 'none'; initAudio(); gameState = 'playing'; }
         function quitToMenu() { document.getElementById('pause-overlay').style.display = 'none'; backToMain(); }
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
 
         serveBall(); animate();
     </script>
