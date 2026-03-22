@@ -14,25 +14,25 @@
         }
         body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; touch-action: none; user-select: none; }
         canvas { display: block; }
-     
+    
         .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; color: white; backdrop-filter: blur(5px); }
         #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; display: none; }
-     
+    
         #score-board { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 30px; padding: 10px 30px; pointer-events: auto; align-items: center;}
         .score-box { display: flex; flex-direction: column; align-items: center; min-width: 100px;}
         .score-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-align: center;}
         .score-text { font-size: 42px; font-weight: bold; line-height: 1; }
         #player-score { color: var(--danger); text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
         #ai-score { color: var(--primary); text-shadow: 0 0 10px rgba(77, 171, 247, 0.5); }
-     
+    
         #announcement { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.8); display: none; text-align: center; padding: 15px 40px; z-index: 12; }
         #pause-btn { position: absolute; top: 25px; right: 25px; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; pointer-events: auto; background: var(--glass-bg); color: white; border: 1px solid var(--glass-border); z-index: 11;}
-     
+    
         .overlay-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; color: white; background: rgba(0,0,0,0.7); }
-     
+    
         .title { font-size: 46px; margin-bottom: 5px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
         .subtitle { font-size: 17px; color: #ddd; margin-bottom: 40px; text-align: center;}
-     
+    
         .btn-primary { padding: 12px 32px; font-size: 16px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 5px; transition: transform 0.1s;}
         .btn-primary:active { transform: scale(0.95); }
         .btn-danger { background: #ff6b6b; }
@@ -44,7 +44,7 @@
         .diff-row { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
         .mode-btn { flex: 1; padding: 9px 0; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold;}
         .mode-btn.active { background: var(--primary); border-color: var(--primary); }
-       
+      
         .career-layout { display: flex; gap: 16px; width: 96%; max-width: 615px; height: 82%; }
         .career-panel { flex: 1; display: flex; flex-direction: column; padding: 12px; overflow: hidden; }
         .standings-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; text-align: left; }
@@ -58,7 +58,7 @@
         .stat-value { font-size: 22px; font-weight: bold; color: var(--primary); margin-top: 4px; }
         .stat-label { font-size: 10px; color: #aaa; text-transform: uppercase; }
         input[type="text"], input[type="number"] { width: 100%; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 16px; border-radius: 8px; margin-bottom: 16px; font-family: inherit; text-align: center;}
-     
+    
         #career-bracket-container {
             display: flex;
             justify-content: space-between;
@@ -113,11 +113,11 @@
         .match-player.winner { font-weight: bold; color: #fff;}
         .match-player.loser { color: #888;}
         .match-score { font-size: 8px; background: rgba(0,0,0,0.4); padding: 1px 3px; border-radius: 3px;}
-     
+    
         .champion-box { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;}
         .champion-icon { font-size: 32px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite; margin-bottom: 6px;}
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-     
+    
         .season-record-row {
             background: rgba(255,255,255,0.08);
             padding: 14px;
@@ -130,7 +130,7 @@
         }
         #countdown-screen { display: none; background: transparent; pointer-events: none;}
         #countdown-text { font-size: 100px; font-weight: 900; color: white; text-shadow: 0 0 20px var(--primary); }
-     
+    
         .confetti { position: absolute; width: 10px; height: 10px; z-index: 100; animation: fall linear forwards; top: -20px;}
         @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
         #replay-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
@@ -138,7 +138,6 @@
         #close-replay-btn { position: absolute; top: 25px; right: 25px; background: #ff4757; color: white; border: 2px solid white; width: 50px; height: 50px; font-size: 24px; font-weight: bold; cursor: pointer; pointer-events: auto; border-radius: 10px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
         #secret-tap-zone { position: absolute; bottom: 0; left: 0; width: 120px; height: 120px; z-index: 99; }
-
         .sens-container { margin: 15px 0 10px 0; text-align: center; }
         .sens-label { font-size: 13px; color: #ccc; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
         .sens-track { position: relative; height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin: 0 15px; cursor: pointer; }
@@ -277,7 +276,7 @@
             <h2 style="font-size: 22px;">PAUSED</h2>
             <p style="color: #aaa; margin-bottom: 16px; font-size: 13px;">Settings locked during match.</p>
             <button class="mode-btn" style="width: 100%; margin-bottom: 12px;" onclick="toggleAudio()" id="sfx-btn">🔊 Audio: ON</button>
-            
+           
             <div class="sens-container">
                 <div class="sens-label">PADDLE SENSITIVITY</div>
                 <div class="sens-track" id="sens-track">
@@ -285,7 +284,7 @@
                 </div>
                 <div id="sens-value" style="font-size: 14px; color: white; margin-top: 6px; text-align: center;">50</div>
             </div>
-            
+           
             <button class="btn-primary" style="width: 100%; background: #2ecc71; margin: 0 0 8px 0; font-size: 15px;" onclick="resumeGame()">RESUME</button>
             <button class="btn-primary" style="width: 100%; background: #e74c3c; margin: 0; font-size: 15px;" onclick="quitToMenu()">QUIT TO MENU</button>
         </div>
@@ -338,7 +337,6 @@
         };
         let career = null;
         let paddleSensitivity = 50;
-
         function getEmptyStats() {
             return {
                 wins: 0, losses: 0, winsBy5: 0, lossesBy5: 0,
@@ -476,7 +474,7 @@
             const sensFactor = paddleSensitivity / 50;
             playerPaddle.position.x = (x * 1.8) * sensFactor;
             playerPaddle.position.y = Math.max(0.0, Math.min(0.8, (y + 1) * 0.4));
-            paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 0.5; 
+            paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 0.5;
             paddleVelocity.y = (playerPaddle.position.y - lastPaddleY) * 0.5;
             lastPaddleX = playerPaddle.position.x; lastPaddleY = playerPaddle.position.y;
         }
@@ -570,13 +568,11 @@
             loadSave();
             initSensitivitySlider();
         }, 500);
-
         function initSensitivitySlider() {
             const track = document.getElementById('sens-track');
             if (!track) return;
             const knob = document.getElementById('sens-knob');
             const valueEl = document.getElementById('sens-value');
-
             function setPosition(percent) {
                 percent = Math.max(0, Math.min(100, Math.round(percent)));
                 knob.style.left = percent + '%';
@@ -584,12 +580,9 @@
                 paddleSensitivity = percent;
                 localStorage.setItem('pingPongProSensitivity', percent);
             }
-
             knob.style.left = paddleSensitivity + '%';
             valueEl.innerText = paddleSensitivity;
-
             let dragging = false;
-
             function moveKnob(e) {
                 if (!dragging) return;
                 const rect = track.getBoundingClientRect();
@@ -598,15 +591,12 @@
                 let percent = (x / rect.width) * 100;
                 setPosition(percent);
             }
-
             track.addEventListener('mousedown', () => { dragging = true; });
             window.addEventListener('mousemove', moveKnob);
             window.addEventListener('mouseup', () => { dragging = false; });
-
             track.addEventListener('touchstart', (e) => { dragging = true; e.preventDefault(); });
             window.addEventListener('touchmove', moveKnob);
             window.addEventListener('touchend', () => { dragging = false; });
-
             track.addEventListener('click', (e) => {
                 const rect = track.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -614,7 +604,6 @@
                 setPosition(percent);
             });
         }
-
         function resetMatchUI() {
             scorePlayer = 0; scoreAI = 0; replayBuffer = [];
             document.getElementById('player-score').innerText = '0'; document.getElementById('ai-score').innerText = '0';
@@ -732,7 +721,15 @@
             return career.league.find(p => p.id === oppId);
         }
         function setCareerMatchDiff(d) { document.querySelectorAll('.car-diff').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); careerMatchDifficulty = d; }
-        function startCareerMatch() { gameMode = 'careerRegular'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
+        function startCareerMatch() {
+            if (career && career.phase === 'playoffs') {
+                gameMode = 'careerPlayoffs';
+            } else {
+                gameMode = 'careerRegular';
+            }
+            activeDifficulty = careerMatchDifficulty;
+            triggerGameStart();
+        }
         let currentStatTab = 'season';
         function showStatsScreen() {
             document.getElementById('career-hub-screen').style.display = 'none';
@@ -884,8 +881,10 @@
                 statusText.innerText = "Top 8 Championship Tournament";
                 statusText.style.color = "#ddd";
             }
-            document.getElementById('career-bracket-play-btn').style.display = 'none';
-            document.getElementById('career-bracket-next-season-btn').style.display = (!playerActive || tournamentOver) ? 'block' : 'none';
+            const playBtn = document.getElementById('career-bracket-play-btn');
+            const nextBtn = document.getElementById('career-bracket-next-season-btn');
+            playBtn.style.display = (playerActive && !tournamentOver) ? 'block' : 'none';
+            nextBtn.style.display = (!playerActive || tournamentOver) ? 'block' : 'none';
             screen.style.display = 'flex';
         }
         function startPlayoffMatch() { gameMode = 'careerPlayoffs'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
@@ -1163,7 +1162,7 @@
         function resumeGame() { document.getElementById('pause-overlay').style.display = 'none'; initAudio(); gameState = 'playing'; }
         function quitToMenu() { document.getElementById('pause-overlay').style.display = 'none'; backToMain(); }
         window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
-        
+       
         const style = document.createElement('style');
         style.innerHTML = `
             .standings-table tr.is-player {
@@ -1175,7 +1174,6 @@
             }
         `;
         document.head.appendChild(style);
-
         serveBall(); animate();
     </script>
 </body>
