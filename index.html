@@ -14,26 +14,26 @@
         }
         body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; touch-action: none; user-select: none; }
         canvas { display: block; }
-       
+     
         .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; color: white; backdrop-filter: blur(5px); }
         #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; display: none; }
-       
+     
         #score-board { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 30px; padding: 10px 30px; pointer-events: auto; align-items: center;}
         .score-box { display: flex; flex-direction: column; align-items: center; min-width: 100px;}
         .score-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-align: center;}
         .score-text { font-size: 42px; font-weight: bold; line-height: 1; }
         #player-score { color: var(--danger); text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
         #ai-score { color: var(--primary); text-shadow: 0 0 10px rgba(77, 171, 247, 0.5); }
-       
+     
         #announcement { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.8); display: none; text-align: center; padding: 15px 40px; z-index: 12; }
         #pause-btn { position: absolute; top: 25px; right: 25px; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; pointer-events: auto; background: var(--glass-bg); color: white; border: 1px solid var(--glass-border); z-index: 11;}
-       
+     
         .overlay-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; color: white; background: rgba(0,0,0,0.7); }
-       
-        .title { font-size: 50px; margin-bottom: 5px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
-        .subtitle { font-size: 18px; color: #ddd; margin-bottom: 40px; text-align: center;}
-       
-        .btn-primary { padding: 15px 40px; font-size: 18px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 5px; transition: transform 0.1s;}
+     
+        .title { font-size: 46px; margin-bottom: 5px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
+        .subtitle { font-size: 17px; color: #ddd; margin-bottom: 40px; text-align: center;}
+     
+        .btn-primary { padding: 12px 32px; font-size: 16px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 5px; transition: transform 0.1s;}
         .btn-primary:active { transform: scale(0.95); }
         .btn-danger { background: #ff6b6b; }
         .btn-gold { background: var(--gold); color: #000; }
@@ -42,109 +42,107 @@
         .country-btn { font-size: 28px; background: rgba(255,255,255,0.1); border: 2px solid transparent; border-radius: 10px; cursor: pointer; padding: 5px;}
         .country-btn.selected { border-color: var(--primary); background: rgba(77, 171, 247, 0.3); }
         .diff-row { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
-        .mode-btn { flex: 1; padding: 10px 0; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold;}
+        .mode-btn { flex: 1; padding: 9px 0; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold;}
         .mode-btn.active { background: var(--primary); border-color: var(--primary); }
-        /* Career Specific UI */
-        .career-layout { display: flex; gap: 20px; width: 95%; max-width: 1000px; height: 80%; }
-        .career-panel { flex: 1; display: flex; flex-direction: column; padding: 20px; overflow: hidden; }
-        .standings-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; text-align: left; }
-        .standings-table th { border-bottom: 2px solid var(--glass-border); padding: 8px; color: #aaa; position: sticky; top: 0; background: rgba(20, 25, 40, 0.95); z-index: 2;}
-        .standings-table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .standings-table tr.is-player td { font-weight: bold; color: var(--primary); background: rgba(77, 171, 247, 0.1); }
-        .table-container { overflow-y: auto; flex: 1; padding-right: 10px; }
-        .table-container::-webkit-scrollbar { width: 6px; }
-        .table-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .stat-box { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
-        .stat-value { font-size: 28px; font-weight: bold; color: var(--primary); margin-top: 5px; }
-        .stat-label { font-size: 12px; color: #aaa; text-transform: uppercase; }
-        input[type="text"], input[type="number"] { width: 100%; padding: 12px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 18px; border-radius: 8px; margin-bottom: 20px; font-family: inherit; text-align: center;}
        
-        /* Bracket UI - ZOOMED OUT + FULLY SIDE-TO-SIDE */
-        #bracket-container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: stretch; 
-            width: 95%; 
-            max-width: 1100px; 
-            background: rgba(0,0,0,0.6); 
-            padding: 15px; 
-            border-radius: 15px; 
-            margin-bottom: 20px; 
+        .career-layout { display: flex; gap: 16px; width: 96%; max-width: 615px; height: 82%; }
+        .career-panel { flex: 1; display: flex; flex-direction: column; padding: 12px; overflow: hidden; }
+        .standings-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; text-align: left; }
+        .standings-table th { border-bottom: 2px solid var(--glass-border); padding: 6px; color: #aaa; position: sticky; top: 0; background: rgba(20, 25, 40, 0.95); z-index: 2;}
+        .standings-table td { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .table-container { overflow-y: auto; flex: 1; padding-right: 8px; }
+        .table-container::-webkit-scrollbar { width: 5px; }
+        .table-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); gap: 12px; margin-top: 16px; }
+        .stat-box { background: rgba(0,0,0,0.4); padding: 12px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-value { font-size: 22px; font-weight: bold; color: var(--primary); margin-top: 4px; }
+        .stat-label { font-size: 10px; color: #aaa; text-transform: uppercase; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 16px; border-radius: 8px; margin-bottom: 16px; font-family: inherit; text-align: center;}
+     
+        #career-bracket-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            width: 96%;
+            max-width: 645px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px;
+            border-radius: 15px;
+            margin-bottom: 16px;
             overflow-x: auto;
-            gap: 8px;
-        }
-        .bracket-col { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-around; 
-            min-width: 125px; 
-            gap: 10px; 
-            position: relative; 
-            flex: 1; 
-            padding: 0 6px;
-        }
-        .bracket-col-title { 
-            text-align: center; 
-            color: #ccc; 
-            font-size: 11px; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            margin-bottom: 8px; 
-            letter-spacing: 1px;
-        }
-        .match-box { 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(255,255,255,0.2); 
-            border-radius: 6px; 
-            padding: 5px; 
-            font-size: 13px; 
-            display: flex; 
-            flex-direction: column; 
             gap: 3px;
         }
-        .match-player { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 3px 5px; 
-            border-radius: 4px; 
-            font-size: 13px;
+        .bracket-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-width: 68px;
+            gap: 4px;
+            position: relative;
+            flex: 1;
+            padding: 0 2px;
+        }
+        .bracket-col-title {
+            text-align: center;
+            color: #ccc;
+            font-size: 7px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .match-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            padding: 2px;
+            font-size: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+        .match-player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1px 2px;
+            border-radius: 3px;
+            font-size: 9.5px;
         }
         .match-player.is-me { background: rgba(77, 171, 247, 0.25); border: 1px solid var(--primary); }
         .match-player.winner { font-weight: bold; color: #fff;}
         .match-player.loser { color: #888;}
-        .match-score { font-size: 11px; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 4px;}
-       
+        .match-score { font-size: 8px; background: rgba(0,0,0,0.4); padding: 1px 3px; border-radius: 3px;}
+     
         .champion-box { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;}
-        .champion-icon { font-size: 38px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite; margin-bottom: 8px;}
+        .champion-icon { font-size: 32px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite; margin-bottom: 6px;}
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-       
-        /* NEW SEASON RECORDS STYLES */
+     
         .season-record-row {
             background: rgba(255,255,255,0.08);
-            padding: 18px;
-            margin-bottom: 12px;
-            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.2s;
         }
-        .season-record-row:hover { transform: scale(1.03); }
-       
         #countdown-screen { display: none; background: transparent; pointer-events: none;}
         #countdown-text { font-size: 100px; font-weight: 900; color: white; text-shadow: 0 0 20px var(--primary); }
-       
+     
         .confetti { position: absolute; width: 10px; height: 10px; z-index: 100; animation: fall linear forwards; top: -20px;}
         @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
         #replay-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
         #replay-text { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); color: #ff4757; font-size: 28px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 10px rgba(0,0,0,0.8); animation: blink 1.5s infinite; }
         #close-replay-btn { position: absolute; top: 25px; right: 25px; background: #ff4757; color: white; border: 2px solid white; width: 50px; height: 50px; font-size: 24px; font-weight: bold; cursor: pointer; pointer-events: auto; border-radius: 10px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
-        /* Secret Tap Zone */
         #secret-tap-zone { position: absolute; bottom: 0; left: 0; width: 120px; height: 120px; z-index: 99; }
+
+        .sens-container { margin: 15px 0 10px 0; text-align: center; }
+        .sens-label { font-size: 13px; color: #ccc; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        .sens-track { position: relative; height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin: 0 15px; cursor: pointer; }
+        .sens-knob { position: absolute; top: -8px; width: 24px; height: 24px; background: #fff; border-radius: 50%; box-shadow: 0 3px 10px rgba(0,0,0,0.5); cursor: grab; transition: left 0.05s ease; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
@@ -153,10 +151,8 @@
         <h1 class="title">Ping Pong Pro</h1>
         <p class="subtitle" id="loading-subtitle">LOADING ENGINE...</p>
         <div class="menu-container" id="main-buttons" style="display: none;">
-           
             <button class="btn-primary" style="background: var(--gold); color: black;" onclick="openCareerSetup()" id="btn-new-career">Start Career Mode</button>
             <button class="btn-primary" style="background: var(--gold); color: black; display: none;" onclick="resumeCareer()" id="btn-resume-career">Resume Career</button>
-           
             <div class="glass-panel" style="padding: 15px; margin-top: 15px;">
                 <p style="margin: 0 0 10px 0; color: #ccc; font-size: 14px;">EXHIBITION DIFFICULTY</p>
                 <div class="diff-row" style="margin-bottom: 0;">
@@ -167,7 +163,6 @@
                 <button class="btn-primary" style="width: 100%; margin: 15px 0 0 0; font-size: 16px;" onclick="startExhibition()">Play Exhibition</button>
             </div>
         </div>
-       
         <div id="secret-tap-zone" onpointerdown="handleSecretTap(event)"></div>
     </div>
     <div id="cheat-screen" class="overlay-screen" style="display: none; z-index: 100; background: rgba(0,0,0,0.9);">
@@ -182,7 +177,7 @@
         </div>
     </div>
     <div id="career-setup-screen" class="overlay-screen" style="display: none;">
-        <div class="glass-panel" style="padding: 30px; width: 320px; text-align: center;">
+        <div class="glass-panel" style="padding: 30px; width: 240px; text-align: center;">
             <h2 style="margin-top: 0;">Create Pro</h2>
             <input type="text" id="career-name-input" placeholder="Enter Your Name" maxlength="12" autocomplete="off">
             <p style="margin: 0 0 10px 0; color: #ccc; font-size: 14px;">SELECT COUNTRY</p>
@@ -194,82 +189,68 @@
         </div>
     </div>
     <div id="career-hub-screen" class="overlay-screen" style="display: none;">
-        <h1 class="title" style="font-size: 36px; margin-bottom: 20px;">Career Hub - Season <span id="hub-season-num">1</span></h1>
-       
+        <h1 class="title" style="font-size: 32px; margin-bottom: 16px;">Career Hub - Season <span id="hub-season-num">1</span></h1>
         <div class="career-layout">
             <div class="glass-panel career-panel">
-                <h3 style="margin: 0 0 10px 0; text-align: center;">League Standings</h3>
+                <h3 style="margin: 0 0 8px 0; text-align: center; font-size: 15px;">League Standings</h3>
                 <div class="table-container">
-                    <table class="standings-table" id="standings-table-body">
-                    </table>
+                    <table class="standings-table" id="standings-table-body"></table>
                 </div>
             </div>
             <div class="glass-panel career-panel" style="justify-content: space-between;">
                 <div style="text-align: center;">
-                    <h2 style="margin: 0; color: var(--gold);" id="hub-player-name">Name</h2>
-                    <p style="margin: 5px 0 20px 0; color: #aaa;" id="hub-player-record">Record: 0 - 0</p>
-                   
+                    <h2 style="margin: 0; color: var(--gold); font-size: 22px;" id="hub-player-name">Name</h2>
+                    <p style="margin: 4px 0 16px 0; color: #aaa; font-size: 15px;" id="hub-player-record">Record: 0 - 0</p>
                     <div id="next-match-container">
-                        <p style="font-size: 14px; color: #ccc; margin-bottom: 5px; text-transform: uppercase; font-weight: bold;">Next Match (Game <span id="hub-game-num">1</span>/23)</p>
-                        <div class="match-box" style="margin: 0 auto 20px auto; width: 80%; text-align: center; padding: 15px; font-size: 20px; font-weight: bold;">
+                        <p id="hub-next-label" style="font-size: 12px; color: #ccc; margin-bottom: 4px; text-transform: uppercase; font-weight: bold;">Next Match (Game <span id="hub-game-num">1</span>/23)</p>
+                        <div class="match-box" style="margin: 0 auto 16px auto; width: 80%; text-align: center; padding: 12px; font-size: 18px; font-weight: bold;">
                             vs <span id="hub-next-opp">Opponent</span>
                         </div>
-                       
-                        <p style="margin: 0 0 10px 0; color: #ccc; font-size: 12px;">MATCH DIFFICULTY</p>
+                        <p style="margin: 0 0 8px 0; color: #ccc; font-size: 11px;">MATCH DIFFICULTY</p>
                         <div class="diff-row">
                             <button class="mode-btn car-diff" onclick="setCareerMatchDiff('easy')">EASY</button>
                             <button class="mode-btn car-diff active" onclick="setCareerMatchDiff('normal')">NORM</button>
                             <button class="mode-btn car-diff" onclick="setCareerMatchDiff('hard')">HARD</button>
                         </div>
-                        <button class="btn-primary btn-danger" style="width: 100%; margin: 0 0 10px 0; padding: 20px; font-size: 22px;" onclick="startCareerMatch()">PLAY MATCH</button>
+                        <button class="btn-primary btn-danger" style="width: 100%; margin: 0 0 8px 0; padding: 16px; font-size: 19px;" onclick="startCareerMatch()">PLAY MATCH</button>
                     </div>
-                   
-                    <button id="view-playoffs-btn" class="btn-primary btn-gold" style="width: 100%; margin: 0 0 10px 0; padding: 20px; font-size: 22px; display: none;" onclick="showPlayoffBracket()">VIEW PLAYOFFS</button>
+                    <button id="view-playoffs-btn" class="btn-primary btn-gold" style="width: 100%; margin: 0 0 8px 0; padding: 16px; font-size: 19px; display: none;" onclick="showPlayoffBracket()">VIEW BRACKET</button>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <button class="btn-primary" style="background: #34495e;" onclick="showStatsScreen()">View Stats</button>
-                    <button class="btn-primary" style="background: #27ae60;" onclick="showSeasonRecords()">SEASON RECORDS</button>
-                    <button class="btn-primary" style="background: #555;" onclick="backToMain()">Main Menu</button>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button class="btn-primary" style="background: #34495e; font-size: 15px;" onclick="showStatsScreen()">View Stats</button>
+                    <button class="btn-primary" style="background: #27ae60; font-size: 15px;" onclick="showSeasonRecords()">SEASON RECORDS</button>
+                    <button class="btn-primary" style="background: #9b59b6; font-size: 15px;" onclick="simulateNextGame()">SIM GAME</button>
                 </div>
             </div>
         </div>
     </div>
     <div id="stats-screen" class="overlay-screen" style="display: none;">
-        <div class="glass-panel" style="padding: 30px; width: 90%; max-width: 600px;">
-            <h1 class="title" style="font-size: 32px; margin-bottom: 20px;">Statistics</h1>
-           
+        <div class="glass-panel" style="padding: 24px; width: 90%; max-width: 390px;">
+            <h1 class="title" style="font-size: 28px; margin-bottom: 16px;">Statistics</h1>
             <div class="diff-row">
                 <button class="mode-btn stat-tab active" onclick="toggleStatView('season')">Current Season</button>
                 <button class="mode-btn stat-tab" onclick="toggleStatView('career')">Career Totals</button>
             </div>
-            <div class="stat-grid" id="stats-grid-container">
-            </div>
-            <button class="btn-primary" style="width: 100%; background: #555; margin-top: 20px;" onclick="closeStatsScreen()">Back to Hub</button>
+            <div class="stat-grid" id="stats-grid-container"></div>
+            <button class="btn-primary" style="width: 100%; background: #555; margin-top: 16px; font-size: 15px;" onclick="closeStatsScreen()">Back to Hub</button>
         </div>
     </div>
-
-    <!-- NEW SEASON RECORDS SCREEN -->
     <div id="season-records-screen" class="overlay-screen" style="display: none;">
-        <div class="glass-panel" style="padding: 30px; width: 95%; max-width: 720px; height: 88%; display: flex; flex-direction: column;">
-            <h1 class="title" style="font-size: 32px; margin-bottom: 10px;">Season Records</h1>
-            <p id="career-overview" style="color: #aaa; text-align: center; margin-bottom: 20px; font-size: 18px;">Career Overview: 0-0 | 0 Championships 🏆</p>
-            
-            <div id="history-list" style="flex: 1; overflow-y: auto; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                <!-- JS populated -->
-            </div>
-            
-            <button class="btn-primary" style="width: 100%; background: #555; margin-top: 20px;" onclick="closeSeasonRecords()">Back to Hub</button>
+        <div class="glass-panel" style="padding: 24px; width: 95%; max-width: 465px; height: 86%; display: flex; flex-direction: column;">
+            <h1 class="title" style="font-size: 28px; margin-bottom: 8px;">Season Records</h1>
+            <p id="career-overview" style="color: #aaa; text-align: center; margin-bottom: 16px; font-size: 16px;">Career Overview: 0-0 | 0 Championships 🏆</p>
+            <div id="history-list" style="flex: 1; overflow-y: auto; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 10px;"></div>
+            <button class="btn-primary" style="width: 100%; background: #555; margin-top: 16px; font-size: 15px;" onclick="closeSeasonRecords()">Back to Hub</button>
         </div>
     </div>
-
     <div id="career-bracket-screen" class="overlay-screen" style="display: none;">
-        <h1 class="title" style="font-size: 36px; margin-bottom: 5px;">Season <span id="bracket-season-num">1</span> Playoffs</h1>
-        <p class="subtitle" id="bracket-status-text" style="margin-bottom: 10px; font-weight: bold;">Top 8 Championship Tournament</p>
+        <h1 class="title" style="font-size: 32px; margin-bottom: 4px;">Season <span id="bracket-season-num">1</span> Playoffs</h1>
+        <p class="subtitle" id="bracket-status-text" style="margin-bottom: 8px; font-weight: bold; font-size: 15px;">Top 8 Championship Tournament</p>
         <div id="career-bracket-container"></div>
-        <div style="display: flex; gap: 15px; margin-top: 20px;">
-            <button class="btn-primary btn-danger" id="career-bracket-play-btn" onclick="startPlayoffMatch()">PLAY MATCH</button>
+        <div style="display: flex; gap: 12px; margin-top: 16px;">
+            <button class="btn-primary btn-danger" id="career-bracket-play-btn" onclick="startPlayoffMatch()" style="display:none;">PLAY MATCH</button>
             <button class="btn-primary btn-gold" id="career-bracket-next-season-btn" style="display:none;" onclick="startNextSeason()">START NEXT SEASON</button>
-            <button class="btn-primary" style="background: #555;" onclick="backToCareerHub()">Back to Hub</button>
+            <button class="btn-primary" style="background: #555; font-size: 15px;" onclick="backToCareerHub()">Back to Hub</button>
         </div>
     </div>
     <div id="game-over-screen" class="overlay-screen" style="display: none;">
@@ -278,17 +259,35 @@
         <button id="post-match-btn" class="btn-primary" style="margin-bottom: 5px; width: 250px;" onclick="handlePostMatch()">CONTINUE</button>
         <button id="replay-btn" class="btn-primary" style="background: #e67e22; width: 250px; font-size: 16px;" onclick="startReplay()">🎥 WATCH REPLAY</button>
     </div>
+    <div id="sim-result-screen" class="overlay-screen" style="display: none; background: rgba(0,0,0,0.85);">
+        <div class="glass-panel" style="padding: 32px 24px; width: 280px; text-align: center; border: 3px solid var(--gold);">
+            <div style="font-size: 19px; color: #aaa; margin-bottom: 6px;">SIMULATED MATCH</div>
+            <h1 id="sim-winner-text" class="title" style="font-size: 36px; margin-bottom: 6px;">YOU WIN!</h1>
+            <p id="sim-final-score-text" style="font-size: 32px; font-weight: bold; margin: 8px 0 18px; color: var(--gold);">11 - 8</p>
+            <div id="sim-opp-name" style="font-size: 15px; color: #ddd; margin-bottom: 20px;">vs 🇺🇸 Liam</div>
+            <button class="btn-primary" style="width: 100%; padding: 14px; font-size: 17px; background: var(--gold); color: #000;" onclick="closeSimResult()">CONTINUE TO HUB</button>
+        </div>
+    </div>
     <div id="replay-overlay">
         <div id="replay-text">• REPLAY</div>
         <button id="close-replay-btn" onclick="stopReplay()">X</button>
     </div>
     <div id="pause-overlay" class="overlay-screen" style="display: none;">
-        <div class="glass-panel" style="padding: 30px; text-align: center; width: 250px;">
-            <h2>PAUSED</h2>
-            <p style="color: #aaa; margin-bottom: 20px;">Settings locked during match.</p>
-            <button class="mode-btn" style="width: 100%; margin-bottom: 15px;" onclick="toggleAudio()" id="sfx-btn">🔊 Audio: ON</button>
-            <button class="btn-primary" style="width: 100%; background: #2ecc71; margin: 0 0 10px 0;" onclick="resumeGame()">RESUME</button>
-            <button class="btn-primary" style="width: 100%; background: #e74c3c; margin: 0;" onclick="quitToMenu()">QUIT TO MENU</button>
+        <div class="glass-panel" style="padding: 24px; text-align: center; width: 220px;">
+            <h2 style="font-size: 22px;">PAUSED</h2>
+            <p style="color: #aaa; margin-bottom: 16px; font-size: 13px;">Settings locked during match.</p>
+            <button class="mode-btn" style="width: 100%; margin-bottom: 12px;" onclick="toggleAudio()" id="sfx-btn">🔊 Audio: ON</button>
+            
+            <div class="sens-container">
+                <div class="sens-label">PADDLE SENSITIVITY</div>
+                <div class="sens-track" id="sens-track">
+                    <div class="sens-knob" id="sens-knob"></div>
+                </div>
+                <div id="sens-value" style="font-size: 14px; color: white; margin-top: 6px; text-align: center;">50</div>
+            </div>
+            
+            <button class="btn-primary" style="width: 100%; background: #2ecc71; margin: 0 0 8px 0; font-size: 15px;" onclick="resumeGame()">RESUME</button>
+            <button class="btn-primary" style="width: 100%; background: #e74c3c; margin: 0; font-size: 15px;" onclick="quitToMenu()">QUIT TO MENU</button>
         </div>
     </div>
     <div id="countdown-screen" class="overlay-screen">
@@ -310,7 +309,6 @@
         <button id="pause-btn" onclick="pauseGame()">⏸</button>
     </div>
     <script>
-        // --- DATA & SETTINGS ---
         const countries = ['🇺🇸', '🇬🇧', '🇯🇵', '🇩🇪', '🇫🇷', '🇧🇷', '🇨🇦', '🇦🇺', '🇮🇹', '🇪🇸', '🇲🇽', '🇰🇷', '🇨🇳', '🇷🇺', '🇸🇪', '🇳🇴', '🇪🇬', '🇸🇦', '🇹🇷', '🇦🇷'];
         const aiNamesRoster = [
             {n: 'Liam', c: '🇺🇸'}, {n: 'Noah', c: '🇬🇧'}, {n: 'Kenji', c: '🇯🇵'}, {n: 'Lukas', c: '🇩🇪'},
@@ -323,45 +321,46 @@
         let sfxEnabled = true;
         let gameState = 'demo';
         let gameMode = 'exhibition';
-       
         let scorePlayer = 0; let scoreAI = 0;
-       
         const diffSettings = {
             'easy': { diff: 0.10, margin: 0.12 },
             'normal': { diff: 0.25, margin: 0.05 },
             'hard': { diff: 0.33, margin: 0.01 }
         };
-       
         let activeDifficulty = 'normal';
         let exhibitionDifficulty = 'normal';
         let careerMatchDifficulty = 'normal';
-
-        // PLAYOFF FINISH LABELS
         const playoffFinishLabels = {
             0: "Lost in Quarterfinals",
             1: "Lost in Semifinals",
             2: "Lost in Finals",
             3: "Won Finals"
         };
-
-        // --- CAREER DATA STRUCTURE ---
         let career = null;
+        let paddleSensitivity = 50;
+
         function getEmptyStats() {
-            return { wins: 0, losses: 0, winsBy5: 0, lossesBy5: 0, otWins: 0, otLosses: 0, championships: 0 };
+            return {
+                wins: 0, losses: 0, winsBy5: 0, lossesBy5: 0,
+                otWins: 0, otLosses: 0, championships: 0,
+                maxWinMargin: 0, maxLossMargin: 0
+            };
         }
-        // --- SAVE/LOAD ---
         function loadSave() {
             const data = localStorage.getItem('pingPongProCareerSave');
             if (data) {
                 career = JSON.parse(data);
                 if (!career.seasonHistory) career.seasonHistory = [];
+                if (!career.seasonStats.maxWinMargin) career.seasonStats.maxWinMargin = 0;
+                if (!career.careerStats.maxWinMargin) career.careerStats.maxWinMargin = 0;
                 document.getElementById('btn-resume-career').style.display = 'block';
             }
+            const savedSens = localStorage.getItem('pingPongProSensitivity');
+            if (savedSens) paddleSensitivity = parseInt(savedSens);
         }
         function saveGameData() {
             if (career) localStorage.setItem('pingPongProCareerSave', JSON.stringify(career));
         }
-        // --- AUDIO ENGINE ---
         let audioCtx;
         function initAudio() {
             if (!sfxEnabled) return;
@@ -384,17 +383,14 @@
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (type==='hit'?0.1:0.05));
             osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.1);
         }
-        // --- THREE.JS GRAPHICS ---
         const scene = new THREE.Scene(); scene.background = new THREE.Color(0x87CEEB);
         const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.set(0, 1.2, 2.8); camera.lookAt(0, -0.2, 0);
-       
         const renderer = new THREE.WebGLRenderer({ antialias: false });
         renderer.setPixelRatio(1); renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         document.body.appendChild(renderer.domElement);
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); scene.add(ambientLight);
-       
         const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
         dirLight.position.set(3, 5, 2);
         dirLight.castShadow = true; dirLight.shadow.mapSize.width = 1024; dirLight.shadow.mapSize.height = 1024;
@@ -402,7 +398,6 @@
         scene.add(dirLight);
         const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshLambertMaterial({ color: 0x228B22 }));
         ground.rotation.x = -Math.PI / 2; ground.position.y = -0.76; ground.receiveShadow = true; scene.add(ground);
-       
         const tableW = 1.525, tableL = 2.74, tableH = 0.05;
         const table = new THREE.Mesh(new THREE.BoxGeometry(tableW, tableH, tableL), new THREE.MeshLambertMaterial({ color: 0x00008B }));
         table.receiveShadow = true; table.castShadow = true; scene.add(table);
@@ -460,7 +455,6 @@
                 ann.style.display = 'block'; setTimeout(() => ann.style.display = 'none', 1500);
             }
             document.getElementById('player-score').innerText = scorePlayer; document.getElementById('ai-score').innerText = scoreAI;
-           
             if (scorePlayer >= 11 || scoreAI >= 11) {
                 if (Math.abs(scorePlayer - scoreAI) >= 2) {
                     gameState = 'gameover';
@@ -479,8 +473,11 @@
             if (gameState !== 'playing') return;
             const cx = e.touches ? e.touches[0].clientX : e.clientX; const cy = e.touches ? e.touches[0].clientY : e.clientY;
             const x = (cx / window.innerWidth) * 2 - 1; const y = -(cy / window.innerHeight) * 2 + 1;
-            playerPaddle.position.x = x * 1.8; playerPaddle.position.y = Math.max(0.0, Math.min(0.8, (y + 1) * 0.4));
-            paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 0.5; paddleVelocity.y = (playerPaddle.position.y - lastPaddleY) * 0.5;
+            const sensFactor = paddleSensitivity / 50;
+            playerPaddle.position.x = (x * 1.8) * sensFactor;
+            playerPaddle.position.y = Math.max(0.0, Math.min(0.8, (y + 1) * 0.4));
+            paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 0.5; 
+            paddleVelocity.y = (playerPaddle.position.y - lastPaddleY) * 0.5;
             lastPaddleX = playerPaddle.position.x; lastPaddleY = playerPaddle.position.y;
         }
         window.addEventListener('mousemove', onPointerMove); window.addEventListener('touchmove', onPointerMove, { passive: false });
@@ -523,7 +520,6 @@
                             playSound('hit', Math.min(1.5, 0.5 + sSpeed * 10), false);
                         }
                         lastBounceSide = null; ball.position.z = playerPaddle.position.z - 0.1;
-                       
                         if(gameState === 'demo') {
                             const targetZ = -0.8 - Math.random() * 0.4; const speedZ = 0.055 + Math.random() * 0.01;
                             ballVel.z = -speedZ; ballVel.x = (ball.position.x - playerPaddle.position.x) * 0.15;
@@ -572,11 +568,56 @@
             document.getElementById('loading-subtitle').style.display = 'none';
             document.getElementById('main-buttons').style.display = 'flex';
             loadSave();
+            initSensitivitySlider();
         }, 500);
+
+        function initSensitivitySlider() {
+            const track = document.getElementById('sens-track');
+            if (!track) return;
+            const knob = document.getElementById('sens-knob');
+            const valueEl = document.getElementById('sens-value');
+
+            function setPosition(percent) {
+                percent = Math.max(0, Math.min(100, Math.round(percent)));
+                knob.style.left = percent + '%';
+                valueEl.innerText = percent;
+                paddleSensitivity = percent;
+                localStorage.setItem('pingPongProSensitivity', percent);
+            }
+
+            knob.style.left = paddleSensitivity + '%';
+            valueEl.innerText = paddleSensitivity;
+
+            let dragging = false;
+
+            function moveKnob(e) {
+                if (!dragging) return;
+                const rect = track.getBoundingClientRect();
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const x = clientX - rect.left;
+                let percent = (x / rect.width) * 100;
+                setPosition(percent);
+            }
+
+            track.addEventListener('mousedown', () => { dragging = true; });
+            window.addEventListener('mousemove', moveKnob);
+            window.addEventListener('mouseup', () => { dragging = false; });
+
+            track.addEventListener('touchstart', (e) => { dragging = true; e.preventDefault(); });
+            window.addEventListener('touchmove', moveKnob);
+            window.addEventListener('touchend', () => { dragging = false; });
+
+            track.addEventListener('click', (e) => {
+                const rect = track.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                let percent = (x / rect.width) * 100;
+                setPosition(percent);
+            });
+        }
+
         function resetMatchUI() {
             scorePlayer = 0; scoreAI = 0; replayBuffer = [];
             document.getElementById('player-score').innerText = '0'; document.getElementById('ai-score').innerText = '0';
-           
             let pLabel = document.getElementById('player-label'); let pFlag = document.getElementById('player-flag');
             let aLabel = document.getElementById('ai-label'); let aFlag = document.getElementById('ai-flag');
             if (gameMode.includes('career')) {
@@ -593,10 +634,8 @@
             resetMatchUI(); initAudio(); gameState = 'serving';
             runCountdown(() => { document.getElementById('ui').style.display = 'block'; serveBall(); });
         }
-        // --- EXHIBITION ---
         function setExhibitionDiff(d) { document.querySelectorAll('.ex-diff').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); exhibitionDifficulty = d; }
         function startExhibition() { gameMode = 'exhibition'; activeDifficulty = exhibitionDifficulty; triggerGameStart(); }
-        // --- CAREER LOGIC ---
         let selectedCareerCountry = '🇺🇸';
         function openCareerSetup() {
             document.getElementById('main-menu-screen').style.display = 'none';
@@ -616,7 +655,6 @@
                 league: [], schedule: [], matchIndex: 0, phase: 'regular', playoffBracket: [],
                 seasonHistory: []
             };
-           
             career.league.push({ id: 0, name: name, country: selectedCareerCountry, w: 0, l: 0, isPlayer: true });
             for (let i = 0; i < 23; i++) {
                 career.league.push({ id: i+1, name: aiNamesRoster[i].n, country: aiNamesRoster[i].c, w: 0, l: 0, isPlayer: false });
@@ -631,33 +669,51 @@
             let opps = career.league.filter(p => !p.isPlayer).map(p => p.id);
             opps.sort(() => Math.random() - 0.5); career.schedule = opps; career.matchIndex = 0;
         }
+        function getCurrentPlayoffInfo() {
+            if (career.phase !== 'playoffs' || !career.playoffBracket) return null;
+            const roundNames = ["Quarterfinals", "Semifinals", "Finals"];
+            for (let r = 0; r < 3; r++) {
+                for (let m = 0; m < career.playoffBracket[r].length; m++) {
+                    let match = career.playoffBracket[r][m];
+                    if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) {
+                        let opp = match.p1.isPlayer ? match.p2 : match.p1;
+                        return { roundName: roundNames[r], opp: opp, roundIndex: r };
+                    }
+                }
+            }
+            return null;
+        }
         function showCareerHub() {
             document.querySelectorAll('.overlay-screen').forEach(el => el.style.display = 'none');
             document.getElementById('career-hub-screen').style.display = 'flex';
-           
             document.getElementById('hub-season-num').innerText = career.season;
             document.getElementById('hub-player-name').innerText = `${career.playerName} ${career.playerCountry}`;
-           
             let me = career.league.find(p => p.isPlayer);
             document.getElementById('hub-player-record').innerText = `Record: ${me.w} - ${me.l}`;
             career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l));
-           
             let tbody = document.getElementById('standings-table-body');
             tbody.innerHTML = `<tr><th>Rk</th><th>Player</th><th>W</th><th>L</th></tr>`;
             career.league.forEach((p, index) => {
-                let tr = document.createElement('tr'); if(p.isPlayer) tr.className = 'is-player';
+                let tr = document.createElement('tr');
+                if(p.isPlayer) tr.className = 'is-player';
                 tr.innerHTML = `<td>${index + 1}</td><td>${p.country} ${p.name}</td><td>${p.w}</td><td>${p.l}</td>`;
                 tbody.appendChild(tr);
             });
+            const nextContainer = document.getElementById('next-match-container');
+            const viewBtn = document.getElementById('view-playoffs-btn');
+            const hasNext = career.phase === 'regular' || (career.phase === 'playoffs' && getCurrentPlayoffInfo() !== null);
+            nextContainer.style.display = hasNext ? 'block' : 'none';
+            viewBtn.style.display = career.phase === 'playoffs' ? 'block' : 'none';
             if (career.phase === 'regular') {
-                document.getElementById('next-match-container').style.display = 'block';
-                document.getElementById('view-playoffs-btn').style.display = 'none';
-                document.getElementById('hub-game-num').innerText = career.matchIndex + 1;
+                document.getElementById('hub-next-label').innerHTML = `Next Match (Game <span id="hub-game-num">${career.matchIndex + 1}</span>/23)`;
                 let opp = getOpponent();
                 document.getElementById('hub-next-opp').innerText = `${opp.country} ${opp.name}`;
-            } else {
-                document.getElementById('next-match-container').style.display = 'none';
-                document.getElementById('view-playoffs-btn').style.display = 'block';
+            } else if (career.phase === 'playoffs') {
+                let info = getCurrentPlayoffInfo();
+                if (info) {
+                    document.getElementById('hub-next-label').innerHTML = `Next Match <span id="hub-game-num">(${info.roundName})</span>`;
+                    document.getElementById('hub-next-opp').innerText = `${info.opp.country} ${info.opp.name}`;
+                }
             }
         }
         function getOpponent() {
@@ -677,7 +733,6 @@
         }
         function setCareerMatchDiff(d) { document.querySelectorAll('.car-diff').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); careerMatchDifficulty = d; }
         function startCareerMatch() { gameMode = 'careerRegular'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
-        // --- STATS LOGIC ---
         let currentStatTab = 'season';
         function showStatsScreen() {
             document.getElementById('career-hub-screen').style.display = 'none';
@@ -685,7 +740,6 @@
             renderStats();
         }
         function closeStatsScreen() { document.getElementById('stats-screen').style.display = 'none'; document.getElementById('career-hub-screen').style.display = 'flex'; }
-       
         function toggleStatView(tab) {
             currentStatTab = tab;
             document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
@@ -695,7 +749,6 @@
             const grid = document.getElementById('stats-grid-container');
             const data = currentStatTab === 'season' ? career.seasonStats : career.careerStats;
             let winPct = data.wins + data.losses > 0 ? ((data.wins / (data.wins + data.losses)) * 100).toFixed(1) + '%' : '0%';
-           
             let html = `
                 <div class="stat-box"><div class="stat-label">Total Wins</div><div class="stat-value">${data.wins}</div></div>
                 <div class="stat-box"><div class="stat-label">Total Losses</div><div class="stat-value" style="color:var(--danger)">${data.losses}</div></div>
@@ -705,11 +758,11 @@
                 <div class="stat-box"><div class="stat-label">Blowout Losses (5+)</div><div class="stat-value" style="color:var(--danger)">${data.lossesBy5}</div></div>
                 <div class="stat-box"><div class="stat-label">Overtime Wins</div><div class="stat-value">${data.otWins}</div></div>
                 <div class="stat-box"><div class="stat-label">Overtime Losses</div><div class="stat-value" style="color:var(--danger)">${data.otLosses}</div></div>
+                <div class="stat-box"><div class="stat-label">Biggest Win</div><div class="stat-value" style="color:var(--gold)">+${data.maxWinMargin || 0}</div></div>
+                <div class="stat-box"><div class="stat-label">Biggest Loss</div><div class="stat-value" style="color:var(--danger)">-${data.maxLossMargin || 0}</div></div>
             `;
             grid.innerHTML = html;
         }
-
-        // === NEW: SEASON RECORDS ===
         function showSeasonRecords() {
             document.getElementById('career-hub-screen').style.display = 'none';
             document.getElementById('season-records-screen').style.display = 'flex';
@@ -723,55 +776,39 @@
             const list = document.getElementById('history-list');
             let html = '';
             if (!career.seasonHistory || career.seasonHistory.length === 0) {
-                html = '<p style="text-align:center; color:#aaa; padding:60px 20px; font-size:18px;">No completed seasons yet!<br>Finish a full season + playoffs to see your history 🎾</p>';
+                html = '<p style="text-align:center; color:#aaa; padding:50px 16px; font-size:16px;">No completed seasons yet!<br>Finish a full season + playoffs to see your history 🎾</p>';
             } else {
                 career.seasonHistory.forEach(h => {
                     let emoji = '📊';
                     let color = '#fff';
                     let label = h.playoffFinish;
-                    if (h.playoffFinish === "Won Finals") {
-                        emoji = '🏆'; color = 'var(--gold)'; label = 'CHAMPION!';
-                    } else if (h.playoffFinish === "Lost in Finals") {
-                        emoji = '🥈'; color = '#f1c40f';
-                    } else if (h.playoffFinish === "Lost in Semifinals") {
-                        emoji = '😔';
-                    } else if (h.playoffFinish === "Lost in Quarterfinals") {
-                        emoji = '😢';
-                    } else if (h.playoffFinish === "Didn't make playoffs") {
-                        emoji = '📉'; color = 'var(--danger)';
-                    }
+                    if (h.playoffFinish === "Won Finals") { emoji = '🏆'; color = 'var(--gold)'; label = 'CHAMPION!'; }
+                    else if (h.playoffFinish === "Lost in Finals") { emoji = '🥈'; color = '#f1c40f'; }
+                    else if (h.playoffFinish === "Lost in Semifinals") { emoji = '😔'; }
+                    else if (h.playoffFinish === "Lost in Quarterfinals") { emoji = '😢'; }
+                    else if (h.playoffFinish === "Didn't make playoffs") { emoji = '📉'; color = 'var(--danger)'; }
                     html += `
                         <div class="season-record-row">
-                            <div style="font-size:22px; font-weight:bold;">Season ${h.season}</div>
-                            <div style="font-size:21px; color:#4dabf7;">${h.record.w} - ${h.record.l}</div>
-                            <div style="font-size:16px; color:${color};">${emoji} ${label}</div>
+                            <div style="font-size:20px; font-weight:bold;">Season ${h.season}</div>
+                            <div style="font-size:19px; color:#4dabf7;">${h.record.w} - ${h.record.l}</div>
+                            <div style="font-size:14px; color:${color};">${emoji} ${label}</div>
                         </div>
                     `;
                 });
             }
-            document.getElementById('career-overview').innerHTML = 
-                `Career Overview: ${career.careerStats.wins}-${career.careerStats.losses} | ${career.careerStats.championships} Championship${career.careerStats.championships === 1 ? '' : 's'} 🏆`;
+            document.getElementById('career-overview').innerHTML = `Career Overview: ${career.careerStats.wins}-${career.careerStats.losses} | ${career.careerStats.championships} Championship${career.careerStats.championships === 1 ? '' : 's'} 🏆`;
             list.innerHTML = html;
         }
-
-        // === DETERMINE PLAYOFF FINISH ===
         function determinePlayoffFinish() {
             if (!career.playoffBracket || career.playoffBracket.length === 0) return "Didn't make playoffs";
-            let deepestRound = -1;
-            let lostInRound = -1;
-            let isChampion = false;
-
+            let deepestRound = -1; let lostInRound = -1; let isChampion = false;
             for (let r = 0; r < career.playoffBracket.length; r++) {
                 for (let m of career.playoffBracket[r]) {
                     if ((m.p1 && m.p1.isPlayer) || (m.p2 && m.p2.isPlayer)) {
                         deepestRound = r;
                         if (m.winner) {
-                            const playerWon = (m.p1 && m.p1.isPlayer && m.winner.id === m.p1.id) ||
-                                              (m.p2 && m.p2.isPlayer && m.winner.id === m.p2.id);
-                            if (!playerWon) {
-                                lostInRound = r;
-                                return playoffFinishLabels[lostInRound] || "Lost in Quarterfinals";
-                            }
+                            const playerWon = (m.p1 && m.p1.isPlayer && m.winner.id === m.p1.id) || (m.p2 && m.p2.isPlayer && m.winner.id === m.p2.id);
+                            if (!playerWon) { lostInRound = r; return playoffFinishLabels[lostInRound] || "Lost in Quarterfinals"; }
                             if (r === 2) isChampion = true;
                         }
                     }
@@ -781,19 +818,15 @@
             if (isChampion) return "Won Finals";
             return playoffFinishLabels[deepestRound] || "Didn't make playoffs";
         }
-
-        // --- PLAYOFF LOGIC ---
         function generatePlayoffs() {
             career.phase = 'playoffs';
             career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l));
             let t8 = career.league.slice(0, 8);
-           
             career.playoffBracket = [
                 [ {p1: t8[0], p2: t8[7], s1: null, s2: null, winner: null}, {p1: t8[3], p2: t8[4], s1: null, s2: null, winner: null}, {p1: t8[2], p2: t8[5], s1: null, s2: null, winner: null}, {p1: t8[1], p2: t8[6], s1: null, s2: null, winner: null} ],
                 [ {p1: null, p2: null, s1: null, s2: null, winner: null}, {p1: null, p2: null, s1: null, s2: null, winner: null} ],
                 [ {p1: null, p2: null, s1: null, s2: null, winner: null} ]
             ];
-           
             saveGameData();
             showPlayoffBracket();
         }
@@ -802,9 +835,7 @@
             const screen = document.getElementById('career-bracket-screen');
             const container = document.getElementById('career-bracket-container');
             document.getElementById('bracket-season-num').innerText = career.season;
-           
             let html = ''; const roundTitles = ["Quarterfinals", "Semifinals", "Finals"];
-           
             for(let r=0; r<3; r++) {
                 html += `<div class="bracket-col"><div class="bracket-col-title">${roundTitles[r]}</div>`;
                 career.playoffBracket[r].forEach(m => {
@@ -815,7 +846,6 @@
                         let p2Winner = m.winner && (m.winner.id === m.p2.id);
                         let p1Class = "match-player" + (isP1Me ? " is-me" : "") + (p1Winner ? " winner" : (m.winner ? " loser" : ""));
                         let p2Class = "match-player" + (isP2Me ? " is-me" : "") + (p2Winner ? " winner" : (m.winner ? " loser" : ""));
-                       
                         html += `<div class="match-box">
                                     <div class="${p1Class}"><span>${m.p1.country} ${m.p1.name}</span> ${m.s1 !== null ? `<span class="match-score">${m.s1}</span>` : ''}</div>
                                     <div class="${p2Class}"><span>${m.p2.country} ${m.p2.name}</span> ${m.s2 !== null ? `<span class="match-score">${m.s2}</span>` : ''}</div>
@@ -825,15 +855,13 @@
                 html += `</div>`;
             }
             let champ = "?";
-            if (career.playoffBracket[2][0].winner) champ = `${career.playoffBracket[2][0].winner.country}<br><span style="font-size:16px">${career.playoffBracket[2][0].winner.name}</span>`;
+            if (career.playoffBracket[2][0].winner) champ = `${career.playoffBracket[2][0].winner.country}<br><span style="font-size:14px">${career.playoffBracket[2][0].winner.name}</span>`;
             html += `<div class="bracket-col"><div class="bracket-col-title">Champion</div><div class="champion-box"><span class="champion-icon">${champ}</span></div></div>`;
             container.innerHTML = html;
-            // STATUS CHECKS
             let playerActive = false;
             let tournamentOver = career.playoffBracket[2][0].winner !== null;
             let playerEliminated = false;
             let playerWasInTournament = false;
-           
             for(let r=0; r<3; r++) {
                 career.playoffBracket[r].forEach(m => {
                     if (m.p1 && m.p1.isPlayer) playerWasInTournament = true;
@@ -842,7 +870,6 @@
                 });
             }
             if (playerWasInTournament && !playerActive && !tournamentOver) playerEliminated = true;
-            // UPDATE UI SUBTITLE TEXT
             let statusText = document.getElementById('bracket-status-text');
             if (!playerWasInTournament) {
                 statusText.innerText = "You missed the Top 8 cut.";
@@ -857,14 +884,13 @@
                 statusText.innerText = "Top 8 Championship Tournament";
                 statusText.style.color = "#ddd";
             }
-            document.getElementById('career-bracket-play-btn').style.display = (playerActive && !tournamentOver) ? 'block' : 'none';
+            document.getElementById('career-bracket-play-btn').style.display = 'none';
             document.getElementById('career-bracket-next-season-btn').style.display = (!playerActive || tournamentOver) ? 'block' : 'none';
             screen.style.display = 'flex';
         }
         function startPlayoffMatch() { gameMode = 'careerPlayoffs'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
         function backToCareerHub() { showCareerHub(); }
         function startNextSeason() {
-            // RECORD THIS SEASON'S RESULTS
             let finish = determinePlayoffFinish();
             let me = career.league.find(p => p.isPlayer);
             if (!career.seasonHistory) career.seasonHistory = [];
@@ -873,42 +899,59 @@
                 record: {w: me.w, l: me.l},
                 playoffFinish: finish
             });
-
-            // RESET FOR NEW SEASON
             career.season++;
             career.phase = 'regular';
             career.seasonStats = getEmptyStats();
             career.league.forEach(p => { p.w = 0; p.l = 0; });
-            generateSchedule(); 
-            saveGameData(); 
+            generateSchedule();
+            saveGameData();
             showCareerHub();
         }
         function simulateLeagueWeek() {
             career.league.forEach(p => { if (!p.isPlayer) { Math.random() > 0.5 ? p.w++ : p.l++; } });
         }
-        function genAiScore() { let w = 11, l = Math.floor(Math.random() * 10); return [w, l]; }
+        function simulateAiMatch(match) {
+            if (!match.p1 || !match.p2) return;
+            const p1Wins = Math.random() > 0.5;
+            let winScore = 11;
+            let loseScore = Math.floor(Math.random() * 8) + 3;
+            if (Math.random() < 0.18) {
+                winScore = 12;
+                loseScore = 10;
+            }
+            if (p1Wins) {
+                match.s1 = winScore;
+                match.s2 = loseScore;
+                match.winner = match.p1;
+            } else {
+                match.s1 = loseScore;
+                match.s2 = winScore;
+                match.winner = match.p2;
+            }
+        }
         function handlePostMatch() {
             document.getElementById('game-over-screen').style.display = 'none';
-           
             if (gameMode === 'exhibition') { backToMain(); return; }
             let pScore = scorePlayer; let oScore = scoreAI;
             let isWin = pScore > oScore; let margin = Math.abs(pScore - oScore); let isOT = (pScore > 11 || oScore > 11);
-            // Update Stats
             if (isWin) {
                 career.seasonStats.wins++; career.careerStats.wins++;
                 if (margin >= 5) { career.seasonStats.winsBy5++; career.careerStats.winsBy5++; }
                 if (isOT) { career.seasonStats.otWins++; career.careerStats.otWins++; }
+                career.seasonStats.maxWinMargin = Math.max(career.seasonStats.maxWinMargin || 0, margin);
+                career.careerStats.maxWinMargin = Math.max(career.careerStats.maxWinMargin || 0, margin);
             } else {
                 career.seasonStats.losses++; career.careerStats.losses++;
                 if (margin >= 5) { career.seasonStats.lossesBy5++; career.careerStats.lossesBy5++; }
                 if (isOT) { career.seasonStats.otLosses++; career.careerStats.otLosses++; }
+                career.seasonStats.maxLossMargin = Math.max(career.seasonStats.maxLossMargin || 0, margin);
+                career.careerStats.maxLossMargin = Math.max(career.careerStats.maxLossMargin || 0, margin);
             }
             let me = career.league.find(p => p.isPlayer);
             isWin ? me.w++ : me.l++;
             if (gameMode === 'careerRegular') {
                 let opp = getOpponent(); isWin ? opp.l++ : opp.w++;
                 simulateLeagueWeek();
-               
                 career.matchIndex++;
                 if (career.matchIndex >= 23) {
                     generatePlayoffs();
@@ -916,8 +959,7 @@
                     saveGameData();
                     showCareerHub();
                 }
-            }
-            else if (gameMode === 'careerPlayoffs') {
+            } else if (gameMode === 'careerPlayoffs') {
                 let rIdx = -1, mIdx = -1;
                 for(let r=0; r<3; r++) {
                     for(let m=0; m<career.playoffBracket[r].length; m++) {
@@ -930,15 +972,12 @@
                 let currentMatch = career.playoffBracket[rIdx][mIdx];
                 currentMatch.s1 = currentMatch.p1.isPlayer ? pScore : oScore;
                 currentMatch.s2 = currentMatch.p2.isPlayer ? pScore : oScore;
-               
                 let playerObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p1 : currentMatch.p2;
                 let oppObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1;
                 currentMatch.winner = isWin ? playerObjInBracket : oppObjInBracket;
                 for(let i=0; i < career.playoffBracket[rIdx].length; i++) {
                     let m = career.playoffBracket[rIdx][i];
-                    if (!m.winner && m.p1 && m.p2) {
-                        let s = genAiScore(); m.s1 = s[0]; m.s2 = s[1]; m.winner = Math.random() > 0.5 ? m.p1 : m.p2;
-                    }
+                    if (!m.winner && m.p1 && m.p2) simulateAiMatch(m);
                 }
                 if (rIdx < 2) {
                     let nR = rIdx + 1;
@@ -953,7 +992,7 @@
                     for(let r = rIdx + 1; r < 3; r++) {
                         for(let m = 0; m < career.playoffBracket[r].length; m++) {
                             let match = career.playoffBracket[r][m];
-                            let s = genAiScore(); match.s1 = s[0]; match.s2 = s[1]; match.winner = Math.random() > 0.5 ? match.p1 : match.p2;
+                            if (!match.winner && match.p1 && match.p2) simulateAiMatch(match);
                         }
                         if (r < 2) {
                             for(let i=0; i < career.playoffBracket[r+1].length; i++) {
@@ -966,7 +1005,105 @@
                 saveGameData(); showPlayoffBracket();
             }
         }
-        // --- DEV CONSOLE (SECRET MENU) ---
+        function simulateNextGame() {
+            if (!career) return;
+            const isRegular = career.phase === 'regular';
+            let info = isRegular ? null : getCurrentPlayoffInfo();
+            let opp = isRegular ? getOpponent() : (info ? info.opp : null);
+            if (!opp && !isRegular) return;
+            const isWin = Math.random() < 0.53;
+            let pScore, oScore;
+            if (isWin) {
+                pScore = 11;
+                oScore = Math.floor(Math.random() * 7) + 4;
+            } else {
+                oScore = 11;
+                pScore = Math.floor(Math.random() * 7) + 4;
+            }
+            if (Math.random() < 0.18 && Math.abs(pScore - oScore) < 4) {
+                if (isWin) { pScore = 12; oScore = 10; }
+                else { oScore = 12; pScore = 10; }
+            }
+            const margin = Math.abs(pScore - oScore);
+            const isOT = (pScore > 11 || oScore > 11);
+            let me = career.league.find(p => p.isPlayer);
+            if (isWin) {
+                career.seasonStats.wins++; career.careerStats.wins++;
+                if (margin >= 5) { career.seasonStats.winsBy5++; career.careerStats.winsBy5++; }
+                if (isOT) { career.seasonStats.otWins++; career.careerStats.otWins++; }
+                career.seasonStats.maxWinMargin = Math.max(career.seasonStats.maxWinMargin || 0, margin);
+                career.careerStats.maxWinMargin = Math.max(career.careerStats.maxWinMargin || 0, margin);
+                me.w++;
+            } else {
+                career.seasonStats.losses++; career.careerStats.losses++;
+                if (margin >= 5) { career.seasonStats.lossesBy5++; career.careerStats.lossesBy5++; }
+                if (isOT) { career.seasonStats.otLosses++; career.careerStats.otLosses++; }
+                career.seasonStats.maxLossMargin = Math.max(career.seasonStats.maxLossMargin || 0, margin);
+                career.careerStats.maxLossMargin = Math.max(career.careerStats.maxLossMargin || 0, margin);
+                me.l++;
+            }
+            if (isRegular) {
+                if (isWin) opp.l++; else opp.w++;
+                simulateLeagueWeek();
+                career.matchIndex++;
+                if (career.matchIndex >= 23) generatePlayoffs();
+            } else {
+                let rIdx = -1, mIdx = -1;
+                for(let r=0; r<3; r++) {
+                    for(let m=0; m<career.playoffBracket[r].length; m++) {
+                        let match = career.playoffBracket[r][m];
+                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) { rIdx = r; mIdx = m; break; }
+                    }
+                    if(rIdx !== -1) break;
+                }
+                if (rIdx === -1) { showCareerHub(); return; }
+                let currentMatch = career.playoffBracket[rIdx][mIdx];
+                currentMatch.s1 = currentMatch.p1.isPlayer ? pScore : oScore;
+                currentMatch.s2 = currentMatch.p2.isPlayer ? pScore : oScore;
+                let playerObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p1 : currentMatch.p2;
+                let oppObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1;
+                currentMatch.winner = isWin ? playerObjInBracket : oppObjInBracket;
+                for(let i=0; i < career.playoffBracket[rIdx].length; i++) {
+                    let m = career.playoffBracket[rIdx][i];
+                    if (!m.winner && m.p1 && m.p2) simulateAiMatch(m);
+                }
+                if (rIdx < 2) {
+                    let nR = rIdx + 1;
+                    for(let i=0; i < career.playoffBracket[nR].length; i++) {
+                        career.playoffBracket[nR][i].p1 = career.playoffBracket[rIdx][i*2].winner;
+                        career.playoffBracket[nR][i].p2 = career.playoffBracket[rIdx][i*2 + 1].winner;
+                    }
+                } else if (rIdx === 2 && isWin) {
+                    career.careerStats.championships++;
+                }
+                if (!isWin) {
+                    for(let r = rIdx + 1; r < 3; r++) {
+                        for(let m = 0; m < career.playoffBracket[r].length; m++) {
+                            let match = career.playoffBracket[r][m];
+                            if (!match.winner && match.p1 && match.p2) simulateAiMatch(match);
+                        }
+                        if (r < 2) {
+                            for(let i=0; i < career.playoffBracket[r+1].length; i++) {
+                                career.playoffBracket[r+1][i].p1 = career.playoffBracket[r][i*2].winner;
+                                career.playoffBracket[r+1][i].p2 = career.playoffBracket[r][i*2 + 1].winner;
+                            }
+                        }
+                    }
+                }
+            }
+            saveGameData();
+            const winnerEl = document.getElementById('sim-winner-text');
+            winnerEl.innerText = isWin ? "YOU WIN!" : "YOU LOSE!";
+            winnerEl.style.color = isWin ? "var(--danger)" : "var(--primary)";
+            document.getElementById('sim-final-score-text').innerText = `${pScore} - ${oScore}`;
+            document.getElementById('sim-opp-name').innerText = `vs ${opp.country} ${opp.name}`;
+            if (isWin && !isRegular && rIdx === 2) fireConfetti();
+            document.getElementById('sim-result-screen').style.display = 'flex';
+        }
+        function closeSimResult() {
+            document.getElementById('sim-result-screen').style.display = 'none';
+            showCareerHub();
+        }
         let lastSecretTapTime = 0;
         function handleSecretTap(e) {
             let currentTime = new Date().getTime();
@@ -991,7 +1128,6 @@
                 if (career.phase === 'regular') {
                     let me = career.league.find(p => p.isPlayer);
                     me.w = 23; me.l = 0;
-                   
                     while(career.matchIndex < 23) {
                         simulateLeagueWeek();
                         career.matchIndex++;
@@ -1005,7 +1141,6 @@
                 alert("Invalid Access Code");
             }
         }
-        // --- EFFECTS & REPLAY ---
         function fireConfetti() {
             const colors = ['#ff6b6b', '#4dabf7', '#f1c40f', '#2ecc71', '#9b59b6'];
             for(let i=0; i<150; i++) {
@@ -1018,14 +1153,29 @@
         function startReplay() { document.getElementById('game-over-screen').style.display = 'none'; document.getElementById('replay-overlay').style.display = 'block'; isReplaying = true; replayPlaybackIndex = 0; }
         function stopReplay() { isReplaying = false; document.getElementById('replay-overlay').style.display = 'none'; document.getElementById('game-over-screen').style.display = 'flex'; }
         function backToMain() {
+            if (career) saveGameData();
             document.querySelectorAll('.overlay-screen').forEach(el => el.style.display = 'none');
-            document.getElementById('ui').style.display = 'none'; document.getElementById('main-menu-screen').style.display = 'flex';
+            document.getElementById('ui').style.display = 'none';
+            document.getElementById('main-menu-screen').style.display = 'flex';
             gameState = 'demo'; isReplaying = false;
         }
         function pauseGame() { if (gameState === 'gameover' || gameState === 'demo') return; gameState = 'paused'; document.getElementById('pause-overlay').style.display = 'flex'; }
         function resumeGame() { document.getElementById('pause-overlay').style.display = 'none'; initAudio(); gameState = 'playing'; }
         function quitToMenu() { document.getElementById('pause-overlay').style.display = 'none'; backToMain(); }
         window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+        
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .standings-table tr.is-player {
+                background: rgba(77, 171, 247, 0.15) !important;
+            }
+            .standings-table tr.is-player td {
+                color: #4dabf7 !important;
+                font-weight: 600 !important;
+            }
+        `;
+        document.head.appendChild(style);
+
         serveBall(); animate();
     </script>
 </body>
