@@ -14,25 +14,25 @@
         }
         body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; touch-action: none; user-select: none; }
         canvas { display: block; }
-    
+  
         .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; color: white; backdrop-filter: blur(5px); }
         #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; display: none; }
-    
+  
         #score-board { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 30px; padding: 10px 30px; pointer-events: auto; align-items: center;}
         .score-box { display: flex; flex-direction: column; align-items: center; min-width: 100px;}
         .score-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-align: center;}
         .score-text { font-size: 42px; font-weight: bold; line-height: 1; }
         #player-score { color: var(--danger); text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
         #ai-score { color: var(--primary); text-shadow: 0 0 10px rgba(77, 171, 247, 0.5); }
-    
+  
         #announcement { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.8); display: none; text-align: center; padding: 15px 40px; z-index: 12; }
         #pause-btn { position: absolute; top: 25px; right: 25px; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; pointer-events: auto; background: var(--glass-bg); color: white; border: 1px solid var(--glass-border); z-index: 11;}
-    
+  
         .overlay-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; color: white; background: rgba(0,0,0,0.7); }
-    
+  
         .title { font-size: 46px; margin-bottom: 5px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
         .subtitle { font-size: 17px; color: #ddd; margin-bottom: 40px; text-align: center;}
-    
+  
         .btn-primary { padding: 12px 32px; font-size: 16px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 5px; transition: transform 0.1s;}
         .btn-primary:active { transform: scale(0.95); }
         .btn-danger { background: #ff6b6b; }
@@ -44,7 +44,7 @@
         .diff-row { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
         .mode-btn { flex: 1; padding: 9px 0; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold;}
         .mode-btn.active { background: var(--primary); border-color: var(--primary); }
-      
+    
         .career-layout { display: flex; gap: 16px; width: 96%; max-width: 615px; height: 82%; }
         .career-panel { flex: 1; display: flex; flex-direction: column; padding: 12px; overflow: hidden; }
         .standings-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; text-align: left; }
@@ -58,7 +58,7 @@
         .stat-value { font-size: 22px; font-weight: bold; color: var(--primary); margin-top: 4px; }
         .stat-label { font-size: 10px; color: #aaa; text-transform: uppercase; }
         input[type="text"], input[type="number"] { width: 100%; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 16px; border-radius: 8px; margin-bottom: 16px; font-family: inherit; text-align: center;}
-    
+  
         #career-bracket-container {
             display: flex;
             justify-content: space-between;
@@ -113,11 +113,11 @@
         .match-player.winner { font-weight: bold; color: #fff;}
         .match-player.loser { color: #888;}
         .match-score { font-size: 8px; background: rgba(0,0,0,0.4); padding: 1px 3px; border-radius: 3px;}
-    
+  
         .champion-box { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;}
         .champion-icon { font-size: 32px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite; margin-bottom: 6px;}
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-    
+  
         .season-record-row {
             background: rgba(255,255,255,0.08);
             padding: 14px;
@@ -130,7 +130,7 @@
         }
         #countdown-screen { display: none; background: transparent; pointer-events: none;}
         #countdown-text { font-size: 100px; font-weight: 900; color: white; text-shadow: 0 0 20px var(--primary); }
-    
+  
         .confetti { position: absolute; width: 10px; height: 10px; z-index: 100; animation: fall linear forwards; top: -20px;}
         @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
         #replay-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
@@ -163,6 +163,7 @@
             </div>
         </div>
         <div id="secret-tap-zone" onpointerdown="handleSecretTap(event)"></div>
+        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 12px; opacity: 0.25; color: white; pointer-events: none; text-align: center;">Made by Vewerty Ploik</div>
     </div>
     <div id="cheat-screen" class="overlay-screen" style="display: none; z-index: 100; background: rgba(0,0,0,0.9);">
         <div class="glass-panel" style="padding: 30px; text-align: center; width: 280px;">
@@ -218,6 +219,7 @@
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                     <button class="btn-primary" style="background: #34495e; font-size: 15px;" onclick="showStatsScreen()">View Stats</button>
                     <button class="btn-primary" style="background: #27ae60; font-size: 15px;" onclick="showSeasonRecords()">SEASON RECORDS</button>
+                    <button id="allstar-btn" class="btn-primary" style="background: #f1c40f; color: #000; font-size: 15px; display: none;" onclick="showAllStarBracket()">🏆 ALL-STAR TOURNAMENT</button>
                     <button class="btn-primary" style="background: #9b59b6; font-size: 15px;" onclick="simulateNextGame()">SIM GAME</button>
                 </div>
             </div>
@@ -238,6 +240,14 @@
         <div class="glass-panel" style="padding: 24px; width: 95%; max-width: 465px; height: 86%; display: flex; flex-direction: column;">
             <h1 class="title" style="font-size: 28px; margin-bottom: 8px;">Season Records</h1>
             <p id="career-overview" style="color: #aaa; text-align: center; margin-bottom: 16px; font-size: 16px;">Career Overview: 0-0 | 0 Championships 🏆</p>
+            
+            <!-- NEW SORT CONTROLS -->
+            <div style="display: flex; justify-content: center; gap: 10px; margin: 12px 0 8px;">
+                <button onclick="setHistorySort('season')" id="sort-season" class="mode-btn active">SEASON</button>
+                <button onclick="setHistorySort('championships')" id="sort-champ" class="mode-btn">CHAMPIONSHIPS</button>
+                <button onclick="setHistorySort('allstar')" id="sort-allstar" class="mode-btn">ALL-STAR</button>
+            </div>
+            
             <div id="history-list" style="flex: 1; overflow-y: auto; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 10px;"></div>
             <button class="btn-primary" style="width: 100%; background: #555; margin-top: 16px; font-size: 15px;" onclick="closeSeasonRecords()">Back to Hub</button>
         </div>
@@ -246,8 +256,10 @@
         <h1 class="title" style="font-size: 32px; margin-bottom: 4px;">Season <span id="bracket-season-num">1</span> Playoffs</h1>
         <p class="subtitle" id="bracket-status-text" style="margin-bottom: 8px; font-weight: bold; font-size: 15px;">Top 8 Championship Tournament</p>
         <div id="career-bracket-container"></div>
-        <div style="display: flex; gap: 12px; margin-top: 16px;">
+        <div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; justify-content: center;">
             <button class="btn-primary btn-danger" id="career-bracket-play-btn" onclick="startPlayoffMatch()" style="display:none;">PLAY MATCH</button>
+            <button class="btn-primary" id="sim-round-btn" onclick="simAllStarRound()" style="display:none; background:#9b59b6; font-size:15px;">SIM ROUND</button>
+            <button class="btn-primary" id="sim-tournament-btn" onclick="simAllStarTournament()" style="display:none; background:#9b59b6; font-size:15px;">SIM TOURNAMENT</button>
             <button class="btn-primary btn-gold" id="career-bracket-next-season-btn" style="display:none;" onclick="startNextSeason()">START NEXT SEASON</button>
             <button class="btn-primary" style="background: #555; font-size: 15px;" onclick="backToCareerHub()">Back to Hub</button>
         </div>
@@ -276,7 +288,7 @@
             <h2 style="font-size: 22px;">PAUSED</h2>
             <p style="color: #aaa; margin-bottom: 16px; font-size: 13px;">Settings locked during match.</p>
             <button class="mode-btn" style="width: 100%; margin-bottom: 12px;" onclick="toggleAudio()" id="sfx-btn">🔊 Audio: ON</button>
-           
+         
             <div class="sens-container">
                 <div class="sens-label">PADDLE SENSITIVITY</div>
                 <div class="sens-track" id="sens-track">
@@ -284,7 +296,7 @@
                 </div>
                 <div id="sens-value" style="font-size: 14px; color: white; margin-top: 6px; text-align: center;">50</div>
             </div>
-           
+         
             <button class="btn-primary" style="width: 100%; background: #2ecc71; margin: 0 0 8px 0; font-size: 15px;" onclick="resumeGame()">RESUME</button>
             <button class="btn-primary" style="width: 100%; background: #e74c3c; margin: 0; font-size: 15px;" onclick="quitToMenu()">QUIT TO MENU</button>
         </div>
@@ -337,11 +349,14 @@
         };
         let career = null;
         let paddleSensitivity = 50;
+        let currentHistorySort = 'season';   // NEW: for season records sorting
         function getEmptyStats() {
             return {
                 wins: 0, losses: 0, winsBy5: 0, lossesBy5: 0,
                 otWins: 0, otLosses: 0, championships: 0,
-                maxWinMargin: 0, maxLossMargin: 0
+                maxWinMargin: 0, maxLossMargin: 0,
+                allStarAppearances: 0,
+                allStarChampionships: 0
             };
         }
         function loadSave() {
@@ -351,6 +366,14 @@
                 if (!career.seasonHistory) career.seasonHistory = [];
                 if (!career.seasonStats.maxWinMargin) career.seasonStats.maxWinMargin = 0;
                 if (!career.careerStats.maxWinMargin) career.careerStats.maxWinMargin = 0;
+                if (!career.allStarBracket) career.allStarBracket = null;
+                if (!career.allStarPhase) career.allStarPhase = false;
+                if (!career.allStarDone) career.allStarDone = false;
+                if (!career.allStarQualified) career.allStarQualified = false;
+                if (!career.seasonStats.allStarAppearances) career.seasonStats.allStarAppearances = 0;
+                if (!career.careerStats.allStarAppearances) career.careerStats.allStarAppearances = 0;
+                if (!career.seasonStats.allStarChampionships) career.seasonStats.allStarChampionships = 0;
+                if (!career.careerStats.allStarChampionships) career.careerStats.allStarChampionships = 0;
                 document.getElementById('btn-resume-career').style.display = 'block';
             }
             const savedSens = localStorage.getItem('pingPongProSensitivity');
@@ -447,8 +470,12 @@
             who === 'player' ? scorePlayer++ : scoreAI++;
             if(reason) {
                 const ann = document.getElementById('announcement');
-                let pointWinner = who === 'player' ? (gameMode.includes('career') ? career.playerName : 'Player') :
-                    (gameMode.includes('career') ? getOpponent().name : 'AI');
+                let pointWinner;
+                if (gameMode === 'allStar' || gameMode.includes('career')) {
+                    pointWinner = who === 'player' ? career.playerName : getOpponent().name;
+                } else {
+                    pointWinner = who === 'player' ? 'Player' : 'AI';
+                }
                 ann.innerText = `Point ${pointWinner}!`;
                 ann.style.display = 'block'; setTimeout(() => ann.style.display = 'none', 1500);
             }
@@ -609,13 +636,42 @@
             document.getElementById('player-score').innerText = '0'; document.getElementById('ai-score').innerText = '0';
             let pLabel = document.getElementById('player-label'); let pFlag = document.getElementById('player-flag');
             let aLabel = document.getElementById('ai-label'); let aFlag = document.getElementById('ai-flag');
-            if (gameMode.includes('career')) {
-                let opp = getOpponent();
-                pLabel.innerText = career.playerName; pFlag.innerText = career.playerCountry; pFlag.style.display = 'inline';
-                aLabel.innerText = opp.name; aFlag.innerText = opp.country; aFlag.style.display = 'inline';
+            if (gameMode === 'allStar' || gameMode.includes('career')) {
+                pLabel.innerText = career.playerName;
+                pFlag.innerText = career.playerCountry;
+                pFlag.style.display = 'inline';
+                if (gameMode === 'allStar') {
+                    let activeMatch = null;
+                    for(let r = 0; r < career.allStarBracket.length; r++) {
+                        for(let m = 0; m < career.allStarBracket[r].length; m++) {
+                            let match = career.allStarBracket[r][m];
+                            if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) {
+                                activeMatch = match;
+                                break;
+                            }
+                        }
+                        if (activeMatch) break;
+                    }
+                    if (activeMatch) {
+                        let opp = activeMatch.p1.isPlayer ? activeMatch.p2 : activeMatch.p1;
+                        aLabel.innerText = opp.name;
+                        aFlag.innerText = opp.country;
+                        aFlag.style.display = 'inline';
+                    } else {
+                        aLabel.innerText = "All-Star Opponent";
+                        aFlag.style.display = 'none';
+                    }
+                } else {
+                    let opp = getOpponent();
+                    aLabel.innerText = opp.name;
+                    aFlag.innerText = opp.country;
+                    aFlag.style.display = 'inline';
+                }
             } else {
-                pLabel.innerText = "Player"; pFlag.style.display = 'none';
-                aLabel.innerText = "AI"; aFlag.style.display = 'none';
+                pLabel.innerText = "Player";
+                pFlag.style.display = 'none';
+                aLabel.innerText = "AI";
+                aFlag.style.display = 'none';
             }
         }
         function triggerGameStart() {
@@ -642,11 +698,11 @@
                 playerName: name, playerCountry: selectedCareerCountry, season: 1,
                 careerStats: getEmptyStats(), seasonStats: getEmptyStats(),
                 league: [], schedule: [], matchIndex: 0, phase: 'regular', playoffBracket: [],
-                seasonHistory: []
+                seasonHistory: [], allStarBracket: null, allStarPhase: false, allStarDone: false, allStarQualified: false
             };
-            career.league.push({ id: 0, name: name, country: selectedCareerCountry, w: 0, l: 0, isPlayer: true });
+            career.league.push({ id: 0, name: name, country: selectedCareerCountry, w: 0, l: 0, blowouts: 0, isPlayer: true });
             for (let i = 0; i < 23; i++) {
-                career.league.push({ id: i+1, name: aiNamesRoster[i].n, country: aiNamesRoster[i].c, w: 0, l: 0, isPlayer: false });
+                career.league.push({ id: i+1, name: aiNamesRoster[i].n, country: aiNamesRoster[i].c, w: 0, l: 0, blowouts: 0, isPlayer: false });
             }
             generateSchedule(); saveGameData(); showCareerHub();
         }
@@ -690,13 +746,20 @@
             });
             const nextContainer = document.getElementById('next-match-container');
             const viewBtn = document.getElementById('view-playoffs-btn');
+            const allstarBtn = document.getElementById('allstar-btn');
             const hasNext = career.phase === 'regular' || (career.phase === 'playoffs' && getCurrentPlayoffInfo() !== null);
             nextContainer.style.display = hasNext ? 'block' : 'none';
             viewBtn.style.display = career.phase === 'playoffs' ? 'block' : 'none';
+            allstarBtn.style.display = (career.allStarPhase && !career.allStarDone) ? 'block' : 'none';
             if (career.phase === 'regular') {
-                document.getElementById('hub-next-label').innerHTML = `Next Match (Game <span id="hub-game-num">${career.matchIndex + 1}</span>/23)`;
-                let opp = getOpponent();
-                document.getElementById('hub-next-opp').innerText = `${opp.country} ${opp.name}`;
+                if (career.allStarPhase && !career.allStarDone) {
+                    document.getElementById('hub-next-label').innerHTML = `ALL-STAR TOURNAMENT PENDING`;
+                    document.getElementById('hub-next-opp').innerHTML = `<span style="color:#f1c40f">Complete All-Star to unlock Games 12-23</span>`;
+                } else {
+                    document.getElementById('hub-next-label').innerHTML = `Next Match (Game <span id="hub-game-num">${career.matchIndex + 1}</span>/23)`;
+                    let opp = getOpponent();
+                    document.getElementById('hub-next-opp').innerText = `${opp.country} ${opp.name}`;
+                }
             } else if (career.phase === 'playoffs') {
                 let info = getCurrentPlayoffInfo();
                 if (info) {
@@ -717,11 +780,25 @@
                 if (activeMatch) return activeMatch.p1.isPlayer ? activeMatch.p2 : activeMatch.p1;
                 return {name: "Unknown", country: "❓"};
             }
+            if (gameMode === 'allStar') {
+                let activeMatch = null;
+                for(let r=0; r<career.allStarBracket.length; r++) {
+                    for(let m=0; m<career.allStarBracket[r].length; m++) {
+                        let match = career.allStarBracket[r][m];
+                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) activeMatch = match;
+                    }
+                }
+                if (activeMatch) return activeMatch.p1.isPlayer ? activeMatch.p2 : activeMatch.p1;
+            }
             let oppId = career.schedule[career.matchIndex];
             return career.league.find(p => p.id === oppId);
         }
         function setCareerMatchDiff(d) { document.querySelectorAll('.car-diff').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); careerMatchDifficulty = d; }
         function startCareerMatch() {
+            if (career.allStarPhase && !career.allStarDone) {
+                showAllStarBracket();
+                return;
+            }
             if (career && career.phase === 'playoffs') {
                 gameMode = 'careerPlayoffs';
             } else {
@@ -757,33 +834,83 @@
                 <div class="stat-box"><div class="stat-label">Overtime Losses</div><div class="stat-value" style="color:var(--danger)">${data.otLosses}</div></div>
                 <div class="stat-box"><div class="stat-label">Biggest Win</div><div class="stat-value" style="color:var(--gold)">+${data.maxWinMargin || 0}</div></div>
                 <div class="stat-box"><div class="stat-label">Biggest Loss</div><div class="stat-value" style="color:var(--danger)">-${data.maxLossMargin || 0}</div></div>
+                <div class="stat-box"><div class="stat-label">All-Star</div><div class="stat-value">${data.allStarAppearances}</div></div>
+                <div class="stat-box"><div class="stat-label">All-Star Champ</div><div class="stat-value" style="color:var(--gold)">${data.allStarChampionships}</div></div>
             `;
             grid.innerHTML = html;
         }
         function showSeasonRecords() {
             document.getElementById('career-hub-screen').style.display = 'none';
             document.getElementById('season-records-screen').style.display = 'flex';
+            currentHistorySort = 'season';
+            document.querySelectorAll('#season-records-screen .mode-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('sort-season').classList.add('active');
             renderSeasonRecords();
         }
         function closeSeasonRecords() {
             document.getElementById('season-records-screen').style.display = 'none';
             document.getElementById('career-hub-screen').style.display = 'flex';
         }
+        // NEW HELPER: get All-Star result string for current season (used when saving history)
+        function getAllStarResult() {
+            if (!career.allStarQualified || !career.allStarBracket || career.allStarBracket.length < 2) return "DIDNT make";
+            const finalsMatch = career.allStarBracket[1][0];
+            if (!finalsMatch || !finalsMatch.winner) return "lost in semi-finals";
+            if (finalsMatch.winner.isPlayer) return "champ";
+            if ((finalsMatch.p1 && finalsMatch.p1.isPlayer) || (finalsMatch.p2 && finalsMatch.p2.isPlayer)) {
+                return "lost in finals";
+            }
+            return "lost in semi-finals";
+        }
         function renderSeasonRecords() {
             const list = document.getElementById('history-list');
+            let historyCopy = [...career.seasonHistory];
+            
+            if (currentHistorySort === 'championships') {
+                historyCopy.sort((a, b) => {
+                    const aChamp = (a.playoffFinish === "Won Finals") ? 1 : 0;
+                    const bChamp = (b.playoffFinish === "Won Finals") ? 1 : 0;
+                    return bChamp - aChamp || b.season - a.season;
+                });
+            } else if (currentHistorySort === 'allstar') {
+                historyCopy.sort((a, b) => {
+                    const getScore = (res) => {
+                        if (!res) return 0;
+                        if (res === "champ") return 3;
+                        if (res === "lost in finals") return 2;
+                        if (res === "lost in semi-finals") return 1;
+                        return 0;
+                    };
+                    return getScore(b.allStarResult) - getScore(a.allStarResult) || b.season - a.season;
+                });
+            }
+            // default 'season' = chronological (oldest first) - exact same as original
+            
             let html = '';
-            if (!career.seasonHistory || career.seasonHistory.length === 0) {
+            if (!historyCopy || historyCopy.length === 0) {
                 html = '<p style="text-align:center; color:#aaa; padding:50px 16px; font-size:16px;">No completed seasons yet!<br>Finish a full season + playoffs to see your history 🎾</p>';
             } else {
-                career.seasonHistory.forEach(h => {
+                historyCopy.forEach(h => {
                     let emoji = '📊';
                     let color = '#fff';
                     let label = h.playoffFinish;
-                    if (h.playoffFinish === "Won Finals") { emoji = '🏆'; color = 'var(--gold)'; label = 'CHAMPION!'; }
-                    else if (h.playoffFinish === "Lost in Finals") { emoji = '🥈'; color = '#f1c40f'; }
-                    else if (h.playoffFinish === "Lost in Semifinals") { emoji = '😔'; }
-                    else if (h.playoffFinish === "Lost in Quarterfinals") { emoji = '😢'; }
-                    else if (h.playoffFinish === "Didn't make playoffs") { emoji = '📉'; color = 'var(--danger)'; }
+                    
+                    // override for ALL-STAR sort
+                    if (currentHistorySort === 'allstar') {
+                        label = h.allStarResult || "DIDNT make";
+                        if (label === "champ") { emoji = '🏆'; color = 'var(--gold)'; label = 'ALL-STAR CHAMP!'; }
+                        else if (label === "lost in finals") { emoji = '🥈'; color = '#f1c40f'; }
+                        else if (label === "lost in semi-finals") { emoji = '😔'; }
+                        else { emoji = '📉'; color = 'var(--danger)'; }
+                    } else {
+                        // original playoff logic
+                        if (h.playoffFinish === "Won Finals") { emoji = '🏆'; color = 'var(--gold)'; label = 'CHAMPION!'; }
+                        else if (h.playoffFinish === "Lost in Finals") { emoji = '🥈'; color = '#f1c40f'; }
+                        else if (h.playoffFinish === "Lost in Semifinals") { emoji = '😔'; }
+                        else if (h.playoffFinish === "Lost in Quarterfinals") { emoji = '😢'; }
+                        else if (h.playoffFinish === "Didn't make playoffs") { emoji = '📉'; color = 'var(--danger)'; }
+                    }
+                    
                     html += `
                         <div class="season-record-row">
                             <div style="font-size:20px; font-weight:bold;">Season ${h.season}</div>
@@ -793,8 +920,15 @@
                     `;
                 });
             }
-            document.getElementById('career-overview').innerHTML = `Career Overview: ${career.careerStats.wins}-${career.careerStats.losses} | ${career.careerStats.championships} Championship${career.careerStats.championships === 1 ? '' : 's'} 🏆`;
+            document.getElementById('career-overview').innerHTML = `Career Overview: ${career.careerStats.wins}-${career.careerStats.losses} | ${career.careerStats.championships} Championship${career.careerStats.championships === 1 ? '' : 's'} 🏆 | ${career.careerStats.allStarAppearances} All-Star | ${career.careerStats.allStarChampionships} All-Star Champs`;
             list.innerHTML = html;
+        }
+        function setHistorySort(mode) {
+            currentHistorySort = mode;
+            document.querySelectorAll('#season-records-screen .mode-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById('sort-' + mode);
+            if (btn) btn.classList.add('active');
+            renderSeasonRecords();
         }
         function determinePlayoffFinish() {
             if (!career.playoffBracket || career.playoffBracket.length === 0) return "Didn't make playoffs";
@@ -815,6 +949,28 @@
             if (isChampion) return "Won Finals";
             return playoffFinishLabels[deepestRound] || "Didn't make playoffs";
         }
+        // NEW: fully simulate playoffs when player missed top 8 (so bracket is visible)
+        function simulateFullPlayoffs() {
+            if (!career.playoffBracket) return;
+            // Simulate all quarterfinals
+            career.playoffBracket[0].forEach(m => {
+                if (!m.winner) simulateAiMatch(m);
+            });
+            // Advance to semifinals
+            for (let i = 0; i < 2; i++) {
+                career.playoffBracket[1][i].p1 = career.playoffBracket[0][i * 2].winner;
+                career.playoffBracket[1][i].p2 = career.playoffBracket[0][i * 2 + 1].winner;
+            }
+            // Simulate semifinals
+            career.playoffBracket[1].forEach(m => {
+                if (!m.winner) simulateAiMatch(m);
+            });
+            // Advance to finals
+            career.playoffBracket[2][0].p1 = career.playoffBracket[1][0].winner;
+            career.playoffBracket[2][0].p2 = career.playoffBracket[1][1].winner;
+            // Simulate finals
+            if (!career.playoffBracket[2][0].winner) simulateAiMatch(career.playoffBracket[2][0]);
+        }
         function generatePlayoffs() {
             career.phase = 'playoffs';
             career.league.sort((a, b) => (b.w - a.w) || (a.l - b.l));
@@ -824,6 +980,13 @@
                 [ {p1: null, p2: null, s1: null, s2: null, winner: null}, {p1: null, p2: null, s1: null, s2: null, winner: null} ],
                 [ {p1: null, p2: null, s1: null, s2: null, winner: null} ]
             ];
+            
+            // NEW: if player missed playoffs → auto-sim entire tournament and show bracket
+            const playerInPlayoffs = t8.some(p => p.isPlayer);
+            if (!playerInPlayoffs) {
+                simulateFullPlayoffs();
+            }
+            
             saveGameData();
             showPlayoffBracket();
         }
@@ -832,6 +995,11 @@
             const screen = document.getElementById('career-bracket-screen');
             const container = document.getElementById('career-bracket-container');
             document.getElementById('bracket-season-num').innerText = career.season;
+            document.querySelector('#career-bracket-screen h1').innerHTML = `Season <span id="bracket-season-num">${career.season}</span> Playoffs`;
+            document.getElementById('bracket-status-text').innerText = "Top 8 Championship Tournament";
+            document.getElementById('bracket-status-text').style.color = "#ddd";
+            document.getElementById('sim-round-btn').style.display = 'none';
+            document.getElementById('sim-tournament-btn').style.display = 'none';
             let html = ''; const roundTitles = ["Quarterfinals", "Semifinals", "Finals"];
             for(let r=0; r<3; r++) {
                 html += `<div class="bracket-col"><div class="bracket-col-title">${roundTitles[r]}</div>`;
@@ -884,24 +1052,237 @@
             const playBtn = document.getElementById('career-bracket-play-btn');
             const nextBtn = document.getElementById('career-bracket-next-season-btn');
             playBtn.style.display = (playerActive && !tournamentOver) ? 'block' : 'none';
+            playBtn.innerText = "PLAY MATCH";
+            playBtn.onclick = startPlayoffMatch;
             nextBtn.style.display = (!playerActive || tournamentOver) ? 'block' : 'none';
+            nextBtn.innerText = "START NEXT SEASON";
+            nextBtn.onclick = startNextSeason;
             screen.style.display = 'flex';
+        }
+        function generateAllStar() {
+            if (career.matchIndex !== 11 || career.phase !== 'regular' || career.allStarBracket) return;
+            const totalGamesMid = 11;
+            let ranked = career.league.map(player => {
+                const gamesPlayed = totalGamesMid;
+                const winPct = gamesPlayed > 0 ? player.w / gamesPlayed : 0;
+                const blowoutScore = gamesPlayed > 0 ? (player.blowouts || 0) / gamesPlayed : 0;
+                return {
+                    ...player,
+                    winPct,
+                    blowoutScore,
+                    combinedScore: 0.5 * winPct + 0.5 * blowoutScore
+                };
+            });
+            ranked.sort((a, b) => b.combinedScore - a.combinedScore || b.winPct - a.winPct || (b.blowouts || 0) - (a.blowouts || 0));
+            let top4 = ranked.slice(0, 4);
+            career.allStarBracket = [
+                [
+                    {p1: top4[0], p2: top4[3], s1: null, s2: null, winner: null, seed1: 1, seed2: 4},
+                    {p1: top4[1], p2: top4[2], s1: null, s2: null, winner: null, seed1: 2, seed2: 3}
+                ],
+                [
+                    {p1: null, p2: null, s1: null, s2: null, winner: null}
+                ]
+            ];
+            career.allStarPhase = true;
+            career.allStarQualified = top4.some(p => p.isPlayer);
+            career.allStarDone = !career.allStarQualified;
+            if (career.allStarQualified) {
+                career.seasonStats.allStarAppearances = 1;
+                career.careerStats.allStarAppearances = (career.careerStats.allStarAppearances || 0) + 1;
+            }
+            if (!career.allStarQualified) {
+                simulateAllStarTournament();
+            }
+            saveGameData();
+        }
+        function simulateAllStarTournament() {
+            if (!career.allStarBracket) return;
+            career.allStarBracket[0].forEach(m => {
+                if (!m.winner) simulateAiMatch(m);
+            });
+            career.allStarBracket[1][0].p1 = career.allStarBracket[0][0].winner;
+            career.allStarBracket[1][0].p2 = career.allStarBracket[0][1].winner;
+            if (!career.allStarBracket[1][0].winner) simulateAiMatch(career.allStarBracket[1][0]);
+            awardAllStarChampionshipIfPlayerWon();
+            saveGameData();
+        }
+        function showAllStarBracket() {
+            document.querySelectorAll('.overlay-screen').forEach(el => el.style.display = 'none');
+            const screen = document.getElementById('career-bracket-screen');
+            const container = document.getElementById('career-bracket-container');
+            const titleEl = document.querySelector('#career-bracket-screen h1');
+            titleEl.innerHTML = `All-Star Tournament <span id="bracket-season-num">${career.season}</span>`;
+            document.getElementById('sim-round-btn').style.display = 'none';
+            document.getElementById('sim-tournament-btn').style.display = 'none';
+            let html = ''; const roundTitles = ["Semifinals", "Finals"];
+            for(let r=0; r<2; r++) {
+                html += `<div class="bracket-col"><div class="bracket-col-title">${roundTitles[r]}</div>`;
+                career.allStarBracket[r].forEach((m) => {
+                    if (!m.p1 || !m.p2) {
+                        html += `<div class="match-box"><div style="text-align:center; color:#555;">TBD vs TBD</div></div>`;
+                    } else {
+                        let isP1Me = m.p1 && m.p1.isPlayer;
+                        let isP2Me = m.p2 && m.p2.isPlayer;
+                        let p1Winner = m.winner && (m.winner.id === m.p1.id);
+                        let p2Winner = m.winner && (m.winner.id === m.p2.id);
+                        let p1Class = "match-player" + (isP1Me ? " is-me" : "") + (p1Winner ? " winner" : (m.winner ? " loser" : ""));
+                        let p2Class = "match-player" + (isP2Me ? " is-me" : "") + (p2Winner ? " winner" : (m.winner ? " loser" : ""));
+                        let p1SeedHTML = m.seed1 ? `<span style="color:#f1c40f; font-weight:bold;">${m.seed1}.</span> ` : '';
+                        let p2SeedHTML = m.seed2 ? `<span style="color:#f1c40f; font-weight:bold;">${m.seed2}.</span> ` : '';
+                        html += `<div class="match-box">
+                                    <div class="${p1Class}">${p1SeedHTML}<span>${m.p1.country} ${m.p1.name}</span> ${m.s1 !== null ? `<span class="match-score">${m.s1}</span>` : ''}</div>
+                                    <div class="${p2Class}">${p2SeedHTML}<span>${m.p2.country} ${m.p2.name}</span> ${m.s2 !== null ? `<span class="match-score">${m.s2}</span>` : ''}</div>
+                                </div>`;
+                    }
+                });
+                html += `</div>`;
+            }
+            let champ = career.allStarBracket[1][0].winner ? `${career.allStarBracket[1][0].winner.country}<br><span style="font-size:14px">${career.allStarBracket[1][0].winner.name}</span>` : "?";
+            html += `<div class="bracket-col"><div class="bracket-col-title">All-Star Champion</div><div class="champion-box"><span class="champion-icon">${champ}</span></div></div>`;
+            container.innerHTML = html;
+            let playerWasInTournament = false;
+            let playerActive = false;
+            let tournamentOver = career.allStarBracket[1][0].winner !== null;
+            for(let r=0; r<2; r++) {
+                career.allStarBracket[r].forEach(m => {
+                    if (m.p1 && m.p1.isPlayer) playerWasInTournament = true;
+                    if (m.p2 && m.p2.isPlayer) playerWasInTournament = true;
+                    if (!m.winner && m.p1 && m.p2 && (m.p1.isPlayer || m.p2.isPlayer)) playerActive = true;
+                });
+            }
+            let statusText = document.getElementById('bracket-status-text');
+            if (!playerWasInTournament) {
+                statusText.innerText = "You missed the All-Star cut!";
+                statusText.style.color = "var(--danger)";
+            } else if (playerActive) {
+                statusText.innerText = "Mid-Season All-Star Tournament";
+                statusText.style.color = "#f1c40f";
+            } else if (tournamentOver) {
+                statusText.innerText = "All-Star Tournament Complete!";
+                statusText.style.color = "var(--gold)";
+            } else {
+                statusText.innerText = "Mid-Season All-Star Tournament";
+                statusText.style.color = "#f1c40f";
+            }
+            const playBtn = document.getElementById('career-bracket-play-btn');
+            const nextBtn = document.getElementById('career-bracket-next-season-btn');
+            const simRoundBtn = document.getElementById('sim-round-btn');
+            const simTourBtn = document.getElementById('sim-tournament-btn');
+            playBtn.style.display = (playerActive && !tournamentOver) ? 'block' : 'none';
+            playBtn.innerText = "PLAY ALL-STAR MATCH";
+            playBtn.onclick = startAllStarMatch;
+            nextBtn.style.display = (!playerActive || tournamentOver) ? 'block' : 'none';
+            nextBtn.innerText = "CONTINUE SEASON";
+            nextBtn.onclick = finishAllStarTournament;
+            if (!tournamentOver) {
+                simRoundBtn.style.display = 'block';
+                simTourBtn.style.display = 'block';
+            }
+            screen.style.display = 'flex';
+        }
+        function simAllStarRound() {
+            if (!career.allStarBracket) return;
+            let roundToSim = 0;
+            const semisDone = career.allStarBracket[0].every(m => !!m.winner);
+            if (semisDone) roundToSim = 1;
+            career.allStarBracket[roundToSim].forEach(m => {
+                if (!m.winner) simulateAiMatch(m);
+            });
+            if (roundToSim === 0) {
+                career.allStarBracket[1][0].p1 = career.allStarBracket[0][0].winner;
+                career.allStarBracket[1][0].p2 = career.allStarBracket[0][1].winner;
+            }
+            awardAllStarChampionshipIfPlayerWon();
+            saveGameData();
+            showAllStarBracket();
+        }
+        function simAllStarTournament() {
+            simulateAllStarTournament();
+            showAllStarBracket();
+        }
+        function startAllStarMatch() {
+            gameMode = 'allStar';
+            activeDifficulty = careerMatchDifficulty;
+            triggerGameStart();
+        }
+        function awardAllStarChampionshipIfPlayerWon() {
+            if (!career || !career.allStarBracket || career.allStarBracket.length < 2 || !career.allStarBracket[1][0] || !career.allStarBracket[1][0].winner) return;
+            if (career.allStarBracket[1][0].winner.isPlayer && career.seasonStats.allStarChampionships !== 1) {
+                career.seasonStats.allStarChampionships = 1;
+                career.careerStats.allStarChampionships = (career.careerStats.allStarChampionships || 0) + 1;
+                fireConfetti();
+            }
+        }
+        function handleAllStarPostMatch() {
+            document.getElementById('game-over-screen').style.display = 'none';
+            let pScore = scorePlayer;
+            let oScore = scoreAI;
+            let isWin = pScore > oScore;
+            let margin = Math.abs(pScore - oScore);
+            let rIdx = -1, mIdx = -1;
+            for(let r=0; r<2; r++) {
+                for(let m=0; m<career.allStarBracket[r].length; m++) {
+                    let match = career.allStarBracket[r][m];
+                    if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) {
+                        rIdx = r; mIdx = m; break;
+                    }
+                }
+                if(rIdx !== -1) break;
+            }
+            if (rIdx === -1) { showAllStarBracket(); return; }
+            let currentMatch = career.allStarBracket[rIdx][mIdx];
+            currentMatch.s1 = currentMatch.p1.isPlayer ? pScore : oScore;
+            currentMatch.s2 = currentMatch.p2.isPlayer ? pScore : oScore;
+            let playerObj = currentMatch.p1.isPlayer ? currentMatch.p1 : currentMatch.p2;
+            let oppObj = currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1;
+            currentMatch.winner = isWin ? playerObj : oppObj;
+            for(let i=0; i < career.allStarBracket[rIdx].length; i++) {
+                let m = career.allStarBracket[rIdx][i];
+                if (!m.winner && m.p1 && m.p2) simulateAiMatch(m);
+            }
+            if (rIdx === 0) {
+                career.allStarBracket[1][0].p1 = career.allStarBracket[0][0].winner;
+                career.allStarBracket[1][0].p2 = career.allStarBracket[0][1].winner;
+                if (!isWin) {
+                    simulateAiMatch(career.allStarBracket[1][0]);
+                }
+            }
+            awardAllStarChampionshipIfPlayerWon();
+            saveGameData();
+            showAllStarBracket();
+        }
+        function finishAllStarTournament() {
+            career.allStarDone = true;
+            career.allStarPhase = false;
+            saveGameData();
+            showCareerHub();
         }
         function startPlayoffMatch() { gameMode = 'careerPlayoffs'; activeDifficulty = careerMatchDifficulty; triggerGameStart(); }
         function backToCareerHub() { showCareerHub(); }
         function startNextSeason() {
             let finish = determinePlayoffFinish();
             let me = career.league.find(p => p.isPlayer);
+            
+            // NEW: capture All-Star result for this season BEFORE clearing bracket
+            let allStarRes = getAllStarResult();
+            
             if (!career.seasonHistory) career.seasonHistory = [];
             career.seasonHistory.push({
                 season: career.season,
                 record: {w: me.w, l: me.l},
-                playoffFinish: finish
+                playoffFinish: finish,
+                allStarResult: allStarRes
             });
+            
             career.season++;
             career.phase = 'regular';
             career.seasonStats = getEmptyStats();
-            career.league.forEach(p => { p.w = 0; p.l = 0; });
+            career.league.forEach(p => { p.w = 0; p.l = 0; p.blowouts = 0; });
+            career.allStarBracket = null;
+            career.allStarPhase = false;
+            career.allStarDone = false;
+            career.allStarQualified = false;
             generateSchedule();
             saveGameData();
             showCareerHub();
@@ -927,8 +1308,17 @@
                 match.s2 = winScore;
                 match.winner = match.p2;
             }
+            const margin = Math.abs(winScore - loseScore);
+            if (margin >= 5) {
+                const winnerObj = match.winner;
+                winnerObj.blowouts = (winnerObj.blowouts || 0) + 1;
+            }
         }
         function handlePostMatch() {
+            if (gameMode === 'allStar') {
+                handleAllStarPostMatch();
+                return;
+            }
             document.getElementById('game-over-screen').style.display = 'none';
             if (gameMode === 'exhibition') { backToMain(); return; }
             let pScore = scorePlayer; let oScore = scoreAI;
@@ -949,9 +1339,21 @@
             let me = career.league.find(p => p.isPlayer);
             isWin ? me.w++ : me.l++;
             if (gameMode === 'careerRegular') {
-                let opp = getOpponent(); isWin ? opp.l++ : opp.w++;
+                let opp = getOpponent();
+                isWin ? opp.l++ : opp.w++;
+                if (margin >= 5) {
+                    let winnerLeague = isWin ? me : opp;
+                    winnerLeague.blowouts = (winnerLeague.blowouts || 0) + 1;
+                }
                 simulateLeagueWeek();
                 career.matchIndex++;
+                if (career.matchIndex === 11) {
+                    generateAllStar();
+                    if (!career.allStarQualified) {
+                        showAllStarBracket();
+                        return;
+                    }
+                }
                 if (career.matchIndex >= 23) {
                     generatePlayoffs();
                 } else {
@@ -974,6 +1376,9 @@
                 let playerObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p1 : currentMatch.p2;
                 let oppObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1;
                 currentMatch.winner = isWin ? playerObjInBracket : oppObjInBracket;
+                if (margin >= 5) {
+                    currentMatch.winner.blowouts = (currentMatch.winner.blowouts || 0) + 1;
+                }
                 for(let i=0; i < career.playoffBracket[rIdx].length; i++) {
                     let m = career.playoffBracket[rIdx][i];
                     if (!m.winner && m.p1 && m.p2) simulateAiMatch(m);
@@ -1006,6 +1411,10 @@
         }
         function simulateNextGame() {
             if (!career) return;
+            if (career.allStarPhase && !career.allStarDone) {
+                showAllStarBracket();
+                return;
+            }
             const isRegular = career.phase === 'regular';
             let info = isRegular ? null : getCurrentPlayoffInfo();
             let opp = isRegular ? getOpponent() : (info ? info.opp : null);
@@ -1043,25 +1452,48 @@
             }
             if (isRegular) {
                 if (isWin) opp.l++; else opp.w++;
+                if (margin >= 5) {
+                    let winnerLeague = isWin ? me : opp;
+                    winnerLeague.blowouts = (winnerLeague.blowouts || 0) + 1;
+                }
                 simulateLeagueWeek();
                 career.matchIndex++;
+                if (career.matchIndex === 11) {
+                    generateAllStar();
+                    if (!career.allStarQualified) {
+                        showAllStarBracket();
+                        return;
+                    }
+                }
                 if (career.matchIndex >= 23) generatePlayoffs();
             } else {
+                // FIXED PLAYOFF SIM LOGIC (cleaned duplicate loop + robust finding)
                 let rIdx = -1, mIdx = -1;
                 for(let r=0; r<3; r++) {
                     for(let m=0; m<career.playoffBracket[r].length; m++) {
                         let match = career.playoffBracket[r][m];
-                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) { rIdx = r; mIdx = m; break; }
+                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) { 
+                            rIdx = r; 
+                            mIdx = m; 
+                            break; 
+                        }
                     }
                     if(rIdx !== -1) break;
                 }
-                if (rIdx === -1) { showCareerHub(); return; }
+                if (rIdx === -1 || mIdx === -1) {
+                    // no more player matches → just go back to hub
+                    closeSimResult();
+                    return;
+                }
                 let currentMatch = career.playoffBracket[rIdx][mIdx];
                 currentMatch.s1 = currentMatch.p1.isPlayer ? pScore : oScore;
                 currentMatch.s2 = currentMatch.p2.isPlayer ? pScore : oScore;
                 let playerObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p1 : currentMatch.p2;
                 let oppObjInBracket = currentMatch.p1.isPlayer ? currentMatch.p2 : currentMatch.p1;
                 currentMatch.winner = isWin ? playerObjInBracket : oppObjInBracket;
+                if (margin >= 5) {
+                    currentMatch.winner.blowouts = (currentMatch.winner.blowouts || 0) + 1;
+                }
                 for(let i=0; i < career.playoffBracket[rIdx].length; i++) {
                     let m = career.playoffBracket[rIdx][i];
                     if (!m.winner && m.p1 && m.p2) simulateAiMatch(m);
@@ -1074,6 +1506,7 @@
                     }
                 } else if (rIdx === 2 && isWin) {
                     career.careerStats.championships++;
+                    fireConfetti();
                 }
                 if (!isWin) {
                     for(let r = rIdx + 1; r < 3; r++) {
@@ -1096,7 +1529,6 @@
             winnerEl.style.color = isWin ? "var(--danger)" : "var(--primary)";
             document.getElementById('sim-final-score-text').innerText = `${pScore} - ${oScore}`;
             document.getElementById('sim-opp-name').innerText = `vs ${opp.country} ${opp.name}`;
-            if (isWin && !isRegular && rIdx === 2) fireConfetti();
             document.getElementById('sim-result-screen').style.display = 'flex';
         }
         function closeSimResult() {
@@ -1162,7 +1594,7 @@
         function resumeGame() { document.getElementById('pause-overlay').style.display = 'none'; initAudio(); gameState = 'playing'; }
         function quitToMenu() { document.getElementById('pause-overlay').style.display = 'none'; backToMain(); }
         window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
-       
+     
         const style = document.createElement('style');
         style.innerHTML = `
             .standings-table tr.is-player {
