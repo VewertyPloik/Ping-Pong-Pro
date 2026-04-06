@@ -14,25 +14,19 @@
         }
         body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; touch-action: none; user-select: none; }
         canvas { display: block; }
-  
         .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; color: white; backdrop-filter: blur(5px); }
         #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; display: none; }
-  
         #score-board { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 30px; padding: 10px 30px; pointer-events: auto; align-items: center;}
         .score-box { display: flex; flex-direction: column; align-items: center; min-width: 100px;}
         .score-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #ccc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-align: center;}
         .score-text { font-size: 42px; font-weight: bold; line-height: 1; }
         #player-score { color: var(--danger); text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
         #ai-score { color: var(--primary); text-shadow: 0 0 10px rgba(77, 171, 247, 0.5); }
-  
         #announcement { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.8); display: none; text-align: center; padding: 15px 40px; z-index: 12; }
         #pause-btn { position: absolute; top: 25px; right: 25px; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; pointer-events: auto; background: var(--glass-bg); color: white; border: 1px solid var(--glass-border); z-index: 11;}
-  
         .overlay-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; color: white; background: rgba(0,0,0,0.7); }
-  
         .title { font-size: 46px; margin-bottom: 5px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
         .subtitle { font-size: 17px; color: #ddd; margin-bottom: 40px; text-align: center;}
-  
         .btn-primary { padding: 12px 32px; font-size: 16px; background: #4dabf7; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 5px; transition: transform 0.1s;}
         .btn-primary:active { transform: scale(0.95); }
         .btn-danger { background: #ff6b6b; }
@@ -44,7 +38,7 @@
         .diff-row { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
         .mode-btn { flex: 1; padding: 9px 0; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold;}
         .mode-btn.active { background: var(--primary); border-color: var(--primary); }
-    
+  
         .career-layout { display: flex; gap: 16px; width: 96%; max-width: 615px; height: 82%; }
         .career-panel { flex: 1; display: flex; flex-direction: column; padding: 12px; overflow: hidden; }
         .standings-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11px; text-align: left; }
@@ -58,7 +52,6 @@
         .stat-value { font-size: 22px; font-weight: bold; color: var(--primary); margin-top: 4px; }
         .stat-label { font-size: 10px; color: #aaa; text-transform: uppercase; }
         input[type="text"], input[type="number"] { width: 100%; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; font-size: 16px; border-radius: 8px; margin-bottom: 16px; font-family: inherit; text-align: center;}
-  
         #career-bracket-container {
             display: flex;
             justify-content: space-between;
@@ -113,11 +106,9 @@
         .match-player.winner { font-weight: bold; color: #fff;}
         .match-player.loser { color: #888;}
         .match-score { font-size: 8px; background: rgba(0,0,0,0.4); padding: 1px 3px; border-radius: 3px;}
-  
         .champion-box { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;}
         .champion-icon { font-size: 32px; text-shadow: 0 0 20px gold; animation: pulse 2s infinite; margin-bottom: 6px;}
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-  
         .season-record-row {
             background: rgba(255,255,255,0.08);
             padding: 14px;
@@ -130,7 +121,6 @@
         }
         #countdown-screen { display: none; background: transparent; pointer-events: none;}
         #countdown-text { font-size: 100px; font-weight: 900; color: white; text-shadow: 0 0 20px var(--primary); }
-  
         .confetti { position: absolute; width: 10px; height: 10px; z-index: 100; animation: fall linear forwards; top: -20px;}
         @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
         #replay-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
@@ -142,6 +132,17 @@
         .sens-label { font-size: 13px; color: #ccc; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
         .sens-track { position: relative; height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin: 0 15px; cursor: pointer; }
         .sens-knob { position: absolute; top: -8px; width: 24px; height: 24px; background: #fff; border-radius: 50%; box-shadow: 0 3px 10px rgba(0,0,0,0.5); cursor: grab; transition: left 0.05s ease; }
+       
+        /* NEW: Paddle customizer styles */
+        #paddle-preview-container {
+            width: 100%;
+            height: 260px;
+            background: #112233;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.6);
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
@@ -199,7 +200,16 @@
             </div>
             <div class="glass-panel career-panel" style="justify-content: space-between;">
                 <div style="text-align: center;">
-                    <h2 style="margin: 0; color: var(--gold); font-size: 22px;" id="hub-player-name">Name</h2>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                        <h2 style="margin: 0; color: var(--gold); font-size: 22px;" id="hub-player-name">Name</h2>
+                        <button onclick="openPaddleCustom()" id="edit-paddle-btn" style="background: rgba(241, 196, 15, 0.2); border: 2px solid #f1c40f; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; box-shadow: 0 3px 8px rgba(241,196,15,0.3);">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17 3L21 7L9 19L5 19L5 15L17 3Z" stroke="#f1c40f" stroke-width="2.5" stroke-linejoin="round" fill="#f1c40f" fill-opacity="0.1"/>
+                                <path d="M5 15L9 19L5 19L5 15Z" fill="#2c3e50"/>
+                                <rect x="18" y="3" width="3" height="5" rx="0.5" fill="#e74c3c" stroke="#f1c40f" stroke-width="1.5"/>
+                            </svg>
+                        </button>
+                    </div>
                     <p style="margin: 4px 0 16px 0; color: #aaa; font-size: 15px;" id="hub-player-record">Record: 0 - 0</p>
                     <div id="next-match-container">
                         <p id="hub-next-label" style="font-size: 12px; color: #ccc; margin-bottom: 4px; text-transform: uppercase; font-weight: bold;">Next Match (Game <span id="hub-game-num">1</span>/23)</p>
@@ -231,6 +241,7 @@
             <div class="diff-row">
                 <button class="mode-btn stat-tab active" onclick="toggleStatView('season')">Current Season</button>
                 <button class="mode-btn stat-tab" onclick="toggleStatView('career')">Career Totals</button>
+                <button class="mode-btn stat-tab" onclick="toggleStatView('achievements')">Achievements</button>
             </div>
             <div class="stat-grid" id="stats-grid-container"></div>
             <button class="btn-primary" style="width: 100%; background: #555; margin-top: 16px; font-size: 15px;" onclick="closeStatsScreen()">Back to Hub</button>
@@ -240,14 +251,14 @@
         <div class="glass-panel" style="padding: 24px; width: 95%; max-width: 465px; height: 86%; display: flex; flex-direction: column;">
             <h1 class="title" style="font-size: 28px; margin-bottom: 8px;">Season Records</h1>
             <p id="career-overview" style="color: #aaa; text-align: center; margin-bottom: 16px; font-size: 16px;">Career Overview: 0-0 | 0 Championships 🏆</p>
-            
+          
             <!-- NEW SORT CONTROLS -->
             <div style="display: flex; justify-content: center; gap: 10px; margin: 12px 0 8px;">
                 <button onclick="setHistorySort('season')" id="sort-season" class="mode-btn active">SEASON</button>
                 <button onclick="setHistorySort('championships')" id="sort-champ" class="mode-btn">CHAMPIONSHIPS</button>
                 <button onclick="setHistorySort('allstar')" id="sort-allstar" class="mode-btn">ALL-STAR</button>
             </div>
-            
+          
             <div id="history-list" style="flex: 1; overflow-y: auto; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 10px;"></div>
             <button class="btn-primary" style="width: 100%; background: #555; margin-top: 16px; font-size: 15px;" onclick="closeSeasonRecords()">Back to Hub</button>
         </div>
@@ -262,6 +273,26 @@
             <button class="btn-primary" id="sim-tournament-btn" onclick="simAllStarTournament()" style="display:none; background:#9b59b6; font-size:15px;">SIM TOURNAMENT</button>
             <button class="btn-primary btn-gold" id="career-bracket-next-season-btn" style="display:none;" onclick="startNextSeason()">START NEXT SEASON</button>
             <button class="btn-primary" style="background: #555; font-size: 15px;" onclick="backToCareerHub()">Back to Hub</button>
+        </div>
+    </div>
+    <!-- NEW: Paddle customization screen -->
+    <div id="paddle-custom-screen" class="overlay-screen" style="display: none; z-index: 9999;">
+        <div class="glass-panel" style="padding: 24px 20px; width: 420px; max-width: 92%; display: flex; flex-direction: column; max-height: 92vh;">
+            <h2 style="margin: 0 0 16px 0; text-align: center; color: var(--gold); font-size: 26px;">Customize Your Paddle</h2>
+           
+            <div id="paddle-preview-container"></div>
+           
+            <div style="margin-top: 24px;">
+                <p style="margin-bottom: 12px; text-align: center; font-size: 13px; color: #ccc; letter-spacing: 1px; text-transform: uppercase;">PADDLE FACE COLORS</p>
+                <div id="color-swatches" style="display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;"></div>
+            </div>
+           
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px;">
+                <button onclick="savePaddleCustomization()" class="btn-primary" style="background: var(--gold); color: #000; padding: 18px 20px; font-size: 17px; font-weight: 900;">SAVE PADDLE CHANGES</button>
+                <button onclick="closePaddleCustomWithoutSave()" class="btn-primary" style="background: #555; padding: 18px 20px; font-size: 17px;">LEAVE WITHOUT SAVING</button>
+            </div>
+           
+            <p style="text-align: center; font-size: 11px; color: #777; margin-top: 16px;">Live preview updates instantly</p>
         </div>
     </div>
     <div id="game-over-screen" class="overlay-screen" style="display: none;">
@@ -288,7 +319,7 @@
             <h2 style="font-size: 22px;">PAUSED</h2>
             <p style="color: #aaa; margin-bottom: 16px; font-size: 13px;">Settings locked during match.</p>
             <button class="mode-btn" style="width: 100%; margin-bottom: 12px;" onclick="toggleAudio()" id="sfx-btn">🔊 Audio: ON</button>
-         
+       
             <div class="sens-container">
                 <div class="sens-label">PADDLE SENSITIVITY</div>
                 <div class="sens-track" id="sens-track">
@@ -296,7 +327,7 @@
                 </div>
                 <div id="sens-value" style="font-size: 14px; color: white; margin-top: 6px; text-align: center;">50</div>
             </div>
-         
+       
             <button class="btn-primary" style="width: 100%; background: #2ecc71; margin: 0 0 8px 0; font-size: 15px;" onclick="resumeGame()">RESUME</button>
             <button class="btn-primary" style="width: 100%; background: #e74c3c; margin: 0; font-size: 15px;" onclick="quitToMenu()">QUIT TO MENU</button>
         </div>
@@ -349,7 +380,24 @@
         };
         let career = null;
         let paddleSensitivity = 50;
-        let currentHistorySort = 'season';   // NEW: for season records sorting
+        let currentHistorySort = 'season';
+       
+        // NEW: paddle customization variables
+        let playerPaddleFaceColor = 0xff0000;
+        let paddleFaceMesh;
+        let paddleHandleMesh;
+        let previewScene, previewCamera, previewRenderer, previewPaddle, previewFaceMesh, previewHandleMesh;
+        let previewAnimationId;
+        let selectedFaceColor;
+       
+        const unlockMap = {
+            '#ff0000': {name: 'Red', desc: 'Default'},
+            '#00cc66': {name: 'Green', desc: 'Win 11-3 or better (no sim)'},
+            '#9c27b0': {name: 'Purple', desc: 'Win an All-Star Tournament'},
+            '#ffd700': {name: 'Gold', desc: 'Win 3 Championships'},
+            '#1c1c1e': {name: 'Black', desc: 'Win 5 Championships'}
+        };
+       
         function getEmptyStats() {
             return {
                 wins: 0, losses: 0, winsBy5: 0, lossesBy5: 0,
@@ -374,10 +422,17 @@
                 if (!career.careerStats.allStarAppearances) career.careerStats.allStarAppearances = 0;
                 if (!career.seasonStats.allStarChampionships) career.seasonStats.allStarChampionships = 0;
                 if (!career.careerStats.allStarChampionships) career.careerStats.allStarChampionships = 0;
+                if (!career.unlockedColors) career.unlockedColors = ['#ff0000'];
+                if (!career.unlockHistory) career.unlockHistory = {};
+                if (!career.unlockHistory['#ff0000']) career.unlockHistory['#ff0000'] = {date: 'Career Start', how: 'Default'};
                 document.getElementById('btn-resume-career').style.display = 'block';
             }
             const savedSens = localStorage.getItem('pingPongProSensitivity');
             if (savedSens) paddleSensitivity = parseInt(savedSens);
+           
+            // NEW: load saved paddle face color
+            const savedFaceStr = localStorage.getItem('pingPongProPaddleFace');
+            if (savedFaceStr) playerPaddleFaceColor = parseInt(savedFaceStr);
         }
         function saveGameData() {
             if (career) localStorage.setItem('pingPongProCareerSave', JSON.stringify(career));
@@ -427,14 +482,14 @@
         const legGeo = new THREE.BoxGeometry(0.05, 0.76, 0.05); const legMat = new THREE.MeshLambertMaterial({ color: 0x444444 });
         const legPositions = [[tableW/2 - 0.1, -0.38, tableL/2 - 0.2], [-tableW/2 + 0.1, -0.38, tableL/2 - 0.2], [tableW/2 - 0.1, -0.38, -tableL/2 + 0.2], [-tableW/2 + 0.1, -0.38, -tableL/2 + 0.2]];
         legPositions.forEach(pos => { const leg = new THREE.Mesh(legGeo, legMat); leg.position.set(pos[0], pos[1], pos[2]); leg.castShadow = true; leg.receiveShadow = true; scene.add(leg); });
-        function createPaddle(color) {
+        function createPaddle(faceColor = 0xff0000) {
             const g = new THREE.Group();
-            const f = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.02, 16), new THREE.MeshLambertMaterial({ color: color }));
+            const f = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.02, 16), new THREE.MeshLambertMaterial({ color: faceColor }));
             f.rotation.x = Math.PI/2; f.castShadow = true; f.receiveShadow = true; g.add(f);
             const h = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.14, 8), new THREE.MeshLambertMaterial({ color: 0x8B4513 }));
             h.position.y = -0.15; h.castShadow = true; h.receiveShadow = true; g.add(h); return g;
         }
-        const playerPaddle = createPaddle(0xff0000); playerPaddle.position.set(0, 0.2, tableL / 2 + 0.2); scene.add(playerPaddle);
+        const playerPaddle = createPaddle(playerPaddleFaceColor); playerPaddle.position.set(0, 0.2, tableL / 2 + 0.2); scene.add(playerPaddle);
         const aiPaddle = createPaddle(0x0000ff); aiPaddle.position.set(0, 0.2, -tableL / 2 - 0.1); scene.add(aiPaddle);
         const ball = new THREE.Mesh(new THREE.SphereGeometry(0.02, 8, 8), new THREE.MeshLambertMaterial({ color: 0xffa500 }));
         ball.castShadow = true; scene.add(ball);
@@ -594,6 +649,9 @@
             document.getElementById('main-buttons').style.display = 'flex';
             loadSave();
             initSensitivitySlider();
+            // NEW: assign paddle mesh references after creation
+            paddleFaceMesh = playerPaddle.children[0];
+            paddleHandleMesh = playerPaddle.children[1];
         }, 500);
         function initSensitivitySlider() {
             const track = document.getElementById('sens-track');
@@ -698,7 +756,9 @@
                 playerName: name, playerCountry: selectedCareerCountry, season: 1,
                 careerStats: getEmptyStats(), seasonStats: getEmptyStats(),
                 league: [], schedule: [], matchIndex: 0, phase: 'regular', playoffBracket: [],
-                seasonHistory: [], allStarBracket: null, allStarPhase: false, allStarDone: false, allStarQualified: false
+                seasonHistory: [], allStarBracket: null, allStarPhase: false, allStarDone: false, allStarQualified: false,
+                unlockedColors: ['#ff0000'],
+                unlockHistory: {'#ff0000': {date: 'Career Start', how: 'Default'}}
             };
             career.league.push({ id: 0, name: name, country: selectedCareerCountry, w: 0, l: 0, blowouts: 0, isPlayer: true });
             for (let i = 0; i < 23; i++) {
@@ -821,6 +881,23 @@
         }
         function renderStats() {
             const grid = document.getElementById('stats-grid-container');
+            if (currentStatTab === 'achievements') {
+                let html = `<p style="text-align:center;color:#f1c40f;margin-bottom:12px;font-weight:bold;">UNLOCKED PADDLE COLORS</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 16px;">`;
+                const unlocked = career.unlockedColors || ['#ff0000'];
+                unlocked.forEach(hex => {
+                    const info = unlockMap[hex] || {name: 'Unknown', desc: ''};
+                    html += `
+                        <div style="background: rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; text-align: center;">
+                            <div style="margin: 0 auto 10px; width: 64px; height: 64px; background: ${hex}; border-radius: 50%; box-shadow: 0 0 15px ${hex}40;"></div>
+                            <div style="font-size: 15px; font-weight: bold;">${info.name}</div>
+                            <div style="font-size: 11px; color: #aaa;">${info.desc}</div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                grid.innerHTML = html;
+                return;
+            }
             const data = currentStatTab === 'season' ? career.seasonStats : career.careerStats;
             let winPct = data.wins + data.losses > 0 ? ((data.wins / (data.wins + data.losses)) * 100).toFixed(1) + '%' : '0%';
             let html = `
@@ -851,7 +928,6 @@
             document.getElementById('season-records-screen').style.display = 'none';
             document.getElementById('career-hub-screen').style.display = 'flex';
         }
-        // NEW HELPER: get All-Star result string for current season (used when saving history)
         function getAllStarResult() {
             if (!career.allStarQualified || !career.allStarBracket || career.allStarBracket.length < 2) return "DIDNT make";
             const finalsMatch = career.allStarBracket[1][0];
@@ -865,7 +941,7 @@
         function renderSeasonRecords() {
             const list = document.getElementById('history-list');
             let historyCopy = [...career.seasonHistory];
-            
+          
             if (currentHistorySort === 'championships') {
                 historyCopy.sort((a, b) => {
                     const aChamp = (a.playoffFinish === "Won Finals") ? 1 : 0;
@@ -884,8 +960,7 @@
                     return getScore(b.allStarResult) - getScore(a.allStarResult) || b.season - a.season;
                 });
             }
-            // default 'season' = chronological (oldest first) - exact same as original
-            
+          
             let html = '';
             if (!historyCopy || historyCopy.length === 0) {
                 html = '<p style="text-align:center; color:#aaa; padding:50px 16px; font-size:16px;">No completed seasons yet!<br>Finish a full season + playoffs to see your history 🎾</p>';
@@ -894,8 +969,7 @@
                     let emoji = '📊';
                     let color = '#fff';
                     let label = h.playoffFinish;
-                    
-                    // override for ALL-STAR sort
+                  
                     if (currentHistorySort === 'allstar') {
                         label = h.allStarResult || "DIDNT make";
                         if (label === "champ") { emoji = '🏆'; color = 'var(--gold)'; label = 'ALL-STAR CHAMP!'; }
@@ -903,14 +977,13 @@
                         else if (label === "lost in semi-finals") { emoji = '😔'; }
                         else { emoji = '📉'; color = 'var(--danger)'; }
                     } else {
-                        // original playoff logic
                         if (h.playoffFinish === "Won Finals") { emoji = '🏆'; color = 'var(--gold)'; label = 'CHAMPION!'; }
                         else if (h.playoffFinish === "Lost in Finals") { emoji = '🥈'; color = '#f1c40f'; }
                         else if (h.playoffFinish === "Lost in Semifinals") { emoji = '😔'; }
                         else if (h.playoffFinish === "Lost in Quarterfinals") { emoji = '😢'; }
                         else if (h.playoffFinish === "Didn't make playoffs") { emoji = '📉'; color = 'var(--danger)'; }
                     }
-                    
+                  
                     html += `
                         <div class="season-record-row">
                             <div style="font-size:20px; font-weight:bold;">Season ${h.season}</div>
@@ -949,26 +1022,18 @@
             if (isChampion) return "Won Finals";
             return playoffFinishLabels[deepestRound] || "Didn't make playoffs";
         }
-        // NEW: fully simulate playoffs when player missed top 8 (so bracket is visible)
         function simulateFullPlayoffs() {
             if (!career.playoffBracket) return;
-            // Simulate all quarterfinals
             career.playoffBracket[0].forEach(m => {
                 if (!m.winner) simulateAiMatch(m);
             });
-            // Advance to semifinals
             for (let i = 0; i < 2; i++) {
                 career.playoffBracket[1][i].p1 = career.playoffBracket[0][i * 2].winner;
                 career.playoffBracket[1][i].p2 = career.playoffBracket[0][i * 2 + 1].winner;
             }
-            // Simulate semifinals
             career.playoffBracket[1].forEach(m => {
                 if (!m.winner) simulateAiMatch(m);
             });
-            // Advance to finals
-            career.playoffBracket[2][0].p1 = career.playoffBracket[1][0].winner;
-            career.playoffBracket[2][0].p2 = career.playoffBracket[1][1].winner;
-            // Simulate finals
             if (!career.playoffBracket[2][0].winner) simulateAiMatch(career.playoffBracket[2][0]);
         }
         function generatePlayoffs() {
@@ -980,13 +1045,12 @@
                 [ {p1: null, p2: null, s1: null, s2: null, winner: null}, {p1: null, p2: null, s1: null, s2: null, winner: null} ],
                 [ {p1: null, p2: null, s1: null, s2: null, winner: null} ]
             ];
-            
-            // NEW: if player missed playoffs → auto-sim entire tournament and show bracket
+          
             const playerInPlayoffs = t8.some(p => p.isPlayer);
             if (!playerInPlayoffs) {
                 simulateFullPlayoffs();
             }
-            
+          
             saveGameData();
             showPlayoffBracket();
         }
@@ -1211,6 +1275,12 @@
             if (career.allStarBracket[1][0].winner.isPlayer && career.seasonStats.allStarChampionships !== 1) {
                 career.seasonStats.allStarChampionships = 1;
                 career.careerStats.allStarChampionships = (career.careerStats.allStarChampionships || 0) + 1;
+                const purpleHex = '#9c27b0';
+                if (!career.unlockedColors.includes(purpleHex)) {
+                    career.unlockedColors.push(purpleHex);
+                    if (!career.unlockHistory) career.unlockHistory = {};
+                    career.unlockHistory[purpleHex] = {date: new Date().toLocaleDateString(), how: 'Win an All-Star Tournament'};
+                }
                 fireConfetti();
             }
         }
@@ -1263,10 +1333,9 @@
         function startNextSeason() {
             let finish = determinePlayoffFinish();
             let me = career.league.find(p => p.isPlayer);
-            
-            // NEW: capture All-Star result for this season BEFORE clearing bracket
+          
             let allStarRes = getAllStarResult();
-            
+          
             if (!career.seasonHistory) career.seasonHistory = [];
             career.seasonHistory.push({
                 season: career.season,
@@ -1274,7 +1343,7 @@
                 playoffFinish: finish,
                 allStarResult: allStarRes
             });
-            
+          
             career.season++;
             career.phase = 'regular';
             career.seasonStats = getEmptyStats();
@@ -1329,6 +1398,14 @@
                 if (isOT) { career.seasonStats.otWins++; career.careerStats.otWins++; }
                 career.seasonStats.maxWinMargin = Math.max(career.seasonStats.maxWinMargin || 0, margin);
                 career.careerStats.maxWinMargin = Math.max(career.careerStats.maxWinMargin || 0, margin);
+                if (margin >= 8) {
+                    const greenHex = '#00cc66';
+                    if (!career.unlockedColors.includes(greenHex)) {
+                        career.unlockedColors.push(greenHex);
+                        if (!career.unlockHistory) career.unlockHistory = {};
+                        career.unlockHistory[greenHex] = {date: new Date().toLocaleDateString(), how: 'Win 11-3 or better (no sim)'};
+                    }
+                }
             } else {
                 career.seasonStats.losses++; career.careerStats.losses++;
                 if (margin >= 5) { career.seasonStats.lossesBy5++; career.careerStats.lossesBy5++; }
@@ -1390,7 +1467,25 @@
                         career.playoffBracket[nR][i].p2 = career.playoffBracket[rIdx][i*2 + 1].winner;
                     }
                 } else if (rIdx === 2 && isWin) {
-                    career.careerStats.championships++; fireConfetti();
+                    career.careerStats.championships++;
+                    const champCount = career.careerStats.championships;
+                    if (champCount >= 3) {
+                        const goldHex = '#ffd700';
+                        if (!career.unlockedColors.includes(goldHex)) {
+                            career.unlockedColors.push(goldHex);
+                            if (!career.unlockHistory) career.unlockHistory = {};
+                            career.unlockHistory[goldHex] = {date: new Date().toLocaleDateString(), how: 'Win 3 Championships'};
+                        }
+                    }
+                    if (champCount >= 5) {
+                        const blackHex = '#1c1c1e';
+                        if (!career.unlockedColors.includes(blackHex)) {
+                            career.unlockedColors.push(blackHex);
+                            if (!career.unlockHistory) career.unlockHistory = {};
+                            career.unlockHistory[blackHex] = {date: new Date().toLocaleDateString(), how: 'Win 5 Championships'};
+                        }
+                    }
+                    fireConfetti();
                 }
                 if (!isWin) {
                     for(let r = rIdx + 1; r < 3; r++) {
@@ -1467,21 +1562,19 @@
                 }
                 if (career.matchIndex >= 23) generatePlayoffs();
             } else {
-                // FIXED PLAYOFF SIM LOGIC (cleaned duplicate loop + robust finding)
                 let rIdx = -1, mIdx = -1;
                 for(let r=0; r<3; r++) {
                     for(let m=0; m<career.playoffBracket[r].length; m++) {
                         let match = career.playoffBracket[r][m];
-                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) { 
-                            rIdx = r; 
-                            mIdx = m; 
-                            break; 
+                        if (!match.winner && match.p1 && match.p2 && (match.p1.isPlayer || match.p2.isPlayer)) {
+                            rIdx = r;
+                            mIdx = m;
+                            break;
                         }
                     }
                     if(rIdx !== -1) break;
                 }
                 if (rIdx === -1 || mIdx === -1) {
-                    // no more player matches → just go back to hub
                     closeSimResult();
                     return;
                 }
@@ -1506,6 +1599,23 @@
                     }
                 } else if (rIdx === 2 && isWin) {
                     career.careerStats.championships++;
+                    const champCount = career.careerStats.championships;
+                    if (champCount >= 3) {
+                        const goldHex = '#ffd700';
+                        if (!career.unlockedColors.includes(goldHex)) {
+                            career.unlockedColors.push(goldHex);
+                            if (!career.unlockHistory) career.unlockHistory = {};
+                            career.unlockHistory[goldHex] = {date: new Date().toLocaleDateString(), how: 'Win 3 Championships'};
+                        }
+                    }
+                    if (champCount >= 5) {
+                        const blackHex = '#1c1c1e';
+                        if (!career.unlockedColors.includes(blackHex)) {
+                            career.unlockedColors.push(blackHex);
+                            if (!career.unlockHistory) career.unlockHistory = {};
+                            career.unlockHistory[blackHex] = {date: new Date().toLocaleDateString(), how: 'Win 5 Championships'};
+                        }
+                    }
                     fireConfetti();
                 }
                 if (!isWin) {
@@ -1594,7 +1704,7 @@
         function resumeGame() { document.getElementById('pause-overlay').style.display = 'none'; initAudio(); gameState = 'playing'; }
         function quitToMenu() { document.getElementById('pause-overlay').style.display = 'none'; backToMain(); }
         window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
-     
+   
         const style = document.createElement('style');
         style.innerHTML = `
             .standings-table tr.is-player {
@@ -1606,6 +1716,148 @@
             }
         `;
         document.head.appendChild(style);
+       
+        // NEW: paddle customization functions
+        function initPaddlePreview() {
+            const container = document.getElementById('paddle-preview-container');
+            if (!container) return;
+           
+            // Clean up previous preview
+            if (previewAnimationId) cancelAnimationFrame(previewAnimationId);
+            if (previewRenderer) {
+                previewRenderer.dispose();
+                previewRenderer = null;
+            }
+            container.innerHTML = '';
+           
+            const canvas = document.createElement('canvas');
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            container.appendChild(canvas);
+           
+            previewScene = new THREE.Scene();
+            previewScene.background = new THREE.Color(0x112233);
+           
+            const aspect = container.clientWidth / container.clientHeight;
+            previewCamera = new THREE.PerspectiveCamera(48, aspect, 0.1, 50);
+            previewCamera.position.set(0.4, 0.35, 0.9);
+            previewCamera.lookAt(0, 0.1, 0);
+           
+            previewRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            previewRenderer.setSize(container.clientWidth, container.clientHeight);
+            previewRenderer.shadowMap.enabled = true;
+           
+            const ambLight = new THREE.AmbientLight(0xffffff, 0.7);
+            previewScene.add(ambLight);
+            const dirLight2 = new THREE.DirectionalLight(0xffffff, 1.4);
+            dirLight2.position.set(1.5, 2.5, 1.2);
+            previewScene.add(dirLight2);
+           
+            // preview paddle (handle is always brown)
+            previewPaddle = createPaddle(playerPaddleFaceColor);
+            previewPaddle.position.set(0, 0.12, 0);
+            previewScene.add(previewPaddle);
+           
+            previewFaceMesh = previewPaddle.children[0];
+            previewHandleMesh = previewPaddle.children[1];
+           
+            function previewLoop() {
+                previewAnimationId = requestAnimationFrame(previewLoop);
+                previewPaddle.rotation.y += 0.012;
+                previewRenderer.render(previewScene, previewCamera);
+            }
+            previewLoop();
+        }
+       
+        function openPaddleCustom(refresh = false) {
+            if (!refresh) {
+                document.getElementById('career-hub-screen').style.display = 'none';
+                document.getElementById('paddle-custom-screen').style.display = 'flex';
+           
+                selectedFaceColor = playerPaddleFaceColor;
+           
+                initPaddlePreview();
+            }
+           
+            // populate ALL swatches (unlocked + locked)
+            const swatchesEl = document.getElementById('color-swatches');
+            swatchesEl.innerHTML = '';
+            const allColors = Object.keys(unlockMap);
+            const currentHex = '#' + selectedFaceColor.toString(16).padStart(6, '0');
+            const unlocked = career ? (career.unlockedColors || ['#ff0000']) : ['#ff0000'];
+           
+            allColors.forEach(hex => {
+                const isUnlocked = unlocked.includes(hex);
+                const info = unlockMap[hex];
+                let swHTML = '';
+               
+                if (isUnlocked) {
+                    swHTML = `
+                    <div style="position:relative; display:flex; flex-direction:column; align-items:center; width:68px;">
+                        <div onclick="selectColor('${hex}');" style="width:64px;height:64px;border-radius:12px;background:${hex};box-shadow:0 4px 12px rgba(0,0,0,0.3);cursor:pointer;border:4px solid ${hex === currentHex ? '#f1c40f' : 'transparent'};"></div>
+                        <div onclick="showUnlockInfo('${hex}'); event.stopImmediatePropagation();" style="position:absolute; top:-8px; right:-8px; background:#f1c40f; color:#111; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.4);">?</div>
+                        <div style="font-size:11px; color:#aaa; margin-top:4px; text-align:center;">${info.name}</div>
+                    </div>`;
+                } else {
+                    swHTML = `
+                    <div onclick="showLockedInfo('${hex}');" style="position:relative; display:flex; flex-direction:column; align-items:center; width:68px;">
+                        <div style="width:64px;height:64px;border-radius:12px;background:#111;border:4px solid #555;display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;font-weight:bold;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);">?</div>
+                        <div style="font-size:11px; color:#aaa; margin-top:4px; text-align:center;">${info.name}</div>
+                    </div>`;
+                }
+                swatchesEl.innerHTML += swHTML;
+            });
+        }
+       
+        function selectColor(hex) {
+            selectedFaceColor = parseInt(hex.slice(1), 16);
+            if (previewFaceMesh) previewFaceMesh.material.color.setHex(selectedFaceColor);
+            // refresh border highlight
+            openPaddleCustom(true);
+        }
+       
+        function showLockedInfo(hex) {
+            const info = unlockMap[hex];
+            alert(`How to unlock ${info.name}:\n${info.desc}`);
+        }
+       
+        function showUnlockInfo(hex) {
+            const info = unlockMap[hex];
+            let dateStr = 'Unknown';
+            let howStr = info.desc;
+            if (career && career.unlockHistory && career.unlockHistory[hex]) {
+                dateStr = career.unlockHistory[hex].date;
+                howStr = career.unlockHistory[hex].how;
+            }
+            alert(`${info.name} unlocked on ${dateStr}\n${howStr}`);
+        }
+       
+        function closePaddleCustom() {
+            if (previewAnimationId) cancelAnimationFrame(previewAnimationId);
+            if (previewRenderer) {
+                previewRenderer.dispose();
+                previewRenderer = null;
+            }
+            document.getElementById('paddle-custom-screen').style.display = 'none';
+            document.getElementById('career-hub-screen').style.display = 'flex';
+        }
+       
+        function savePaddleCustomization() {
+            playerPaddleFaceColor = selectedFaceColor;
+           
+            // update main game paddle live
+            if (paddleFaceMesh) paddleFaceMesh.material.color.setHex(playerPaddleFaceColor);
+           
+            // save to localStorage
+            localStorage.setItem('pingPongProPaddleFace', playerPaddleFaceColor.toString());
+           
+            closePaddleCustom();
+        }
+       
+        function closePaddleCustomWithoutSave() {
+            closePaddleCustom();
+        }
+       
         serveBall(); animate();
     </script>
 </body>
