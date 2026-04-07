@@ -167,7 +167,7 @@
         
         <!-- PC CONTROLS BUTTON - Home screen only, right side, cool glass style -->
         <div id="pc-controls-btn" style="position: absolute; top: 25px; right: 25px; background: var(--glass-bg); border: 2px solid var(--glass-border); border-radius: 9999px; color: white; font-size: 15px; font-weight: 700; padding: 10px 26px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 25px -5px rgb(77 171 247); cursor: pointer; z-index: 15; transition: all 0.2s; white-space: nowrap;">
-          <span id="pc-btn-text">…</span>
+          💻 <span id="pc-btn-text">PC? PRESS “G” NOW</span>
         </div>
         
         <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 12px; opacity: 0.25; color: white; pointer-events: none; text-align: center;">Made by Vewerty Ploik</div>
@@ -348,7 +348,7 @@
             <h1 style="font-size: 28px; margin: 0 0 20px; color: var(--primary);">PC CONTROLS</h1>
             <div style="font-size: 22px; line-height: 1.6; margin-bottom: 30px;">
                 <div style="margin: 15px 0;"><strong>🖱️ MOUSE / TOUCH</strong><br>Drag anywhere to move paddle</div>
-                <div style="margin: 15px 0;"><strong>⌨️ KEYBOARD (PC)</strong><br>Hold <span style="background:#222;color:#fff;padding:2px 10px;border-radius:6px;font-weight:bold;">Q</span> — drag paddle LEFT<br>Hold <span style="background:#222;color:#fff;padding:2px 10px;border-radius:6px;font-weight:bold;">P</span> — drag paddle RIGHT</div>
+                <div style="margin: 15px 0;"><strong>⌨️ KEYBOARD (PC)</strong><br>Tap <span style="background:#222;color:#fff;padding:2px 10px;border-radius:6px;font-weight:bold;">SPACE</span> to PAUSE the game</div>
                 <div style="margin-top: 30px; font-size: 17px; color: #ddd;">Hover mouse over any button to SELECT<br>Then tap <strong style="color:#fff;background:#222;padding:2px 8px;border-radius:4px;">SPACE</strong> to CLICK</div>
             </div>
             <div onclick="closeControlsPopup()" style="margin-top:40px; padding:14px 40px; background:rgba(255,255,255,0.1); border-radius:50px; font-size:15px; display:inline-block; cursor:pointer; transition:0.2s;">TAP SPACE OR CLICK HERE TO CLOSE</div>
@@ -369,6 +369,8 @@
         </div>
         <div id="announcement" class="glass-panel">Point!</div>
         <button id="pause-btn" onclick="pauseGame()">⏸</button>
+        <!-- PC pause hint (SPACE) - appears only on desktop -->
+        <div id="pc-pause-label" style="position: absolute; top: 82px; right: 28px; font-size: 11px; color: #ddd; text-shadow: 0 0 4px rgba(0,0,0,0.6); pointer-events: none; display: none; text-align: center; line-height: 1;">[SPACE]</div>
     </div>
     <script>
         const countries = ['🇺🇸', '🇬🇧', '🇯🇵', '🇩🇪', '🇫🇷', '🇧🇷', '🇨🇦', '🇦🇺', '🇮🇹', '🇪🇸', '🇲🇽', '🇰🇷', '🇨🇳', '🇷🇺', '🇸🇪', '🇳🇴', '🇪🇬', '🇸🇦', '🇹🇷', '🇦🇷'];
@@ -417,10 +419,6 @@
             '#ffd700': {name: 'Gold', desc: 'Win 3 Championships'},
             '#1c1c1e': {name: 'Black', desc: 'Win 5 Championships'}
         };
-      
-        // NEW: PC keyboard paddle support
-        let keyboardLeft = false;
-        let keyboardRight = false;
       
         function getEmptyStats() {
             return {
@@ -594,18 +592,6 @@
                 renderer.render(scene, camera); return;
             }
             if (gameState === 'playing' || gameState === 'demo') {
-                
-                // NEW: PC keyboard support - Q / P drag paddle left/right (works together with mouse)
-                if (keyboardLeft || keyboardRight) {
-                    const kbSpeed = 0.115;
-                    const prevX = playerPaddle.position.x;
-                    if (keyboardLeft) playerPaddle.position.x -= kbSpeed;
-                    if (keyboardRight) playerPaddle.position.x += kbSpeed;
-                    playerPaddle.position.x = Math.max(-tableW / 2 + 0.12, Math.min(tableW / 2 - 0.12, playerPaddle.position.x));
-                    paddleVelocity.x = (playerPaddle.position.x - lastPaddleX) * 1.2;
-                    lastPaddleX = playerPaddle.position.x;
-                }
-                
                 ballVel.y += gravity; ballVel.multiplyScalar(airResistance);
                 const oldY = ball.position.y; ball.position.add(ballVel);
                 const tTop = tableH / 2 + 0.02;
@@ -697,6 +683,9 @@
                     if (textSpan) textSpan.innerHTML = `PC CONTROLS<br><small style="opacity:0.7">PRESS “G” ON KEYBOARD</small>`;
                 } else {
                     pcBtn.addEventListener('click', openControlsPopup);
+                    // Show [SPACE] label under pause button on PC
+                    const pauseLabel = document.getElementById('pc-pause-label');
+                    if (pauseLabel) pauseLabel.style.display = 'block';
                 }
             }
             
@@ -1767,27 +1756,24 @@
         function quitToMenu() { document.getElementById('pause-overlay').style.display = 'none'; backToMain(); }
         window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
   
-        // NEW: global keyboard support (Q/P paddle + G for popup + SPACE close popup)
+        // NEW: global keyboard support (SPACE to pause in game + close popup + G for popup)
         window.addEventListener('keydown', function(e) {
             const key = e.key.toLowerCase();
-            if (key === 'q') keyboardLeft = true;
-            if (key === 'p') keyboardRight = true;
+            const popup = document.getElementById('controls-popup');
+            if (key === ' ') {
+                e.preventDefault();
+                if (popup && popup.style.display === 'flex') {
+                    closeControlsPopup();
+                } else if (gameState === 'playing') {
+                    pauseGame();
+                }
+            }
             if (key === 'g') {
                 const mainMenu = document.getElementById('main-menu-screen');
                 if (mainMenu && mainMenu.style.display !== 'none') {
                     openControlsPopup();
                 }
             }
-            const popup = document.getElementById('controls-popup');
-            if (popup && popup.style.display === 'flex' && e.key === ' ') {
-                e.preventDefault();
-                closeControlsPopup();
-            }
-        });
-        window.addEventListener('keyup', function(e) {
-            const key = e.key.toLowerCase();
-            if (key === 'q') keyboardLeft = false;
-            if (key === 'p') keyboardRight = false;
         });
         
         const style = document.createElement('style');
